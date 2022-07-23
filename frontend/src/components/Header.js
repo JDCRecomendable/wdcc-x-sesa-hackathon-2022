@@ -14,29 +14,13 @@ import MenuItem from "@mui/material/MenuItem";
 
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
-import { useTheme } from "@emotion/react";
 
-// import { createTheme } from "@mui/material/styles";
-// import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: "#371B58",
-//     },
-//     secondary: {
-//       main: "#371B58",
-//     },
-//   },
-// });
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Logout"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
-  console.log("header", theme);
+
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
   };
@@ -62,7 +46,7 @@ const Header = () => {
             sx={{
               display: { xs: "none", md: "flex" },
               mr: 1,
-              width: "15px",
+              width: "20px",
             }}
             alt="coin."
             src="coin.png"
@@ -71,7 +55,7 @@ const Header = () => {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/shop"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -83,6 +67,59 @@ const Header = () => {
             }}
           >
             1000
+          </Typography>
+
+          <Box
+            component="img"
+            noWrap
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              width: "20px",
+            }}
+            alt="shield."
+            src="shield.png"
+          />
+          <Box
+            component="img"
+            noWrap
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              width: "20px",
+            }}
+            alt="shield."
+            src="shield.png"
+          />
+          <Box
+            component="img"
+            noWrap
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              width: "20px",
+              opacity: 0.5,
+            }}
+            alt="shield."
+            src="shield.png"
+          />
+
+          <Typography
+            variant="h6"
+            noWrap
+            component="a"
+            href="/"
+            sx={{
+              mr: 2,
+              display: { xs: "none", md: "flex" },
+              fontFamily: "monospace",
+              fontWeight: 800,
+              letterSpacing: ".3rem",
+              color: "inherit",
+              textDecoration: "none",
+            }}
+          >
+            +
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -143,7 +180,7 @@ const Header = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/shop"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -157,6 +194,7 @@ const Header = () => {
           >
             1000
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
               onClick={handleCloseNavMenu}
@@ -177,6 +215,14 @@ const Header = () => {
             </Button>
           </Box>
 
+          <Typography
+            sx={{ p: 3, fontFamily: "monospace", fontWeight: 700 }}
+            textAlign="center"
+            component="a"
+            href="/rooms"
+          >
+            #003142
+          </Typography>
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
