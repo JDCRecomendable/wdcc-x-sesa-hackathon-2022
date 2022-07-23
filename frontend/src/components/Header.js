@@ -11,32 +11,17 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
-import { useTheme } from "@emotion/react";
+import Money from "./Money";
+import Shields from "./Shields";
 
-// import { createTheme } from "@mui/material/styles";
-// import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
-
-// const theme = createTheme({
-//   palette: {
-//     primary: {
-//       main: "#371B58",
-//     },
-//     secondary: {
-//       main: "#371B58",
-//     },
-//   },
-// });
-
-const settings = ["Profile", "Account", "Dashboard", "Logout"];
+const settings = ["Profile", "Account", "Logout"];
 
 const Header = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-  const theme = useTheme();
-  console.log("header", theme);
+
   const handleOpenNavMenu = event => {
     setAnchorElNav(event.currentTarget);
   };
@@ -56,34 +41,8 @@ const Header = () => {
     <AppBar position="static" sx={{ background: "#371B58" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            component="img"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-              width: "15px",
-            }}
-            alt="coin."
-            src="coin.png"
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            1000
-          </Typography>
+          <Money />
+          <Shields />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
@@ -143,7 +102,7 @@ const Header = () => {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/shop"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -157,6 +116,7 @@ const Header = () => {
           >
             1000
           </Typography>
+
           <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Button
               onClick={handleCloseNavMenu}
@@ -176,6 +136,17 @@ const Header = () => {
               </Link>
             </Button>
           </Box>
+
+          <Tooltip title="View rooms">
+            <Typography
+              sx={{ p: 3, fontFamily: "monospace", fontWeight: 700 }}
+              textAlign="center"
+              component="a"
+              href="/rooms"
+            >
+              #003142
+            </Typography>
+          </Tooltip>
 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
