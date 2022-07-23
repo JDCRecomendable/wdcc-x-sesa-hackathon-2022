@@ -8,33 +8,35 @@
 </head>
 
 <body>
-    <div class="topbarstyle">
-        <div class="currencybarstyle">
+    <div class="topbar">
+        <div class="currencybar">
             <img src="/Resources/dollar.png" width="30" height="30">
             <h5>1000</h5>
         </div>
         
 
-        <div class="shieldbarstyle">
+        <div class="shieldbar">
             <img src="/Resources/shield.png" width="30" height="30">
             <img src="/Resources/shield.png" width="30" height="30">
             <img src="/Resources/shield.png" width="30" height="30">
         </div>
     </div>
 
-    <div class="">
+    <div class="container">
         <h3>You are at:</h2>
     </div>
 
-    <div>
-        <h2>youtube.com</h2>
+    <div class="website">
+        <h1>youtube.com</h1>
     </div>
 
-    <progress id="file" value="32" max="100"> 32% </progress>
+    <progress value="0" max="100" id="progressBar"></progress>
+
 
     <img src="/Resources/dollar.png" width="20" height="20">
     <h5>-1000</h5>
 
-    <button type="button">Attack!</button>
+    <button id="attackBtn" type="button">Attack!</button>
+    <script type="module" src="popup.js"></script>
 </body>
 </html>

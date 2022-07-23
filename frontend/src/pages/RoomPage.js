@@ -1,7 +1,7 @@
 const RoomPage = () => {
   return (
     <>
-      <div>ShopPage</div>
+      <div>Room Config</div>
     </>
   );
 };
