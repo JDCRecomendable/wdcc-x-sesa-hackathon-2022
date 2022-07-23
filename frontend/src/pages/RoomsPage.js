@@ -4,23 +4,11 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
 import PeopleList from "../components/PeopleList";
+import RoomsList from "../components/RoomsList";
 
 const RoomsPage = () => {
-  const roomDummyData = [
-    { _id: 252523, name: "Cool room" },
-    { _id: 993541, name: "Another room" },
-    { _id: 342345, name: "Room X" },
-  ];
-
   const blacklistDummyData = ["youtube.com", "facebook.com", "twitter.com"];
   const whitelistDummyData = ["stackoverflow.com", "github.com", "google.com"];
-
-  const roomsList = roomDummyData.map(room => (
-    <tr key={room.id}>
-      <td>{room.name}</td>
-      <td>{room._id}</td>
-    </tr>
-  ));
 
   const whitelisted = whitelistDummyData.map(website => (
     <tr key={website}>
@@ -52,16 +40,7 @@ const RoomsPage = () => {
         }}
       >
         <h2>All Rooms</h2>
-
-        <table>
-          <thead>
-            <tr>
-              <th>Room Name</th>
-              <th>Room ID</th>
-            </tr>
-          </thead>
-          <tbody>{roomsList}</tbody>
-        </table>
+        <RoomsList />
         <div style={{ float: "left", position: "fixed", bottom: "5%" }}>
           <CreateRoom />
           <JoinRoom />
