@@ -1,0 +1,11 @@
+{
+    "name": "Extension",
+    "version": "0.1.0",
+    "description": "Hackathon Team X",
+    "permissions": ["storage", "activeTab","tabs"],
+
+    "action": {
+      "default_popup": "popup.html"
+    },
+    "manifest_version": 3
+}
