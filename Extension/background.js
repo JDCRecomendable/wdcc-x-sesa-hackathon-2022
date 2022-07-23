@@ -45,6 +45,8 @@ chrome.tabs.onActivated.addListener(function (tabs) {
       alert(tab);
     }
   );
+
+  //console.log(current_tab);
 });
 
 function alert(link){
@@ -54,6 +56,8 @@ function alert(link){
   getStatus(current_tab);
 
 }
+  
+
 
 function updateDomain(link){
   const url = new URL(link);
@@ -64,7 +68,7 @@ function updateDomain(link){
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    urlStatus = false;
+    urlStatus = true;
 }
 
 let currency = 9900;

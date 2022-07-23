@@ -35,7 +35,7 @@ function test() {
     document.body.appendChild(iframe);
 
     //play audio
-    var myAudio = new Audio(chrome.runtime.getURL("Resources/knock.mp3"));
+    var myAudio = new Audio(chrome.runtime.getURL("sounds/ugotthat.mp3"));
     myAudio.play();
 
     //10 seconds timer to remove ifram
