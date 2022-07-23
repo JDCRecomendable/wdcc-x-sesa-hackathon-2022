@@ -3,36 +3,82 @@ body {
     background-color: 371B58;
 }
 
-.topbarstyle {
+.topbar {
     display: flex;
     justify-content: space-between;
 }
 
-.currencybarstyle {
+.currencybar {
     width: 80px;
     height: 30px;
     background-color: E0D4FF;
-    border-radius: 20px;
+    border-radius: 30px;
     padding: 10px;
     display: flex;
     align-items: center;
 }
 
-.shieldbarstyle {
+.shieldbar {
     width: auto;
     height: 30px;
     background-color: E0D4FF;
-    border-radius: 20px;
+    border-radius: 30px;
     padding: 10px;
     display: flex;
     align-items: center;
 }
 
-.currencybarstyle img {
+.currencybar img {
     margin-right: 10px;
 }
 
-.shieldbarstyle img {
+.shieldbar img {
     padding: 10px;
+}
+
+.container {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+
+.website {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.progressbar {
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+
+.rewardbar {
+    display: flex;
+    justify-content: center;
+}
+
+.reward {
+    margin-top: 5px;
+    width: 50px;
+    height: 10px;
+    background-color: E0D4FF;
+    border-radius: 30px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.attackbutton {
+    margin-top: 20px;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+}
+
+.buttoncontainer {
+    display: flex;
+    justify-content: center;
 }
 
