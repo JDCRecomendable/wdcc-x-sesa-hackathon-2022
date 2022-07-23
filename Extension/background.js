@@ -64,7 +64,7 @@ function alert(link){
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    urlStatus = false;
+    urlStatus = true;
 }
 
 let currency = 9900;
