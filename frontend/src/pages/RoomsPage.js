@@ -3,6 +3,7 @@ import JoinRoom from "../components/JoinRoom";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { useState } from "react";
+import PeopleList from "../components/PeopleList";
 
 const RoomsPage = () => {
   const roomDummyData = [
@@ -98,6 +99,7 @@ const RoomsPage = () => {
         }}
       >
         <h2>Room Members</h2>
+        <PeopleList />
       </div>
       <div
         style={{
