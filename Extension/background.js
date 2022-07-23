@@ -14,3 +14,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
       sendResponse(time);
     }
   });
+
+
+chrome.tabs.onActivated.addListener(function(tabs) {
+    chrome.tabs.query({active : true, lastFocusedWindow: true}, tabs => {
+        let url = tabs[0].url;
+        console.log(url);
+    })
+});
+
+
