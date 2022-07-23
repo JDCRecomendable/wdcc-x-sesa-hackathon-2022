@@ -23,20 +23,27 @@
     </div>
 
     <div class="container">
-        <h3>You are at:</h2>
+        <h3>You are at:</h3>
     </div>
 
     <div class="website">
         <h1>youtube.com</h1>
     </div>
 
-    <progress value="0" max="100" id="progressBar"></progress>
+    <div class="progressContainer">
+        <label for="progressBar" id="progressLabel">Current time for money: </label>
+        <progress value="0" max="100" id="progressBar"></progress>
+        <div class="bar">
+            <img src="/Resources/dollar.png" width="20" height="20">
+            <h5>+1000</h5>
+        </div>  
+    </div>
 
 
-    <img src="/Resources/dollar.png" width="20" height="20">
-    <h5>-1000</h5>
 
-    <button id="attackBtn" type="button">Attack!</button>
+    <div class="attackBtn">
+        <button id="attackBtn" type="button">Attack!</button>
+    </div>
     <script type="module" src="popup.js"></script>
 </body>
 </html>
