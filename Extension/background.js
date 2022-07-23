@@ -18,10 +18,14 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
 
 // Global variables storing current URL and status of URL
+let currentURL = '';
+let urlStatus = null;
 
+
+// This listener will send the current url and url status to the popup window when opened
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getInfo"){
-        sendResponse(currentURL, urlStatus);
+        sendResponse(urlStatus);
     }
 });
 
@@ -38,7 +42,7 @@ chrome.tabs.onActivated.addListener(function (tabs) {
       // and use that tab to fill in out title and url
       var tab = tabs[0];
       //console.log(tab.url);
-      alert(tab.url);
+      alert(tab);
     }
   );
 
@@ -46,13 +50,12 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 });
 
 function alert(link){
-  current_tab = link;
+  current_tab = link.url;
+  console.log(link);
   console.log(current_tab);
-  // Change html and css of popup
-  let message = current_tab + urlStatus + "/message";
-  chrome.runtime.sendMessage({method:message},function(response){
-    console.log(response);
-});
+  // Send current url to back end to receive back status
+  getStatus(current_tab);
+
 }
   
 
@@ -61,12 +64,8 @@ function alert(link){
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    let status = true;
-
-    return status;
-};
-
-
+    urlStatus = false;
+}
 
 let currency = 9900;
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
@@ -75,13 +74,36 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     }
   });
 
-  chrome.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-      console.log(sender.tab ?
-                  "from a content script:" + sender.tab.url :
-                  "from the extension");
-      if (request.greeting === "hello")
-        sendResponse({farewell: "goodbye"});
+  
+var contentTabId;
+
+chrome.runtime.onMessage.addListener(function(msg,sender) {
+  if (msg.from == "content") {  //get content scripts tab id
+    contentTabId = sender.tab.id;
+  }
+    if (msg.from == "popup" && contentTabId) {  //got message from popup
+      chrome.tabs.sendMessage(contentTabId, {  //send it to content script
+        from: "background",
+        first: msg.first,
+        second: msg.second
+      });
     }
-  );
+  });
+
+  // Placeholder for shields until back end sends correct among
+  let shields = 2;
+
+  // This listener checks how many shields the user has and sends it to the popup
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "getShields") {
+      sendResponse(shields);
+    }
+  });
+
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "yo") {
+      sendResponse("heyman");
+    }
+  });
+
 

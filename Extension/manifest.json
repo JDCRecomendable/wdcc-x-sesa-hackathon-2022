@@ -3,6 +3,12 @@
     "version": "0.1.0",
     "description": "Hackathon Team X",
     "permissions": ["storage", "activeTab","tabs"],
+    "web_accessible_resources": [
+      {
+        "resources": ["Resources/knock.mp3"],
+        "matches": ["<all_urls>"]
+      }
+    ],
     "background": {
         "service_worker": "background.js",
         "type": "module"
@@ -10,9 +16,11 @@
       "content_scripts": [
         {
           "matches": ["<all_urls>"],
-          "js": ["content.js"]
+          "js": ["content.js"],
+          "run_at": "document_end"
         }
       ],
+      
     "action": {
       "default_popup": "popup.html"
     },

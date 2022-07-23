@@ -53,8 +53,7 @@ const Shields = () => {
             letterSpacing: ".3rem",
             color: "inherit",
             textDecoration: "none",
-            marginRight: "250px"
-
+            marginRight: "250px",
           }}
         >
           <ConfirmPurchase />

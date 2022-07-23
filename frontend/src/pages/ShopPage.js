@@ -1,71 +1,122 @@
-import Grid from '@mui/material/Grid'
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import React from 'react';
 
 
-const Attack = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(15),
-  textAlign: 'center',
-  margin: '8px',
-  marginLeft: '20px',
-  color: theme.palette.text.secondary,
-}));
-
-const Target = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
-  padding: theme.spacing(5),
-  textAlign: 'center',
-  marginBottom: '15px',
-  marginTop: '50px',
-  color: theme.palette.text.secondary,
-}));
 
 const ShopPage = () => {
   return (
-    <div style={{backgroundColor: '#E0D4FF', paddingBottom: '300px'}}>
-    ,
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
+    <body>
+      <div
+        style={{
+          position: "fixed",
+          width: "18%",
+          height: "100%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "18px",
+        }} >
+      </div>
 
-        {/* This is for selecting individuals */}
-        <Grid container spacing={1} item xs={3} justifyContent="space-around">
-          <React.Fragment>
-            <Grid item xs={8}>
-              <Target>Random</Target>
-            </Grid>
-            <Grid item xs={8}>
-              <Target>Individual</Target>
-            </Grid>
-            <Grid item xs={8}>
-              <Target>Room</Target>
-            </Grid>
-          </React.Fragment>
-        </Grid>
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "8%",
+          zIndex: "1",
+          backgroundColor: "#371B58",
+          overflowX: "hidden",
+          marginTop: "1%",
+          marginLeft: "24%",
+          borderRadius: "15px",
+          color: '#fff',
+          fontSize: '40px',
+          font: 'Georgia', 
+          textAlign: 'center',
 
-        {/* This is for selecting attacks*/}
-        <Grid container spacing={1} item xs={9}>          
-          <React.Fragment>
-          <Grid item xs={5}>
-            <Attack>Uno</Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack>Dos</Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack>Tres</Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack>Quatros</Attack>
-          </Grid>
-        </React.Fragment></Grid>
-      </Grid>
-    </Box>
-    </div>
+        }}>
+        Memes
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "8%",
+          zIndex: "1",
+          backgroundColor: "#371B58",
+          overflowX: "hidden",
+          marginTop: "1%",
+          marginLeft: "42%",
+          borderRadius: "15px",
+          color: '#fff',
+          fontSize: '40px',
+          font: 'Georgia', 
+          textAlign: 'center',
+        }}>
+        Sounds
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "8%",
+          zIndex: "1",
+          backgroundColor: "#371B58",
+          overflowX: "hidden",
+          marginTop: "1%",
+          marginLeft: "60%",
+          borderRadius: "15px",
+          color: '#fff',
+          fontSize: '40px',
+          font: 'Georgia', 
+          textAlign: 'center',
+        }}>
+        Cursor
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "8%",
+          zIndex: "1",
+          backgroundColor: "#371B58",
+          overflowX: "hidden",
+          marginTop: "1%",
+          marginLeft: "78%",
+          borderRadius: "15px",
+          color: '#fff',
+          fontSize: '40px',
+          font: 'Georgia', 
+          textAlign: 'center',
+          
+        }}>
+        Scare
+      </div>
+
+
+      <div
+        style={{
+          position: "fixed",
+          width: "10%",
+          height: "8%",
+          zIndex: "1",
+          backgroundColor: "#371B58",
+          overflowX: "hidden",
+          marginTop: "38%",
+          marginLeft: "88%",
+          borderRadius: "50px",
+          color: '#fff',
+          fontSize: '40px',
+          font: 'Georgia', 
+          textAlign: 'center',
+        }}>
+        $1000
+      </div>
+
+    </body>
   );
 };
 

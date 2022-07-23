@@ -107,7 +107,7 @@ body {
 
 .bar {
     display: flex;
-    background-color:white;
+    /* background-color:white; */
     align-items: center;
     border-radius: 10px;
     margin: 10px;
@@ -116,7 +116,7 @@ body {
 }
 
 .bar > h5{
-    color: black;
+    color: white;
     margin: 0px;
 }
 
