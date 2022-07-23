@@ -23,7 +23,7 @@ function test() {
   chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
     var iframe = document.createElement("iframe");
-    iframe.style.background = "green";
+    iframe.style.background ="url('https://i.kym-cdn.com/entries/icons/original/000/010/843/ricardo.jpg')";
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.style.position = "fixed";
@@ -32,6 +32,14 @@ function test() {
     iframe.style.zIndex = "9000000000000000000";
 
     document.body.appendChild(iframe);
+    let counter =0;
+    setInterval(() => {
+      counter++
+      if(counter ==10){
+        document.body.removeChild(iframe);
+      }
+    }, 1000);
+    
   });
 }
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.
