@@ -11,9 +11,10 @@ import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
-
 import Link from "@material-ui/core/Link";
 import { Link as RouterLink } from "react-router-dom";
+import Money from "./Money";
+import Shields from "./Shields";
 
 const settings = ["Profile", "Account", "Logout"];
 
@@ -40,87 +41,8 @@ const Header = () => {
     <AppBar position="static" sx={{ background: "#371B58" }}>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Box
-            component="img"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-              width: "20px",
-            }}
-            alt="coin."
-            src="coin.png"
-          />
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/shop"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 700,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            1000
-          </Typography>
-
-          <Box
-            component="img"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-              width: "20px",
-            }}
-            alt="shield."
-            src="shield.png"
-          />
-          <Box
-            component="img"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-              width: "20px",
-            }}
-            alt="shield."
-            src="shield.png"
-          />
-          <Box
-            component="img"
-            noWrap
-            sx={{
-              display: { xs: "none", md: "flex" },
-              mr: 1,
-              width: "20px",
-              opacity: 0.5,
-            }}
-            alt="shield."
-            src="shield.png"
-          />
-
-          <Typography
-            variant="h6"
-            noWrap
-            component="a"
-            href="/"
-            sx={{
-              mr: 2,
-              display: { xs: "none", md: "flex" },
-              fontFamily: "monospace",
-              fontWeight: 800,
-              letterSpacing: ".3rem",
-              color: "inherit",
-              textDecoration: "none",
-            }}
-          >
-            +
-          </Typography>
+          <Money />
+          <Shields />
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
             <IconButton
