@@ -5,6 +5,8 @@ import Button from "@mui/material/Button";
 import { useState } from "react";
 import PeopleList from "../components/PeopleList";
 import RoomsList from "../components/RoomsList";
+import IconButton from "@mui/material/IconButton";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { fontSize } from "@mui/system";
 
 const RoomsPage = () => {
@@ -27,7 +29,7 @@ const RoomsPage = () => {
   const [blackURL, setBlackURL] = useState("");
 
   return (
-    <>
+    <> 
       <div
         style={{
           position: "fixed",
@@ -56,7 +58,7 @@ const RoomsPage = () => {
 
           backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "1.5%",
+          marginTop: "6%",
           marginLeft: "30%",
           borderRadius: "20px",
           color: '#fff',
@@ -111,6 +113,9 @@ const RoomsPage = () => {
           borderRadius: "10px",
         }}
       >
+
+
+
         <h2 style={{ textAlign: 'center', color: '#fff' }}>Whitelisted Websites</h2>
 
         <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
@@ -121,6 +126,8 @@ const RoomsPage = () => {
           </thead>
           <tbody>{whitelisted}</tbody>
         </table>
+
+
 
 
         <div style={{
@@ -145,6 +152,9 @@ const RoomsPage = () => {
           </Button>
         </div>
       </div>
+
+
+
       <div
         style={{
           position: "fixed",
@@ -159,6 +169,8 @@ const RoomsPage = () => {
           borderRadius: "10px",
         }}
       >
+
+
         <h2 style={{ color: '#fff', textAlign: 'center' }}>Blacklisted Websites</h2>
         <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
           <thead>
@@ -173,6 +185,8 @@ const RoomsPage = () => {
           bottom: '0px',
           textAlign: 'fixed',
         }}>
+
+
           <TextField
             autoFocus
             margin="dense"
@@ -188,6 +202,7 @@ const RoomsPage = () => {
           </Button>
         </div>
       </div>
+
     </>
   );
 };

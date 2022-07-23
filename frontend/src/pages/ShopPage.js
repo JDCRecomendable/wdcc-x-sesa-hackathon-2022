@@ -1,10 +1,35 @@
-import React from 'react';
-
-
+import React from "react";
+import { useState, useEffect } from "react";
+import Memes from "../components/Memes";
+import Scares from "../components/Scares";
+import Cursors from "../components/Cursors";
+import Sounds from "../components/Sounds";
 
 const ShopPage = () => {
+  const [page, setPage] = useState("blank");
+  const [mainPage, setMainPage] = useState(<></>);
+
+  const handleClick = e => {
+    setPage(e.target.id);
+  };
+
+  useEffect(() => {
+    if (page === "memes") {
+      setMainPage(<Memes />);
+    } else if (page === "scares") {
+      setMainPage(<Scares />);
+    } else if (page === "cursors") {
+      setMainPage(<Cursors />);
+    } else if (page === "sounds") {
+      setMainPage(<Sounds />);
+    } else {
+      setMainPage(<></>);
+    }
+    console.log(page, mainPage);
+  }, [page]);
+
   return (
-    <body>
+    <>
       <div
         style={{
           position: "fixed",
@@ -15,10 +40,12 @@ const ShopPage = () => {
           backgroundColor: "#E0D4FF",
           overflowX: "hidden",
           marginTop: "18px",
-        }} >
-      </div>
+        }}
+      ></div>
 
-      <div
+      <button
+        id="memes"
+        onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
@@ -29,16 +56,18 @@ const ShopPage = () => {
           marginTop: "1%",
           marginLeft: "24%",
           borderRadius: "15px",
-          color: '#fff',
-          fontSize: '40px',
-          font: 'Georgia', 
-          textAlign: 'center',
-
-        }}>
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
+        }}
+      >
         Memes
-      </div>
+      </button>
 
-      <div
+      <button
+        id="sounds"
+        onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
@@ -49,15 +78,18 @@ const ShopPage = () => {
           marginTop: "1%",
           marginLeft: "42%",
           borderRadius: "15px",
-          color: '#fff',
-          fontSize: '40px',
-          font: 'Georgia', 
-          textAlign: 'center',
-        }}>
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
+        }}
+      >
         Sounds
-      </div>
+      </button>
 
-      <div
+      <button
+        id="cursors"
+        onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
@@ -68,15 +100,18 @@ const ShopPage = () => {
           marginTop: "1%",
           marginLeft: "60%",
           borderRadius: "15px",
-          color: '#fff',
-          fontSize: '40px',
-          font: 'Georgia', 
-          textAlign: 'center',
-        }}>
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
+        }}
+      >
         Cursor
-      </div>
+      </button>
 
-      <div
+      <button
+        id="scares"
+        onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
@@ -87,15 +122,14 @@ const ShopPage = () => {
           marginTop: "1%",
           marginLeft: "78%",
           borderRadius: "15px",
-          color: '#fff',
-          fontSize: '40px',
-          font: 'Georgia', 
-          textAlign: 'center',
-          
-        }}>
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
+        }}
+      >
         Scare
-      </div>
-
+      </button>
 
       <div
         style={{
@@ -105,18 +139,19 @@ const ShopPage = () => {
           zIndex: "1",
           backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "38%",
           marginLeft: "88%",
           borderRadius: "50px",
-          color: '#fff',
-          fontSize: '40px',
-          font: 'Georgia', 
-          textAlign: 'center',
-        }}>
+          bottom: "5%",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
+        }}
+      >
         $1000
       </div>
-
-    </body>
+      <div style={{ marginTop: "10%", marginLeft: "20%" }}>{mainPage}</div>
+    </>
   );
 };
 
