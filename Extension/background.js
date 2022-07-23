@@ -84,3 +84,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
       });
     }
   });
+
+  // Placeholder for shields until back end sends correct among
+  let shields = 2;
+
+  // This listener checks how many shields the user has and sends it to the popup
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "getShields") {
+      sendResponse(shields);
+    }
+  });
