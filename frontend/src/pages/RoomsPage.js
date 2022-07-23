@@ -1,9 +1,10 @@
+import Sidebar from "../components/SideBar";
+
 const RoomsPage = () => {
   return (
-    <>
-      <h1>Rooms</h1>
-    </>
-  );
-};
+    <> <Sidebar />
+      <div> Rooms Page </div></>
+  );  
+};  
 
 export default RoomsPage;

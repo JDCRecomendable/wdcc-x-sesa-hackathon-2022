@@ -30,25 +30,29 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     }
 });
 
+
+var current_tab;
 // Listener for when the active tab changes
-chrome.tabs.onActivated.addListener(function(tabs) {
-    currentURL = getURL();
-    urlStatus = getStatus(currentURL);
-    // chrome.storage.local.set({urlkey: url}, function() {
-    // })
-    // chrome.storage.local.set({statuskey: status}, function() {
-    // })
-    console.log(currentURL);
-    console.log(urlStatus)
+chrome.tabs.onActivated.addListener(function (tabs) {
+  chrome.tabs.query(
+    {
+      active: true,
+      lastFocusedWindow: true,
+    },
+    function (tabs) {
+      // and use that tab to fill in out title and url
+      var tab = tabs[0];
+      //console.log(tab.url);
+      alert(tab.url);
+    }
+  );
 });
 
-// This function returns the url of the active tab
-function getURL() {
-    chrome.tabs.query({active : true, lastFocusedWindow: true}, tabs => {
-         let url = tabs[0].url;
-         return url;
-    })
+function alert(link){
+  current_tab = link;
+  console.log(current_tab);
 }
+
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
@@ -58,12 +62,25 @@ function getStatus(url) {
     return status;
 }
 
-
-
-
 let currency = 9900;
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getCurrency"){
       sendResponse(currency);
+    }
+  });
+
+
+  var contentTabId;
+
+  chrome.runtime.onMessage.addListener(function(msg,sender) {
+    if (msg.from == "content") {  //get content scripts tab id
+      contentTabId = sender.tab.id;
+    }
+    if (msg.from == "popup" && contentTabId) {  //got message from popup
+      chrome.tabs.sendMessage(contentTabId, {  //send it to content script
+        from: "background",
+        first: msg.first,
+        second: msg.second
+      });
     }
   });
