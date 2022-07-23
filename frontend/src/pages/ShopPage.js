@@ -18,6 +18,8 @@ const Item1 = styled(Paper)(({ theme }) => ({
   ...theme.typography.body2,
   padding: theme.spacing(5),
   textAlign: 'center',
+  marginBottom: '5px',
+  marginTop: '5px',
   color: theme.palette.text.secondary,
 }));
 
