@@ -42,13 +42,14 @@ chrome.tabs.onActivated.addListener(function (tabs) {
       // and use that tab to fill in out title and url
       var tab = tabs[0];
       //console.log(tab.url);
-      alert(tab.url);
+      alert(tab);
     }
   );
 });
 
 function alert(link){
-  current_tab = link;
+  current_tab = link.url;
+  console.log(link);
   console.log(current_tab);
   // Send current url to back end to receive back status
   getStatus(current_tab);
@@ -70,8 +71,6 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
   });
 
   
-var contentTabId;
-
 var contentTabId;
 
 chrome.runtime.onMessage.addListener(function(msg,sender) {
@@ -96,3 +95,5 @@ chrome.runtime.onMessage.addListener(function(msg,sender) {
       sendResponse(shields);
     }
   });
+
+
