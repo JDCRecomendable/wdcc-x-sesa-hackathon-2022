@@ -29,7 +29,7 @@ function test() {
     iframe.style.top = "0px"
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
-    iframe.srcdoc = "<img src='https://c.tenor.com/n9Hl8cEdNV4AAAAC/ricardo-milos.gif' width='100%' height='100%'>";
+    iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="480" height="270" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     
 
     document.body.appendChild(iframe);
