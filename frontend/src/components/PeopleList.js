@@ -7,7 +7,6 @@ import ListItemText from "@mui/material/ListItemText";
 import Avatar from "@mui/material/Avatar";
 
 import Grid from "@mui/material/Grid";
-import FolderIcon from "@mui/icons-material/Folder";
 
 function generate(element) {
   return [0, 1, 2].map(value =>
@@ -23,12 +22,12 @@ const Demo = styled("div")(({ theme }) => ({
 
 export default function PeopleList() {
   return (
-    <Grid container spacing={2}>
-      <Grid item xs={12} md={6}>
+    <Grid container spacing={0}>
+      <Grid item xs={12} md={12}>
         <Demo>
           <List>
             {generate(
-              <ListItem sx={{ background: "#E0D4FF" }}>
+              <ListItem sx={{ background: "#371B58", color: "#fff" }}>
                 <ListItemAvatar>
                   <Avatar>
                     <Avatar sx={{ bgcolor: "red" }}>N</Avatar>

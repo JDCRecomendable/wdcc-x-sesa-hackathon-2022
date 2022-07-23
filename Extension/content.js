@@ -29,10 +29,16 @@ function test() {
     iframe.style.top = "0px"
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
-    iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="100%" height="100%" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
+    iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="800" height="800" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     
 
     document.body.appendChild(iframe);
+
+    //play audio
+    var myAudio = new Audio(chrome.runtime.getURL("Resources/knock.mp3"));
+    myAudio.play();
+
+    //10 seconds timer to remove ifram
     let counter =0;
     setInterval(() => {
       counter++
