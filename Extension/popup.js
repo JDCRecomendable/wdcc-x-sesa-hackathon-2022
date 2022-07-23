@@ -22,7 +22,16 @@ chrome.runtime.sendMessage({method:"getCurrency"},function(response){
 });
 
 chrome.runtime.sendMessage({method:"getInfo"},function(response){
+    // Grab html and css
+    
     // Change html and css based on url and status
+});
+
+chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+    if(message.method == "*/message"){ 
+        console.log(message.method);
+        sendResponse("good");
+    }
 });
 
 

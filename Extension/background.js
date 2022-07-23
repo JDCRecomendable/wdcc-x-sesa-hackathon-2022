@@ -18,14 +18,9 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
 
 // Global variables storing current URL and status of URL
-let currentURL = '';
-let urlStatus = '';
 
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getInfo"){
-        // chrome.storage.local.get.([urlkey], (result) => {
-            
-        // });
         sendResponse(currentURL, urlStatus);
     }
 });
@@ -46,21 +41,32 @@ chrome.tabs.onActivated.addListener(function (tabs) {
       alert(tab.url);
     }
   );
+
+  //console.log(current_tab);
 });
 
 function alert(link){
   current_tab = link;
   console.log(current_tab);
+  // Change html and css of popup
+  let message = current_tab + urlStatus + "/message";
+  chrome.runtime.sendMessage({method:message},function(response){
+    console.log(response);
+});
 }
+  
+
 
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    let status = True;
+    let status = true;
 
     return status;
-}
+};
+
+
 
 let currency = 9900;
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
