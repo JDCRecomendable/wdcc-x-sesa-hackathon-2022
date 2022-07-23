@@ -22,7 +22,7 @@ window.addEventListener("click", test, true);
 function test() {
   chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
-    var iframe = document.createElement("iframe");
+    /*var iframe = document.createElement("iframe");
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.style.position = "fixed";
@@ -30,7 +30,7 @@ function test() {
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
     iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="800" height="800" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
-    
+    */
 
     document.body.appendChild(iframe);
 
@@ -47,6 +47,12 @@ function test() {
       }
     }, 1000);
     
+
+    //cursor
+    let bodies = document.getElementsByTagName("body");
+    for (elt of bodies) {
+      elt.style["cursor"] = "#000000";
+    }
   });
 }
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.

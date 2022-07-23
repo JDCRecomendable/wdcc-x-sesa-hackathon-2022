@@ -74,5 +74,8 @@ button.addEventListener("click", function(){
 })
 
 
-
-
+function updateDomain(link){
+  const url = new URL(link);
+  console.log(url.hostname);
+  document.getElementById("domain").setAttribute("name", "url.hostname"); 
+}
