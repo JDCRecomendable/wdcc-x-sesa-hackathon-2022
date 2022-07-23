@@ -1,5 +1,6 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
+import Tooltip from "@mui/material/Tooltip";
 
 const Shields = () => {
   return (
@@ -38,24 +39,25 @@ const Shields = () => {
         alt="shield."
         src="shield.png"
       />
-
-      <Typography
-        variant="h6"
-        noWrap
-        component="a"
-        href="/"
-        sx={{
-          mr: 2,
-          display: { xs: "none", md: "flex" },
-          fontFamily: "monospace",
-          fontWeight: 800,
-          letterSpacing: ".3rem",
-          color: "inherit",
-          textDecoration: "none",
-        }}
-      >
-        +
-      </Typography>
+      <Tooltip title="Purchase a shield">
+        <Typography
+          variant="h6"
+          noWrap
+          component="a"
+          href="/"
+          sx={{
+            mr: 2,
+            display: { xs: "none", md: "flex" },
+            fontFamily: "monospace",
+            fontWeight: 800,
+            letterSpacing: ".3rem",
+            color: "inherit",
+            textDecoration: "none",
+          }}
+        >
+          +
+        </Typography>
+      </Tooltip>
     </>
   );
 };

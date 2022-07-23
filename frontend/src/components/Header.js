@@ -137,14 +137,17 @@ const Header = () => {
             </Button>
           </Box>
 
-          <Typography
-            sx={{ p: 3, fontFamily: "monospace", fontWeight: 700 }}
-            textAlign="center"
-            component="a"
-            href="/rooms"
-          >
-            #003142
-          </Typography>
+          <Tooltip title="View rooms">
+            <Typography
+              sx={{ p: 3, fontFamily: "monospace", fontWeight: 700 }}
+              textAlign="center"
+              component="a"
+              href="/rooms"
+            >
+              #003142
+            </Typography>
+          </Tooltip>
+
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
