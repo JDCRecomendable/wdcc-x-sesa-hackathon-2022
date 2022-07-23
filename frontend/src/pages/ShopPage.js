@@ -6,29 +6,33 @@ import Paper from '@mui/material/Paper';
 
 
 const Attack = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
   padding: theme.spacing(15),
   textAlign: 'center',
   margin: '8px',
   marginLeft: '20px',
-  color: theme.palette.text.secondary,
+  font: 'Georgia',
+  fontSize: '40px',
+  borderRadius: '50px',
+  backgroundColor: "#371B58",
+  color: '#fff',
 }));
 
 const Target = styled(Paper)(({ theme }) => ({
-  backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
-  ...theme.typography.body2,
+
   padding: theme.spacing(5),
   textAlign: 'center',
   marginBottom: '15px',
   marginTop: '50px',
-  color: theme.palette.text.secondary,
+  font: 'Georgia',
+  fontSize: '40px',
+  borderRadius: '50px',
+  backgroundColor: "#371B58",
+  color: '#fff',
 }));
 
 const ShopPage = () => {
   return (
     <div style={{backgroundColor: '#E0D4FF', paddingBottom: '300px'}}>
-    ,
     <Box sx={{ flexGrow: 1 }}>
       <Grid container spacing={1}>
 
@@ -48,21 +52,21 @@ const ShopPage = () => {
         </Grid>
 
         {/* This is for selecting attacks*/}
-        <Grid container spacing={1} item xs={9}>          
+        <Grid container spacing={1} item xs={9} justifyContent="space-around">          
           <React.Fragment>
           <Grid item xs={5}>
-            <Attack>Uno</Attack>
+            <Attack>Memes</Attack>
           </Grid>
           <Grid item xs={5}>
-            <Attack>Dos</Attack>
+            <Attack>Sounds</Attack>
           </Grid>
           <Grid item xs={5}>
-            <Attack>Tres</Attack>
+            <Attack><button>Cursor</button></Attack>
           </Grid>
           <Grid item xs={5}>
-            <Attack>Quatros</Attack>
+            <Attack>Scare</Attack>
           </Grid>
-        </React.Fragment></Grid>
+          </React.Fragment></Grid>
       </Grid>
     </Box>
     </div>
