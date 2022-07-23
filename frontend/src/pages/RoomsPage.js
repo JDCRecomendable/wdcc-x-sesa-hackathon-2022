@@ -2,16 +2,31 @@ import CreateRoom from "../components/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
 
 const RoomsPage = () => {
-  const dummyData = [
+  const roomDummyData = [
     { _id: 252523, name: "Cool room" },
     { _id: 993541, name: "Another room" },
     { _id: 342345, name: "Room X" },
   ];
 
-  const roomsList = dummyData.map(room => (
-    <tr>
+  const blacklistDummyData = ["youtube.com", "facebook.com", "twitter.com"];
+  const whitelistDummyData = ["stackoverflow.com", "github.com", "google.com"];
+
+  const roomsList = roomDummyData.map(room => (
+    <tr key={room.id}>
       <td>{room.name}</td>
       <td>{room._id}</td>
+    </tr>
+  ));
+
+  const whitelisted = whitelistDummyData.map(website => (
+    <tr key={website}>
+      <td>{website}</td>
+    </tr>
+  ));
+
+  const blacklisted = blacklistDummyData.map(website => (
+    <tr key={website}>
+      <td>{website}</td>
     </tr>
   ));
 
@@ -31,11 +46,13 @@ const RoomsPage = () => {
       >
         Table
         <table>
-          <tr>
-            <th>Room Name</th>
-            <th>Room ID</th>
-          </tr>
-          {roomsList}
+          <thead>
+            <tr>
+              <th>Room Name</th>
+              <th>Room ID</th>
+            </tr>
+          </thead>
+          <tbody>{roomsList}</tbody>
         </table>
         <div style={{ float: "left", position: "fixed", bottom: "5%" }}>
           <CreateRoom />
@@ -89,7 +106,16 @@ const RoomsPage = () => {
           borderRadius: "10px",
         }}
       >
-        Whitelist
+        <h2>Whitelisted Websites</h2>
+
+        <table>
+          <thead>
+            <tr>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody>{whitelisted}</tbody>
+        </table>
       </div>
       <div
         style={{
@@ -105,7 +131,15 @@ const RoomsPage = () => {
           borderRadius: "10px",
         }}
       >
-        Blacklist
+        <h2>Blacklisted Websites</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Website</th>
+            </tr>
+          </thead>
+          <tbody>{blacklisted}</tbody>
+        </table>
       </div>
     </>
   );
