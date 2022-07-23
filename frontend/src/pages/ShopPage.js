@@ -1,6 +1,4 @@
-import React from 'react';
-
-
+import React from "react";
 
 const ShopPage = () => {
   return (
@@ -15,7 +13,13 @@ const ShopPage = () => {
           backgroundColor: "#E0D4FF",
           overflowX: "hidden",
           marginTop: "18px",
-        }} >
+        }}
+      >
+        <button style={{ borderRadius: "50%", height: "100px" }}>Random</button>
+        <button style={{ borderRadius: "50%", height: "100px" }}>
+          Individual
+        </button>
+        <button style={{ borderRadius: "50%", height: "100px" }}>Room</button>
       </div>
 
       <div
@@ -30,7 +34,8 @@ const ShopPage = () => {
           marginTop: "2%",
           marginLeft: "24%",
           borderRadius: "15px",
-        }}>
+        }}
+      >
         Memes
       </div>
 
@@ -46,7 +51,8 @@ const ShopPage = () => {
           marginTop: "2%",
           marginLeft: "42%",
           borderRadius: "15px",
-        }}>
+        }}
+      >
         Sounds
       </div>
 
@@ -62,7 +68,8 @@ const ShopPage = () => {
           marginTop: "2%",
           marginLeft: "60%",
           borderRadius: "15px",
-        }}>
+        }}
+      >
         Cursor
       </div>
 
@@ -78,10 +85,10 @@ const ShopPage = () => {
           marginTop: "2%",
           marginLeft: "78%",
           borderRadius: "15px",
-        }}>
+        }}
+      >
         Scare
       </div>
-
 
       <div
         style={{
@@ -95,10 +102,10 @@ const ShopPage = () => {
           marginTop: "38%",
           marginLeft: "88%",
           borderRadius: "50px",
-        }}>
+        }}
+      >
         $1000
       </div>
-
     </body>
   );
 };
