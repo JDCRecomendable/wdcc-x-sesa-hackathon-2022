@@ -11,7 +11,7 @@ const RoomsPage = () => {
   const roomsList = dummyData.map(room => (
     <tr>
       <td>{room.name}</td>
-      <td>#{room._id}</td>
+      <td>{room._id}</td>
     </tr>
   ));
 
@@ -37,25 +37,12 @@ const RoomsPage = () => {
           </tr>
           {roomsList}
         </table>
-        <div style={{ float: "left" }}>
+        <div style={{ float: "left", position: "fixed", bottom: "5%" }}>
           <CreateRoom />
           <JoinRoom />
         </div>
       </div>
-      <div
-        style={{
-          position: "fixed",
-          width: "20%",
-          height: "40%",
-          zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
-          overflowX: "hidden",
-          marginTop: "50px",
-          marginLeft: "30%",
-          borderRadius: "30px",
-        }}
-      ></div>
+
       <div
         style={{
           position: "fixed",

@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function CreateRoom() {
   const [open, setOpen] = React.useState(false);
+  const [textValue, setTextValue] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -18,12 +19,18 @@ export default function CreateRoom() {
     setOpen(false);
   };
 
+  const handleChange = e => {
+    setTextValue(e.target.value);
+  };
+
+  console.log(textValue);
+
   return (
     <>
       <Button
         variant="outlined"
         onClick={handleClickOpen}
-        sx={{ marginRight: "50px" }}
+        sx={{ marginLeft: "25px", marginRight: "50px" }}
       >
         Create
       </Button>
@@ -40,6 +47,8 @@ export default function CreateRoom() {
             label="Room Name"
             fullWidth
             variant="standard"
+            onChange={handleChange}
+            value={textValue}
           />
         </DialogContent>
         <DialogActions>

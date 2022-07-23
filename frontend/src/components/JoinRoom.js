@@ -9,6 +9,7 @@ import DialogTitle from "@mui/material/DialogTitle";
 
 export default function JoinRoom() {
   const [open, setOpen] = React.useState(false);
+  const [textValue, setTextValue] = React.useState("");
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -17,6 +18,12 @@ export default function JoinRoom() {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const handleChange = e => {
+    setTextValue(e.target.value);
+  };
+
+  console.log(textValue);
 
   return (
     <>
@@ -36,6 +43,8 @@ export default function JoinRoom() {
             label="Room ID"
             fullWidth
             variant="standard"
+            onChange={handleChange}
+            value={textValue}
           />
         </DialogContent>
         <DialogActions>
