@@ -19,14 +19,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
 // Global variables storing current URL and status of URL
 let currentURL = '';
-let urlStatus = '';
+let urlStatus = null;
 
+
+// This listener will send the current url and url status to the popup window when opened
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getInfo"){
-        // chrome.storage.local.get.([urlkey], (result) => {
-            
-        // });
-        sendResponse(currentURL, urlStatus);
+        sendResponse(urlStatus);
     }
 });
 
@@ -51,15 +50,16 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 function alert(link){
   current_tab = link;
   console.log(current_tab);
+  // Send current url to back end to receive back status
+  getStatus(current_tab);
+
 }
 
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    let status = True;
-
-    return status;
+    urlStatus = false;
 }
 
 let currency = 9900;
@@ -72,14 +72,27 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
   
 var contentTabId;
 
-chrome.tabs.onActivated.addListener(buttonClicked);
+var contentTabId;
 
-function buttonClicked(tab){
-    let msg = {
-      txt: "hello"
+chrome.runtime.onMessage.addListener(function(msg,sender) {
+  if (msg.from == "content") {  //get content scripts tab id
+    contentTabId = sender.tab.id;
+  }
+    if (msg.from == "popup" && contentTabId) {  //got message from popup
+      chrome.tabs.sendMessage(contentTabId, {  //send it to content script
+        from: "background",
+        first: msg.first,
+        second: msg.second
+      });
     }
-    chrome.tabs.sendMessage(tab.id, msg);
+  });
 
-}
+  // Placeholder for shields until back end sends correct among
+  let shields = 2;
 
-
+  // This listener checks how many shields the user has and sends it to the popup
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "getShields") {
+      sendResponse(shields);
+    }
+  });
