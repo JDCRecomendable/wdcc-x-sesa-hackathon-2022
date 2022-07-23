@@ -24,3 +24,9 @@ chrome.tabs.onActivated.addListener(function(tabs) {
 });
 
 
+let currency = 9900;
+chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+    if(message.method == "getCurrency"){
+      sendResponse(currency);
+    }
+  });
