@@ -13,7 +13,8 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 
-import { Link } from "react-router-dom";
+import Link from "@material-ui/core/Link";
+import { Link as RouterLink } from "react-router-dom";
 
 import { createTheme } from "@mui/material/styles";
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
@@ -104,13 +105,17 @@ const Header = () => {
                   display: { xs: "block", md: "none" },
                 }}
               >
-                {pages.map(page => (
-                  <MenuItem key={page} onClick={handleCloseNavMenu}>
-                    <Link to="/">
-                      <Typography textAlign="center">{page}</Typography>
-                    </Link>
-                  </MenuItem>
-                ))}
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link component={RouterLink} to="/shop">
+                    <Typography textAlign="center">Shop</Typography>
+                  </Link>
+                </MenuItem>
+
+                <MenuItem onClick={handleCloseNavMenu}>
+                  <Link component={RouterLink} to="/rooms">
+                    <Typography textAlign="center">Rooms</Typography>
+                  </Link>
+                </MenuItem>
               </Menu>
             </Box>
             <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
