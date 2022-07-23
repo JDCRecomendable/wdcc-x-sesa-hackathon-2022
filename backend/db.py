@@ -28,7 +28,7 @@ class MongoDBCommunicator:
         item = self.db[collection_name].find_one(filter_dict)
         if item is None:
             return False, {}
-        return True, item
+        return True, dict(item)
 
     def query_one_from_collection_by_id(self, collection_name: str, identifier: Any) -> Tuple[bool, dict]:
         return self.query_one_from_collection(collection_name, {'_id': identifier})

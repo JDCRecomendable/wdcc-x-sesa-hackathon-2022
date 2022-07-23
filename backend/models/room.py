@@ -125,7 +125,10 @@ def get_attack_queue_for_tgt_user(room_item: dict, tgt_user_id: str) -> List[dic
     return _get_attack_queue_for_specific_user(room_item, tgt_user_id, 'tgtUserID')
 
 
-def _get_specific_attacks_for_specific_user(room_item: dict, user_id: str, user_type: str, attribute: str) -> List[dict]:
+def _get_specific_attacks_for_specific_user(room_item: dict,
+                                            user_id: str,
+                                            user_type: str,
+                                            attribute: str) -> List[dict]:
     attack_queue = get_attack_queue(room_item)
     specific_attacks = []
     for attack_object in attack_queue:
@@ -134,7 +137,10 @@ def _get_specific_attacks_for_specific_user(room_item: dict, user_id: str, user_
     return specific_attacks
 
 
-def _get_specific_attacks_for_specific_user_attribute_inverted(room_item: dict, user_id: str, user_type: str, attribute: str) -> List[dict]:
+def _get_specific_attacks_for_specific_user_attribute_inverted(room_item: dict,
+                                                               user_id: str,
+                                                               user_type: str,
+                                                               attribute: str) -> List[dict]:
     attack_queue = get_attack_queue(room_item)
     specific_attacks = []
     for attack_object in attack_queue:

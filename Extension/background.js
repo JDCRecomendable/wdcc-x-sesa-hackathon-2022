@@ -19,14 +19,13 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
 // Global variables storing current URL and status of URL
 let currentURL = '';
-let urlStatus = '';
+let urlStatus = null;
 
+
+// This listener will send the current url and url status to the popup window when opened
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getInfo"){
-        // chrome.storage.local.get.([urlkey], (result) => {
-            
-        // });
-        sendResponse(currentURL, urlStatus);
+        sendResponse(urlStatus);
     }
 });
 
@@ -51,15 +50,16 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 function alert(link){
   current_tab = link;
   console.log(current_tab);
+  // Send current url to back end to receive back status
+  getStatus(current_tab);
+
 }
 
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    let status = True;
-
-    return status;
+    urlStatus = false;
 }
 
 let currency = 9900;

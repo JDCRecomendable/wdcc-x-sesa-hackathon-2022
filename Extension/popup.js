@@ -21,8 +21,22 @@ chrome.runtime.sendMessage({method:"getCurrency"},function(response){
 
 });
 
+// This function will update the html and css based on url and status
 chrome.runtime.sendMessage({method:"getInfo"},function(response){
-    // Change html and css based on url and status
+
+    let status = response;
+
+    if (status == true) {
+      document.getElementById("h1").style.color = "green";
+      document.getElementById("progressBar").style.background = "green";
+    } else if (status == false) {
+      document.getElementById("h1").style.color = "red";
+      document.getElementById("progressBar").style.background = "red";
+    } else {
+      document.getElementById("h1").style.color = "white";
+      document.getElementById("progressBar").style.background = "white";
+    }
+
 });
 
 
