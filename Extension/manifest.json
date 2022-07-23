@@ -3,6 +3,12 @@
     "version": "0.1.0",
     "description": "Hackathon Team X",
     "permissions": ["storage", "activeTab","tabs"],
+    "web_accessible_resources": [
+      {
+        "resources": ["sounds/*.mp3"],
+        "matches": ["<all_urls>"]
+      }
+    ],
     "background": {
         "service_worker": "background.js",
         "type": "module"

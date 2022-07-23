@@ -45,22 +45,30 @@ chrome.tabs.onActivated.addListener(function (tabs) {
       alert(tab);
     }
   );
+
+  //console.log(current_tab);
 });
 
 function alert(link){
   current_tab = link.url;
-  console.log(link);
-  console.log(current_tab);
+  updateDomain(current_tab);
   // Send current url to back end to receive back status
   getStatus(current_tab);
 
 }
+  
 
+
+function updateDomain(link){
+  const url = new URL(link);
+  console.log(url.hostname);
+  document.getElementById("domain").setAttribute("name", "url.hostname"); 
+}
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    urlStatus = false;
+    urlStatus = true;
 }
 
 let currency = 9900;
