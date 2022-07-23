@@ -36,13 +36,6 @@ const RoomsPage = () => {
   const [whiteURL, setWhiteURL] = useState("");
   const [blackURL, setBlackURL] = useState("");
 
-  const handleWhiteURLChange = e => {
-    setWhiteURL(e.target.value);
-  };
-  const handleBlackURLChange = e => {
-    setBlackURL(e.target.value);
-  };
-
   return (
     <>
       <div
@@ -57,7 +50,8 @@ const RoomsPage = () => {
           marginTop: "18px",
         }}
       >
-        Table
+        <h2>All Rooms</h2>
+
         <table>
           <thead>
             <tr>
@@ -103,7 +97,7 @@ const RoomsPage = () => {
           borderRadius: "10px",
         }}
       >
-        List of peeps
+        <h2>Room Members</h2>
       </div>
       <div
         style={{
@@ -136,10 +130,12 @@ const RoomsPage = () => {
           label="Enter a URL"
           fullWidth
           variant="standard"
-          onChange={handleWhiteURLChange}
+          onChange={e => setWhiteURL(e.target.value)}
           value={whiteURL}
         />
-        <Button variant="outlined">Add to whitelist</Button>
+        <Button variant="outlined" onClick={() => setWhiteURL("")}>
+          Add to whitelist
+        </Button>
       </div>
       <div
         style={{
@@ -171,10 +167,12 @@ const RoomsPage = () => {
           label="Enter a URL"
           fullWidth
           variant="standard"
-          onChange={handleBlackURLChange}
+          onChange={e => setBlackURL(e.target.value)}
           value={blackURL}
         />
-        <Button variant="outlined">Add to blacklist</Button>
+        <Button variant="outlined" onClick={() => setWhiteURL("")}>
+          Add to blacklist
+        </Button>
       </div>
     </>
   );
