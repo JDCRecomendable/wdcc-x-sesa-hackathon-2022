@@ -102,3 +102,58 @@ def get_member_number_of_shields(room_item: dict, member_user_id: str) -> int:
     if member_details != {}:
         return member_details['numberOfShields']
     return -1
+
+
+def get_attack_queue(room_item: dict) -> List[dict]:
+    return room_item['attackQueue']
+
+
+def _get_attack_queue_for_specific_user(room_item: dict, user_id: str, user_type: str) -> List[dict]:
+    attack_queue = get_attack_queue(room_item)
+    specific_attacks = []
+    for attack_object in attack_queue:
+        if attack_object[user_type] == user_id:
+            specific_attacks.append(attack_object)
+    return specific_attacks
+
+
+def get_attack_queue_for_src_user(room_item: dict, src_user_id: str) -> List[dict]:
+    return _get_attack_queue_for_specific_user(room_item, src_user_id, 'srcUserID')
+
+
+def get_attack_queue_for_tgt_user(room_item: dict, tgt_user_id: str) -> List[dict]:
+    return _get_attack_queue_for_specific_user(room_item, tgt_user_id, 'tgtUserID')
+
+
+def _get_specific_attacks_for_specific_user(room_item: dict, user_id: str, user_type: str, attribute: str) -> List[dict]:
+    attack_queue = get_attack_queue(room_item)
+    specific_attacks = []
+    for attack_object in attack_queue:
+        if attack_object[user_type] == user_id and attack_object[attribute]:
+            specific_attacks.append(attack_object)
+    return specific_attacks
+
+
+def _get_specific_attacks_for_specific_user_attribute_inverted(room_item: dict, user_id: str, user_type: str, attribute: str) -> List[dict]:
+    attack_queue = get_attack_queue(room_item)
+    specific_attacks = []
+    for attack_object in attack_queue:
+        if attack_object[user_type] == user_id and not attack_object[attribute]:
+            specific_attacks.append(attack_object)
+    return specific_attacks
+
+
+def get_pending_attacks_for_src_user(room_item: dict, src_user_id: str) -> List[dict]:
+    return _get_specific_attacks_for_specific_user_attribute_inverted(room_item, src_user_id, 'srcUserID', 'completed')
+
+
+def get_pending_attacks_for_tgt_user(room_item: dict, tgt_user_id: str) -> List[dict]:
+    return _get_specific_attacks_for_specific_user_attribute_inverted(room_item, tgt_user_id, 'tgtUserID', 'completed')
+
+
+def get_successful_attacks_for_src_user(room_item: dict, src_user_id: str) -> List[dict]:
+    return _get_specific_attacks_for_specific_user(room_item, src_user_id, 'srcUserID', 'isSuccessful')
+
+
+def get_successful_attacks_for_tgt_user(room_item: dict, tgt_user_id: str) -> List[dict]:
+    return _get_specific_attacks_for_specific_user(room_item, tgt_user_id, 'tgtUserID', 'isSuccessful')
