@@ -56,12 +56,15 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 
     if (status == true) {
       heading.style.color = "green";
+      heading.innerText = "ayo making that bread";
       //progressBar.style.backgroundColor = "green";
     } else if (status == false) {
         heading.style.color = "red";
+        heading.innerText = "hey watch out";
         //progressBar.style.backgroundColor = "red";
     } else {
         heading.style.color = "white";
+        heading.innerText = "go to a different website";
         //progressBar.style.backgroundColor = "white";
     }
 
@@ -74,5 +77,8 @@ button.addEventListener("click", function(){
 })
 
 
-
-
+function updateDomain(link){
+  const url = new URL(link);
+  console.log(url.hostname);
+  document.getElementById("domain").setAttribute("name", "url.hostname"); 
+}
