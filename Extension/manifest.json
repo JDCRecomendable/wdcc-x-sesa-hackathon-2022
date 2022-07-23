@@ -3,7 +3,16 @@
     "version": "0.1.0",
     "description": "Hackathon Team X",
     "permissions": ["storage", "activeTab","tabs"],
-
+    "background": {
+        "service_worker": "background.js",
+        "type": "module"
+      },
+      "content_scripts": [
+        {
+          "matches": ["https://*/*"],
+          "js": ["content.js"]
+        }
+      ],
     "action": {
       "default_popup": "popup.html"
     },
