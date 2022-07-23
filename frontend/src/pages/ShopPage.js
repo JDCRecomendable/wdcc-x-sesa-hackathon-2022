@@ -14,26 +14,23 @@ const ShopPage = () => {
           overflowX: "hidden",
           marginTop: "18px",
         }}
-      >
-        <button style={{ borderRadius: "50%", height: "100px" }}>Random</button>
-        <button style={{ borderRadius: "50%", height: "100px" }}>
-          Individual
-        </button>
-        <button style={{ borderRadius: "50%", height: "100px" }}>Room</button>
-      </div>
+      ></div>
 
       <div
         style={{
           position: "fixed",
           width: "15%",
-          height: "10%",
+          height: "8%",
           zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
+          backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "2%",
+          marginTop: "1%",
           marginLeft: "24%",
           borderRadius: "15px",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
         }}
       >
         Memes
@@ -43,14 +40,17 @@ const ShopPage = () => {
         style={{
           position: "fixed",
           width: "15%",
-          height: "10%",
+          height: "8%",
           zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
+          backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "2%",
+          marginTop: "1%",
           marginLeft: "42%",
           borderRadius: "15px",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
         }}
       >
         Sounds
@@ -60,14 +60,17 @@ const ShopPage = () => {
         style={{
           position: "fixed",
           width: "15%",
-          height: "10%",
+          height: "8%",
           zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
+          backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "2%",
+          marginTop: "1%",
           marginLeft: "60%",
           borderRadius: "15px",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
         }}
       >
         Cursor
@@ -77,14 +80,17 @@ const ShopPage = () => {
         style={{
           position: "fixed",
           width: "15%",
-          height: "10%",
+          height: "8%",
           zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
+          backgroundColor: "#371B58",
           overflowX: "hidden",
-          marginTop: "2%",
+          marginTop: "1%",
           marginLeft: "78%",
           borderRadius: "15px",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
         }}
       >
         Scare
@@ -93,15 +99,18 @@ const ShopPage = () => {
       <div
         style={{
           position: "fixed",
-          width: "8%",
-          height: "10%",
+          width: "10%",
+          height: "8%",
           zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#E0D4FF",
+          backgroundColor: "#371B58",
           overflowX: "hidden",
           marginTop: "38%",
           marginLeft: "88%",
           borderRadius: "50px",
+          color: "#fff",
+          fontSize: "40px",
+          font: "Georgia",
+          textAlign: "center",
         }}
       >
         $1000
