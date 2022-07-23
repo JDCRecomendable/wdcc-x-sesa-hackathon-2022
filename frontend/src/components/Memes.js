@@ -1,37 +1,45 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import Button from "@mui/material/Button";
 
 const axios = require("axios");
 
 const Memes = () => {
   const [memes, setMemes] = useState([]);
+  const [selected, setSelected] = useState("");
 
   async function getMemes() {
     try {
       const response = await axios.get(
         "http://api.giphy.com/v1/gifs/search?q=memes&api_key=g8og2VjrkNrDviAgwZup2BUHZV3NzabW&limit=9"
       );
-      console.log(response.data.data);
       setMemes(response.data.data);
     } catch (error) {
       console.error(error);
     }
   }
 
-  getMemes();
+  useEffect(() => {
+    getMemes();
+  }, []);
+
+  const handleClick = e => {
+    setSelected(e.target.id);
+    console.log(selected);
+  };
 
   const memesList = memes.map(meme => (
-    <div key={meme}>
+    <div key={meme.embed_url}>
+      <Button id={meme.embed_url} onClick={handleClick} variant="outlined">
+        Double click to select
+      </Button>
       <iframe
         src={meme.embed_url}
         width="480"
         height="298"
         frameBorder="0"
-        class="giphy-embed"
+        className="giphy-embed"
         allowFullScreen
       ></iframe>
-      <p>
-        <a href={meme.url}>via GIPHY</a>
-      </p>
     </div>
   ));
 
