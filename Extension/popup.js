@@ -14,11 +14,38 @@ chrome.runtime.sendMessage({method:"getTime"},function(response){
     }, 1000);
 });
 
+
+// This sender will update the users currency total
 chrome.runtime.sendMessage({method:"getCurrency"},function(response){
   let currency = response;
   const currencyText = document.getElementById("currency");
   currencyText.innerText = currency;
+});
 
+// This sender will update the users shield total
+chrome.runtime.sendMessage({method:"getShields"}, function(response){
+  let shields = response;
+  if (shields == 3) {
+
+    document.getElementById("shield1").style.opacity = "1";
+    document.getElementById("shield2").style.opacity = "1";
+    document.getElementById("shield3").style.opacity = "1";
+  } else if (shields == 2) {
+
+    document.getElementById("shield1").style.opacity = "1";
+    document.getElementById("shield2").style.opacity = "1";
+    document.getElementById("shield3").style.opacity = "0.3";
+  } else if (shields == 1) {
+
+    document.getElementById("shield1").style.opacity = "1";
+    document.getElementById("shield2").style.opacity = "0.3";
+    document.getElementById("shield3").style.opacity = "0.3";
+  } else {
+
+    document.getElementById("shield1").style.opacity = "0.3";
+    document.getElementById("shield2").style.opacity = "0.3";
+    document.getElementById("shield3").style.opacity = "0.3";
+  }
 });
 
 // This function will update the html and css based on url and status
