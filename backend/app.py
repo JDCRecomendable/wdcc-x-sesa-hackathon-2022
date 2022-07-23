@@ -10,7 +10,7 @@ url = get_value('url')
 mongo_db_communicator = MongoDBCommunicator(username, password, url)
 
 
-# GENERAL
+# COMMON
 @app.route('/')
 def hello_world():  # put application's code here
     return 'Hello World!'
@@ -52,6 +52,36 @@ def ext_progress_full(user_id='1'):
 def ext_progress_empty(user_id='1'):
     pass
 
+# WEB APP - SHOP PAGE
+@app.route('/api/v0/<user_id>/app/shop/', methods=['GET'])
+@app.route('/api/v0/<user_id>/app/shop', methods=['GET'])
+def app_shop_get(user_id='1'):
+    pass
+
+
+# WEB APP - ROOM PAGE
+@app.route('/api/v0/<user_id>/app/room/', methods=['GET'])
+@app.route('/api/v0/<user_id>/app/room', methods=['GET'])
+def app_room_get(user_id='1'):
+    pass
+
+
+@app.route('/api/v0/<user_id>/app/room/add-room/', methods=['POST'])
+@app.route('/api/v0/<user_id>/app/room/add-room', methods=['POST'])
+def app_room_create_or_join(user_id='1'):
+    pass
+
+
+@app.route('/api/v0/app/room/add-to-whitelist/', methods=['POST'])
+@app.route('/api/v0/app/room/add-to-whitelist', methods=['POST'])
+def add_to_whitelist():
+    pass
+
+
+@app.route('/api/v0/app/room/add-to-blacklist/', methods=['POST'])
+@app.route('/api/v0/app/room/add-to-blacklist', methods=['POST'])
+def add_to_blacklist():
+    pass
 
 
 if __name__ == '__main__':
