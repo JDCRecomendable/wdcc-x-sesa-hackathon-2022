@@ -1,6 +1,7 @@
 import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
+import ConfirmPurchase from "./ConfirmPurchase";
 
 const Shields = () => {
   return (
@@ -44,7 +45,6 @@ const Shields = () => {
           variant="h6"
           noWrap
           component="a"
-          href="/"
           sx={{
             mr: 2,
             display: { xs: "none", md: "flex" },
@@ -55,7 +55,7 @@ const Shields = () => {
             textDecoration: "none",
           }}
         >
-          +
+          <ConfirmPurchase />
         </Typography>
       </Tooltip>
     </>
