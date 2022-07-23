@@ -5,28 +5,34 @@ import ShopPage from "./pages/ShopPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
 import { createTheme } from "@mui/material/styles";
-import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider";
+import { ThemeProvider as MuiThemeProvider } from "@material-ui/core/styles";
+
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: "#371B58",
+      dark: "#371B58",
+      light: "#371B58",
+    },
+    secondary: {
+      main: "#371B58",
+      dark: "#371B58",
+      light: "#371B58",
+    },
+  },
+});
 
 function App() {
-  const theme = createTheme({
-    palette: {
-      primary: {
-        main: "#371B58",
-      },
-      secondary: {
-        main: "#371B58",
-      },
-    },
-  });
-
   return (
     <Router>
       <>
-        <Header />
-        <Routes>
-          <Route path="/shop" element={<ShopPage />} />
-          <Route path="/rooms" element={<RoomsPage />} />
-        </Routes>
+        <MuiThemeProvider theme={theme}>
+          <Header />
+          <Routes>
+            <Route path="/shop" element={<ShopPage />} />
+            <Route path="/rooms" element={<RoomsPage />} />
+          </Routes>
+        </MuiThemeProvider>
       </>
     </Router>
   );
