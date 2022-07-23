@@ -1,75 +1,105 @@
-import Grid from '@mui/material/Grid'
-import * as React from 'react';
-import { styled } from '@mui/material/styles';
-import Box from '@mui/material/Box';
-import Paper from '@mui/material/Paper';
+import React from 'react';
 
 
-const Attack = styled(Paper)(({ theme }) => ({
-  padding: theme.spacing(15),
-  textAlign: 'center',
-  margin: '8px',
-  marginLeft: '20px',
-  font: 'Georgia',
-  fontSize: '40px',
-  borderRadius: '50px',
-  backgroundColor: "#371B58",
-  color: '#fff',
-}));
-
-const Target = styled(Paper)(({ theme }) => ({
-
-  padding: theme.spacing(5),
-  textAlign: 'center',
-  marginBottom: '15px',
-  marginTop: '50px',
-  font: 'Georgia',
-  fontSize: '40px',
-  borderRadius: '50px',
-  backgroundColor: "#371B58",
-  color: '#fff',
-}));
 
 const ShopPage = () => {
   return (
-    <div style={{backgroundColor: '#E0D4FF', paddingBottom: '300px'}}>
-    <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1}>
+    <body>
+      <div
+        style={{
+          position: "fixed",
+          width: "18%",
+          height: "100%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "18px",
+        }} >
+      </div>
 
-        {/* This is for selecting individuals */}
-        <Grid container spacing={1} item xs={3} justifyContent="space-around">
-          <React.Fragment>
-            <Grid item xs={8}>
-              <Target>Random</Target>
-            </Grid>
-            <Grid item xs={8}>
-              <Target>Individual</Target>
-            </Grid>
-            <Grid item xs={8}>
-              <Target>Room</Target>
-            </Grid>
-          </React.Fragment>
-        </Grid>
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "10%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "2%",
+          marginLeft: "24%",
+          borderRadius: "15px",
+        }}>
+        Memes
+      </div>
 
-        {/* This is for selecting attacks*/}
-        <Grid container spacing={1} item xs={9} justifyContent="space-around">          
-          <React.Fragment>
-          <Grid item xs={5}>
-            <Attack>Memes</Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack>Sounds</Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack><button>Cursor</button></Attack>
-          </Grid>
-          <Grid item xs={5}>
-            <Attack>Scare</Attack>
-          </Grid>
-          </React.Fragment></Grid>
-      </Grid>
-    </Box>
-    </div>
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "10%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "2%",
+          marginLeft: "42%",
+          borderRadius: "15px",
+        }}>
+        Sounds
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "10%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "2%",
+          marginLeft: "60%",
+          borderRadius: "15px",
+        }}>
+        Cursor
+      </div>
+
+      <div
+        style={{
+          position: "fixed",
+          width: "15%",
+          height: "10%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "2%",
+          marginLeft: "78%",
+          borderRadius: "15px",
+        }}>
+        Scare
+      </div>
+
+
+      <div
+        style={{
+          position: "fixed",
+          width: "8%",
+          height: "10%",
+          zIndex: "1",
+          top: "3.4em",
+          backgroundColor: "#E0D4FF",
+          overflowX: "hidden",
+          marginTop: "38%",
+          marginLeft: "88%",
+          borderRadius: "50px",
+        }}>
+        $1000
+      </div>
+
+    </body>
   );
 };
 

@@ -56,13 +56,13 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 
     if (status == true) {
       heading.style.color = "green";
-      progressBar.style.backgroundColor = "green";
+      //progressBar.style.backgroundColor = "green";
     } else if (status == false) {
         heading.style.color = "red";
-        progressBar.style.backgroundColor = "red";
+        //progressBar.style.backgroundColor = "red";
     } else {
-      heading.style.color = "white";
-      progressBar.style.backgroundColor = "white";
+        heading.style.color = "white";
+        //progressBar.style.backgroundColor = "white";
     }
 
 });
