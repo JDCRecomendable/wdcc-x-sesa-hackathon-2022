@@ -1,5 +1,3 @@
-
-
 chrome.runtime.sendMessage({method:"getTime"},function(response){
     let time = response;
     const progressLabel = document.getElementById("progressLabel");
@@ -22,5 +20,11 @@ chrome.runtime.sendMessage({method:"getCurrency"},function(response){
   currencyText.innerText = currency;
 
 });
+
+chrome.runtime.sendMessage({method:"getInfo"},function(response){
+    // Change html and css based on url and status
+});
+
+
 
 

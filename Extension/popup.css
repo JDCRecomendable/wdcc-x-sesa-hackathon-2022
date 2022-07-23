@@ -1,6 +1,8 @@
 body {
+    /**cursor:url(images/gam1566.cur), auto;**/
     width: 300px;
-    background-color: 371B58;
+    background-color: #371B58;
+    /** background-image: url(images/200.gif);**/
 }
 
 .topbar {
