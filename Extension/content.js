@@ -23,13 +23,14 @@ function test() {
   chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
     var iframe = document.createElement("iframe");
-    iframe.style.background = "green";
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.style.position = "fixed";
-    iframe.style.top = "0px";
-    iframe.style.opacity= "0.5";
+    iframe.style.top = "0px"
+    iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
+    iframe.srcdoc = "<img src='https://i.kym-cdn.com/entries/icons/original/000/010/843/ricardo.jpg' width='50%' height='50%'>";
+    
 
     document.body.appendChild(iframe);
   });
