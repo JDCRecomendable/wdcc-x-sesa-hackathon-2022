@@ -29,13 +29,13 @@ function test() {
     iframe.style.top = "0px"
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
-    iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="1000" height="1000" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
+    iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="1000px" height="1000px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     
 
     document.body.appendChild(iframe);
 
     //play audio
-    var myAudio = new Audio(chrome.runtime.getURL("Resources/knock.mp3"));
+    var myAudio = new Audio(chrome.runtime.getURL("sounds/ugotthat.mp3"));
     myAudio.play();
 
     //10 seconds timer to remove ifram
