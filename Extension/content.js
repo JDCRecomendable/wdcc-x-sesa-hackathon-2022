@@ -33,6 +33,14 @@ function test() {
     
 
     document.body.appendChild(iframe);
+    let counter =0;
+    setInterval(() => {
+      counter++
+      if(counter ==10){
+        document.body.removeChild(iframe);
+      }
+    }, 1000);
+    
   });
 }
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.
