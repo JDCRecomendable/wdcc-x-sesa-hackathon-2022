@@ -1,7 +1,6 @@
 const RoomPage = () => {
   return (
     <>
-      <Header />
       <div>ShopPage</div>;
     </>
   );
