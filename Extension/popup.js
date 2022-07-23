@@ -7,11 +7,8 @@ chrome.runtime.sendMessage({method:"getTime"},function(response){
     
     let coinTimer = setInterval(() => {
       progressEl.value++;
-
       if (progressEl.value >= progressEl.max) {
-        progressEl.value = 0;
-        console.log("Would replace");
-        
+        progressEl.value = 0;       
      }
     }, 1000);
 });
