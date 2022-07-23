@@ -1,0 +1,38 @@
+body {
+    width: 300px;
+    background-color: 371B58;
+}
+
+.topbarstyle {
+    display: flex;
+    justify-content: space-between;
+}
+
+.currencybarstyle {
+    width: 80px;
+    height: 30px;
+    background-color: E0D4FF;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.shieldbarstyle {
+    width: auto;
+    height: 30px;
+    background-color: E0D4FF;
+    border-radius: 20px;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.currencybarstyle img {
+    margin-right: 10px;
+}
+
+.shieldbarstyle img {
+    padding: 10px;
+}
+
