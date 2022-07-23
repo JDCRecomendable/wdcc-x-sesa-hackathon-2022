@@ -1,5 +1,8 @@
 import CreateRoom from "../components/CreateRoom";
 import JoinRoom from "../components/JoinRoom";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import { useState } from "react";
 
 const RoomsPage = () => {
   const roomDummyData = [
@@ -29,6 +32,16 @@ const RoomsPage = () => {
       <td>{website}</td>
     </tr>
   ));
+
+  const [whiteURL, setWhiteURL] = useState("");
+  const [blackURL, setBlackURL] = useState("");
+
+  const handleWhiteURLChange = e => {
+    setWhiteURL(e.target.value);
+  };
+  const handleBlackURLChange = e => {
+    setBlackURL(e.target.value);
+  };
 
   return (
     <>
@@ -116,6 +129,17 @@ const RoomsPage = () => {
           </thead>
           <tbody>{whitelisted}</tbody>
         </table>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Enter a URL"
+          fullWidth
+          variant="standard"
+          onChange={handleWhiteURLChange}
+          value={whiteURL}
+        />
+        <Button variant="outlined">Add to whitelist</Button>
       </div>
       <div
         style={{
@@ -140,6 +164,17 @@ const RoomsPage = () => {
           </thead>
           <tbody>{blacklisted}</tbody>
         </table>
+        <TextField
+          autoFocus
+          margin="dense"
+          id="name"
+          label="Enter a URL"
+          fullWidth
+          variant="standard"
+          onChange={handleBlackURLChange}
+          value={blackURL}
+        />
+        <Button variant="outlined">Add to blacklist</Button>
       </div>
     </>
   );
