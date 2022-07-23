@@ -56,16 +56,22 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 
     if (status == true) {
       heading.style.color = "green";
-      progressBar.style.backgroundColor = "green";
+      //progressBar.style.backgroundColor = "green";
     } else if (status == false) {
         heading.style.color = "red";
-        progressBar.style.backgroundColor = "red";
+        //progressBar.style.backgroundColor = "red";
     } else {
-      heading.style.color = "white";
-      progressBar.style.backgroundColor = "white";
+        heading.style.color = "white";
+        //progressBar.style.backgroundColor = "white";
     }
 
 });
+
+// This listener will send the user to the web app in a new tab when the attack button is pressed
+var button = document.getElementById("attackBtn");
+button.addEventListener("click", function(){
+  chrome.tabs.create({url:"http://google.com/"}); // Placeholder for web app
+})
 
 
 

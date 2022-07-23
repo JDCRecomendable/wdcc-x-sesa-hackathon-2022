@@ -23,8 +23,6 @@ export default function JoinRoom() {
     setTextValue(e.target.value);
   };
 
-  console.log(textValue);
-
   return (
     <>
       <Button variant="outlined" onClick={handleClickOpen}>

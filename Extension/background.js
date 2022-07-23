@@ -96,4 +96,8 @@ chrome.runtime.onMessage.addListener(function(msg,sender) {
     }
   });
 
-
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "yo") {
+      sendResponse("heyman");
+    }
+  });
