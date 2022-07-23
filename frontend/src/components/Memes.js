@@ -30,7 +30,7 @@ const Memes = () => {
   const memesList = memes.map(meme => (
     <div key={meme.embed_url}>
       <Button id={meme.embed_url} onClick={handleClick} variant="outlined">
-        Double click to select
+        Double click to purchase
       </Button>
       <iframe
         src={meme.embed_url}

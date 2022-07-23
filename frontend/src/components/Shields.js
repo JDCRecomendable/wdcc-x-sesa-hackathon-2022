@@ -56,7 +56,12 @@ const Shields = () => {
             marginRight: "250px",
           }}
         >
-          <ConfirmPurchase />
+          <ConfirmPurchase
+            name="Shield"
+            price="100"
+            description="Shields will protect you from attacks from other users."
+            buttonText="+"
+          />
         </Typography>
       </Tooltip>
     </>
