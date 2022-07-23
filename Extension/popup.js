@@ -67,6 +67,12 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 
 });
 
+// This listener will send the user to the web app in a new tab when the attack button is pressed
+var button = document.getElementById("attackBtn");
+button.addEventListener("click", function(){
+  chrome.tabs.create({url:"http://google.com/"}); // Placeholder for web app
+})
+
 
 
 
