@@ -29,7 +29,7 @@ function test() {
     iframe.style.top = "0px"
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
-    iframe.srcdoc = "<img src='https://i.kym-cdn.com/entries/icons/original/000/010/843/ricardo.jpg' width='50%' height='50%'>";
+    iframe.srcdoc = "<img src='https://c.tenor.com/n9Hl8cEdNV4AAAAC/ricardo-milos.gif' width='100%' height='100%'>";
     
 
     document.body.appendChild(iframe);
