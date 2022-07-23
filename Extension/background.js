@@ -94,3 +94,9 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
       sendResponse(shields);
     }
   });
+
+  chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
+    if (message.method == "yo") {
+      sendResponse("heyman");
+    }
+  });
