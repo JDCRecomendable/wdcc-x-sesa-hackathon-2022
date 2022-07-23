@@ -4,6 +4,10 @@ from typing import List
 from flask import Flask, render_template, request
 from flask_cors import CORS
 
+import models.common
+import models.item
+import models.room
+import models.user
 from db import MongoDBCommunicator
 from utils.config_reader import get_value
 
@@ -60,7 +64,32 @@ def attack(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+    src_user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)
+    src_user_active_room = models.user.get_current_room(src_user_details[1])
+    tgt_user_id = request.get_json()['tgtUserID']
+    tgt_user_details = mongo_db_communicator.query_one_from_collection_by_id('users', tgt_user_id)
+    tgt_user_active_room = models.user.get_current_room(tgt_user_details[1])
+
+    if src_user_active_room != tgt_user_active_room:
+        return respond_error('Target user not in the same room')
+
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', src_user_active_room)
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    attack_id = request.get_json()['attackID']
+    attack_details = mongo_db_communicator.query_one_from_collection_by_id('attacks', attack_id)
+    if not attack_details[0]:
+        return respond_error('Attack item ID not available')
+    attack_cost = models.item.get_cost(attack_details)
+    src_user_points = models.room.get_member_points(room_details, user_id)
+    if attack_cost > src_user_points:
+        return respond_error('Not enough points')
+
+    new_data = models.room.add_to_attack_queue(room_details, user_id, tgt_user_id, request.get_json()['attackID'])
+    new_data = models.room.increase_member_points(new_data, user_id, -attack_cost)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', src_user_active_room, new_data)
 
 
 @app.route('/common/<user_id>/is-attacked/', methods=['POST'])

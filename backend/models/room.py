@@ -163,3 +163,21 @@ def get_successful_attacks_for_src_user(room_item: dict, src_user_id: str) -> Li
 
 def get_successful_attacks_for_tgt_user(room_item: dict, tgt_user_id: str) -> List[dict]:
     return _get_specific_attacks_for_specific_user(room_item, tgt_user_id, 'tgtUserID', 'isSuccessful')
+
+
+def add_to_attack_queue(room_item: dict, src_user_id: str, tgt_user_id: str, attack_id: int) -> dict:
+    attack_queue = get_attack_queue(room_item)
+    attack_queue.append({
+        'srcUserID': src_user_id,
+        'tgtUserID': tgt_user_id,
+        'attackID': attack_id,
+        'completed': False,
+        'isSuccessful': False
+    })
+    return room_item
+
+
+def increase_member_points(room_item: dict, member_user_id: str, points: int) -> dict:
+    member_details = get_member_details(room_item, member_user_id)
+    member_details['points'] += points
+    return room_item
