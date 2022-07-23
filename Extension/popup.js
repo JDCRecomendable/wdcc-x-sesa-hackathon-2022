@@ -50,18 +50,19 @@ chrome.runtime.sendMessage({method:"getShields"}, function(response){
 
 // This function will update the html and css based on url and status
 chrome.runtime.sendMessage({method:"getInfo"},function(response){
-
+  const progressBar = document.getElementById("progressBar");
+  const heading = document.getElementById("h1")
     let status = response;
 
     if (status == true) {
-      document.getElementById("h1").style.color = "green";
-      document.getElementById("progressBar").style.background = "green";
+      heading.style.color = "green";
+      progressBar.style.backgroundColor = "green";
     } else if (status == false) {
-      document.getElementById("h1").style.color = "red";
-      document.getElementById("progressBar").style.background = "red";
+        heading.style.color = "red";
+        progressBar.style.backgroundColor = "red";
     } else {
-      document.getElementById("h1").style.color = "white";
-      document.getElementById("progressBar").style.background = "white";
+      heading.style.color = "white";
+      progressBar.style.backgroundColor = "white";
     }
 
 });
