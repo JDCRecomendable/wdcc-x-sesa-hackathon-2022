@@ -81,15 +81,20 @@ def attack(user_id='John'):
     attack_details = mongo_db_communicator.query_one_from_collection_by_id('attacks', attack_id)
     if not attack_details[0]:
         return respond_error('Attack item ID not available')
-    attack_cost = models.item.get_cost(attack_details)
-    src_user_points = models.room.get_member_points(room_details, user_id)
+    attack_cost = models.item.get_cost(attack_details[1])
+    src_user_points = models.room.get_member_points(room_details[1], user_id)
     if attack_cost > src_user_points:
         return respond_error('Not enough points')
 
-    new_data = models.room.add_to_attack_queue(room_details, user_id, tgt_user_id, request.get_json()['attackID'])
+    new_data = models.room.add_to_attack_queue(room_details[1], user_id, tgt_user_id, request.get_json()['attackID'])
     new_data = models.room.increase_member_points(new_data, user_id, -attack_cost)
 
     mongo_db_communicator.update_one_in_collection_by_id('rooms', src_user_active_room, new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 @app.route('/common/<user_id>/is-attacked/', methods=['POST'])
@@ -97,7 +102,46 @@ def attack(user_id='John'):
 def is_attacked(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    pending_attacks = models.room.get_pending_attacks_for_tgt_user(room_details[1], user_id)
+    number_of_shields = models.room.get_member_number_of_shields(room_details[1], user_id)
+    if len(pending_attacks) == 0:
+        return craft_response({
+            'status': True,
+            'statusDescription': 'No pending attacks',
+            'isAttacked': False,
+            'attackID': -1,
+            'numberOfShields': number_of_shields
+        }, 200)
+
+    attack_details = pending_attacks[0]
+
+    if number_of_shields > 0:
+        number_of_shields -= 1
+        models.room.update_pending_attack_status(attack_details, False)
+        new_data = models.room.increase_member_number_of_shields(room_details[1], user_id, -number_of_shields)
+        mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+        return craft_response({
+            'status': True,
+            'statusDescription': 'Decreased shield by 1',
+            'isAttacked': False,
+            'attackID': -1,
+            'numberOfShields': number_of_shields
+        }, 200)
+
+    models.room.update_pending_attack_status(attack_details, True)
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Attack sent',
+        'isAttacked': True,
+        'attackID': attack_details['attackID'],
+        'numberOfShields': number_of_shields
+    }, 200)
 
 
 # CHROME EXTENSION

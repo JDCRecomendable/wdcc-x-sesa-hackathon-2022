@@ -181,3 +181,16 @@ def increase_member_points(room_item: dict, member_user_id: str, points: int) ->
     member_details = get_member_details(room_item, member_user_id)
     member_details['points'] += points
     return room_item
+
+
+def increase_member_number_of_shields(room_item: dict, member_user_id: str, number_of_shields: int) -> dict:
+    member_details = get_member_details(room_item, member_user_id)
+    member_details['numberOfShields'] += number_of_shields
+    return room_item
+
+
+def update_pending_attack_status(attack_details: dict, is_successful: bool) -> dict:
+    attack_details['is_successful'] = is_successful
+    attack_details['completed'] = True
+    return attack_details
+
