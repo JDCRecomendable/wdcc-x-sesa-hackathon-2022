@@ -30,7 +30,6 @@ const theme = createTheme({
   },
 });
 
-const pages = ["Shop", "Rooms"];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 const Header = () => {
@@ -138,15 +137,23 @@ const Header = () => {
               LOGO
             </Typography>
             <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
-              {pages.map(page => (
-                <Button
-                  key={page}
-                  onClick={handleCloseNavMenu}
-                  sx={{ my: 2, color: "white", display: "block" }}
-                >
-                  {page}
-                </Button>
-              ))}
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link component={RouterLink} to="/shop">
+                  Shop
+                </Link>
+              </Button>
+
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
+                <Link component={RouterLink} to="/rooms">
+                  Rooms
+                </Link>
+              </Button>
             </Box>
 
             <Box sx={{ flexGrow: 0 }}>
