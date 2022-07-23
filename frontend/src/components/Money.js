@@ -27,6 +27,7 @@ const Money = () => {
           fontWeight: 700,
           letterSpacing: ".3rem",
           color: "inherit",
+          marginRight: "100px",
           textDecoration: "none",
         }}
       >
