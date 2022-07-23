@@ -1,8 +1,7 @@
 const RoomPage = () => {
   return (
     <>
-      <Header />
-      <div>ShopPage</div>;
+      <div>ShopPage</div>
     </>
   );
 };
