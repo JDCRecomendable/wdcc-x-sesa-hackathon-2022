@@ -13,4 +13,11 @@ chrome.runtime.sendMessage({method:"getTime"},function(response){
     }, 1000);
 });
 
+chrome.runtime.sendMessage({method:"getCurrency"},function(response){
+  let currency = response;
+  const currencyText = document.getElementById("currency");
+  currencyText.innerText = currency;
+
+});
+
 
