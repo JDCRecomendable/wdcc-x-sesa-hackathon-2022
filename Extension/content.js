@@ -17,12 +17,21 @@
 //   elt.style['background-color'] = "red";
 // }
 
-window.addEventListener('click',test,true);
+window.addEventListener("click", test, true);
 
-function test(){
-  chrome.runtime.sendMessage({method:"yo"},function(response){
+function test() {
+  chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
-  
+    var iframe = document.createElement("iframe");
+    iframe.style.background = "green";
+    iframe.style.height = "100%";
+    iframe.style.width = "100%";
+    iframe.style.position = "fixed";
+    iframe.style.top = "0px";
+    iframe.style.opacity= "0.5";
+    iframe.style.zIndex = "9000000000000000000";
+
+    document.body.appendChild(iframe);
   });
 }
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.
@@ -36,15 +45,12 @@ chrome.runtime.onMessage.addListener(function (msg) {
 });
 */
 
-
-
 function gotMessage(request, sender, sendResponse) {
-    console.log(request.txt);
-    if(request.txt == "hello"){
-        let bodies = document.getElementsByTagName("body");
-        for (elt of bodies) {
-            elt.style["background-color"] = "#000000";
-        }
+  console.log(request.txt);
+  if (request.txt == "hello") {
+    let bodies = document.getElementsByTagName("body");
+    for (elt of bodies) {
+      elt.style["background-color"] = "#000000";
     }
+  }
 }
-
