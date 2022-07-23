@@ -5,130 +5,67 @@ import Box from '@mui/material/Box';
 import Paper from '@mui/material/Paper';
 
 
-const Item = styled(Paper)(({ theme }) => ({
+const Attack = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(15),
   textAlign: 'center',
+  margin: '8px',
+  marginLeft: '20px',
   color: theme.palette.text.secondary,
 }));
 
-const Item1 = styled(Paper)(({ theme }) => ({
+const Target = styled(Paper)(({ theme }) => ({
   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
   ...theme.typography.body2,
   padding: theme.spacing(5),
   textAlign: 'center',
   marginBottom: '15px',
-  marginTop: '15px',
+  marginTop: '50px',
   color: theme.palette.text.secondary,
 }));
 
-// function FormRow() {
-//   return (
-//     <React.Fragment>
-//       <Grid item xs={2}>
-//         <Item1>Item</Item1>
-//       </Grid>
-//       <Grid item xs={5}>
-//         <Item>Item</Item>
-//       </Grid>
-//       <Grid item xs={5}>
-//         <Item>Item</Item>
-//       </Grid>
-//     </React.Fragment>
-//   );
-// }
-
 const ShopPage = () => {
   return (
-    // <Box sx={{ flexGrow: 1 }}>
-    //   <Grid container spacing={1} alignItems="center" justifyContent="space-around">
-    //     <Grid container item spacing={3}>
-    //       <React.Fragment>
-    //         <Grid item xs={2}>
-    //           <Item1>Item</Item1>
-    //         </Grid>
-    //         <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid>
-    //         <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid>
-    //       </React.Fragment>
-    //     </Grid>
-    //     <Grid container item spacing={3}>
-    //       <React.Fragment>
-    //         <Grid item xs={2}>
-    //           <Item1>Item</Item1>
-    //         </Grid>
-    //         <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid>
-    //         <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid>
-    //       </React.Fragment>
-    //     </Grid>
-    //     <Grid container item spacing={3}>
-    //       <React.Fragment>
-    //         <Grid item xs={2}>
-    //           <Item1>Item</Item1>
-    //         </Grid>
-    //         {/* <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid>
-    //         <Grid item xs={5}>
-    //           <Item>Item</Item>
-    //         </Grid> */}
-    //       </React.Fragment>
-    //     </Grid>
-    //   </Grid>
-    // </Box>
+    <div style={{backgroundColor: '#E0D4FF', paddingBottom: '300px'}}>
+    ,
     <Box sx={{ flexGrow: 1 }}>
-      <Grid container spacing={1} alignItems="center" justifyContent="space-around">
-        <Grid>
+      <Grid container spacing={1}>
+
+        {/* This is for selecting individuals */}
+        <Grid container spacing={1} item xs={3} justifyContent="space-around">
           <React.Fragment>
-            <Grid item xs={2}>
-              <Item1>Item</Item1>
+            <Grid item xs={8}>
+              <Target>Random</Target>
             </Grid>
-            <Grid item xs={5}>
-              <Item1>Item</Item1>
+            <Grid item xs={8}>
+              <Target>Individual</Target>
             </Grid>
-            <Grid item xs={5}>
-              <Item1>Item</Item1>
+            <Grid item xs={8}>
+              <Target>Room</Target>
             </Grid>
           </React.Fragment>
         </Grid>
 
-        <Grid>          
+        {/* This is for selecting attacks*/}
+        <Grid container spacing={1} item xs={9}>          
           <React.Fragment>
           <Grid item xs={5}>
-            <Item>Item</Item>
+            <Attack>Uno</Attack>
           </Grid>
           <Grid item xs={5}>
-            <Item>Item</Item>
-          </Grid>
-        </React.Fragment>
-        </Grid>
-        
-        <Grid>          
-          <React.Fragment>
-          <Grid item xs={2}>
-
+            <Attack>Dos</Attack>
           </Grid>
           <Grid item xs={5}>
-            <Item>Item</Item>
+            <Attack>Tres</Attack>
           </Grid>
           <Grid item xs={5}>
-            <Item>Item</Item>
+            <Attack>Quatros</Attack>
           </Grid>
         </React.Fragment></Grid>
       </Grid>
-      {/* <Grid container spacing={1} alignItems="center" justifyContent="space-around">
-2
-</Grid> */}
     </Box>
-
+    </div>
   );
 };
 
