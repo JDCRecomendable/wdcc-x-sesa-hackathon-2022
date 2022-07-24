@@ -14,6 +14,7 @@ const Shields = () => {
         "http://ripscamera0c.pythonanywhere.com/app/Alpha/room"
       );
       numOfShields = response.data.numberOfShields;
+      console.log(numOfShields);
     } catch (err) {
       console.log("err");
     }

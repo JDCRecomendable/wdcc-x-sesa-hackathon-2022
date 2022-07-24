@@ -1,9 +1,9 @@
 import React from "react";
-const axios = require("axios");
 
-const PurchaseButton = ({ cost, item_id, details }) => {
+const PurchaseButton = ({ cost, purchase }) => {
   return (
     <div
+      onClick={purchase}
       style={{
         position: "fixed",
         width: "12%",
