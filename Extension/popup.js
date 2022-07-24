@@ -76,9 +76,3 @@ button.addEventListener("click", function(){
   chrome.tabs.create({url:"http://google.com/"}); // Placeholder for web app
 })
 
-
-function updateDomain(link){
-  const url = new URL(link);
-  console.log(url.hostname);
-  document.getElementById("domain").setAttribute("name", "url.hostname"); 
-}

@@ -51,19 +51,11 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 
 function alert(link){
   current_tab = link.url;
-  updateDomain(current_tab);
   // Send current url to back end to receive back status
   getStatus(current_tab);
 
 }
   
-
-
-function updateDomain(link){
-  const url = new URL(link);
-  console.log(url.hostname);
-  document.getElementById("domain").setAttribute("name", "url.hostname"); 
-}
 
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {

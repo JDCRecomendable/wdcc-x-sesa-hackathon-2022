@@ -1,3 +1,5 @@
+
+
 // chrome.runtime.sendMessage({from:"content"}); //first, tell the background page that this is the tab that wants to receive the messages.
 
 // chrome.runtime.onMessage.addListener(function(msg) {
@@ -26,33 +28,64 @@ function test() {
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.style.position = "fixed";
-    iframe.style.top = "0px"
+    iframe.style.top = "0px";
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
     iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="800" height="800" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     */
 
-    document.body.appendChild(iframe);
+    //document.body.appendChild(iframe);
 
     //play audio
     var myAudio = new Audio(chrome.runtime.getURL("sounds/ugotthat.mp3"));
     myAudio.play();
 
     //10 seconds timer to remove ifram
-    let counter =0;
-    setInterval(() => {
-      counter++
-      if(counter ==10){
-        document.body.removeChild(iframe);
-      }
-    }, 1000);
+    // let counter =0;
+    // setInterval(() => {
+    //   counter++
+    //   if(counter ==10){
+    //     document.body.removeChild(iframe);
+    //   }
+    // }, 1000);
     
 
     //cursor
-    let bodies = document.getElementsByTagName("body");
-    for (elt of bodies) {
-      elt.style["cursor"] = "#000000";
+    const colours = ["red", "green", "yellow", "blue", "purple", "pink", "orange", "Chartreuse", "DarkGoldenRod", "GreenYellow", "thistle"];
+    const fg = [];
+    const bg = []
+    let elements = document.getElementsByTagName("*");
+    console.log(elements);
+    for (elt of elements) {
+
+      fg.push(elt.style.color);
+      bg.push(elt.style.background);
+        
+      elt.style.cursor = 'none';
+      console.log(elt.style.cursor);
+      let col1 = Math.floor(Math.random() * 12);
+      let col2 = Math.floor(Math.random() * 12);
+      elt.style.color = colours[col1];
+      elt.style.background = colours[col2];
+
     }
+
+    // 10 seconds timer to remove ifram
+    let counter =0;
+    setInterval(() => {
+      counter++
+      if(counter ==15){
+        var ctr = 0
+        for(elt of elements){
+            elt.style.cursor = 'default';
+            
+            elt.style.color = fg[ctr];
+            elt.style.background = bg[ctr];
+            ctr = ctr + 1;
+        }
+        
+      }
+    }, 1000);
   });
 }
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.
