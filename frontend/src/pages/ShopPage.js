@@ -43,15 +43,15 @@ const ShopPage = () => {
           marginTop: "18px",
         }}
       >
-        <table style={{ textAlign: "center" }}>
-          <tr style={{ textAlign: "center" }}>
-            <IconButton style={{ textAlign: "center" }}>Random</IconButton>
+        <table>
+          <tr>
+            <IconButton style={{ marginTop: '150px', color: '#371B58'}}>Random</IconButton>
           </tr>
           <tr>
-            <IconButton>Individual</IconButton>
+            <IconButton style={{ marginTop: '150px', color: '#371B58' }}>Individual</IconButton>
           </tr>
           <tr>
-            <IconButton>Group</IconButton>
+            <IconButton style={{ marginTop: '150px', color: '#371B58' }}>Group</IconButton>
           </tr>
         </table>
       </div>
