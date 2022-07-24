@@ -47,6 +47,14 @@ def get_owner_user_id(room_item: dict) -> str:
     return room_item['ownerUserID']
 
 
+def get_whitelist_domains(room_item: dict) -> List[str]:
+    return room_item['whitelistDomains']
+
+
+def get_blacklist_domains(room_item: dict) -> List[str]:
+    return room_item['blacklistDomains']
+
+
 def is_whitelist_domain(room_item: dict, domain: str) -> bool:
     whitelist_domains = room_item['whitelistDomains']
     return domain in whitelist_domains
@@ -165,12 +173,13 @@ def get_successful_attacks_for_tgt_user(room_item: dict, tgt_user_id: str) -> Li
     return _get_specific_attacks_for_specific_user(room_item, tgt_user_id, 'tgtUserID', 'isSuccessful')
 
 
-def add_to_attack_queue(room_item: dict, src_user_id: str, tgt_user_id: str, attack_id: int) -> dict:
+def add_to_attack_queue(room_item: dict, src_user_id: str, tgt_user_id: str, attack_id: int, attack_details: str) -> dict:
     attack_queue = get_attack_queue(room_item)
     attack_queue.append({
         'srcUserID': src_user_id,
         'tgtUserID': tgt_user_id,
         'attackID': attack_id,
+        'details': attack_details,
         'completed': False,
         'isSuccessful': False
     })
@@ -194,3 +203,26 @@ def update_pending_attack_status(attack_details: dict, is_successful: bool) -> d
     attack_details['completed'] = True
     return attack_details
 
+
+def set_member_time_progress(room_item: dict, member_user_id: str, time_progress: int) -> dict:
+    member_details = get_member_details(room_item, member_user_id)
+    member_details['timeProgress'] = time_progress
+    if member_details['timeProgress'] < 0:
+        member_details['timeProgress'] = 0
+    return room_item
+
+
+def increase_member_time_progress(room_item: dict, member_user_id: str, time_progress: int) -> dict:
+    member_details = get_member_details(room_item, member_user_id)
+    member_details['timeProgress'] += time_progress
+    if member_details['timeProgress'] < 0:
+        member_details['timeProgress'] = 0
+    return room_item
+
+
+def increase_member_time_points(room_item: dict, member_user_id: str, points: int) -> dict:
+    member_details = get_member_details(room_item, member_user_id)
+    member_details['points'] += points
+    if member_details['points'] < 0:
+        member_details['points'] = 0
+    return room_item
