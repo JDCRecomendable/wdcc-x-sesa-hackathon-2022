@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
 import { IconButton } from "@mui/material";
+import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
@@ -81,6 +82,7 @@ const Memes = () => {
       }}
     >
       {memesList}
+      <PurchaseButton cost={200} purchase={purchase} />
     </div>
   );
 };

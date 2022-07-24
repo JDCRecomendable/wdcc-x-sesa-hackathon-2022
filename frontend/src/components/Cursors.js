@@ -1,14 +1,30 @@
 import React from "react";
 import Button from "@mui/material/Button";
 import PurchaseButton from "./PurchaseButton";
+const axios = require("axios");
 
 const Cursors = () => {
+  const purchase = () => {
+    axios
+      .post("http://ripscamera0c.pythonanywhere.com/common/Alpha/attack", {
+        tgtUserID: "Beta",
+        attackID: 3,
+        details: "",
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <h1>Surprise Party!</h1>
       <h3>Send a colourful surprise to your friends</h3>
       <Button variant="outlined">Throw a surprise party</Button>
-      <PurchaseButton cost={600} type="surprise" item_id={3} details="" />
+      <PurchaseButton cost={600} type="surprise" purchase={purchase} />
     </>
   );
 };
