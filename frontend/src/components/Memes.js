@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
+import { IconButton } from "@mui/material";
 
 const axios = require("axios");
 
@@ -18,7 +19,7 @@ const Memes = () => {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
           q: "memes",
           offset: num,
-          limit: 6,
+          limit: 15,
         },
       });
       setMemes(response.data.data);
@@ -37,45 +38,36 @@ const Memes = () => {
   };
 
   const memesList = memes.map(meme => (
-    <div key={meme.embed_url}>
-      <Button id={meme.embed_url} onClick={handleClick} variant="outlined">
-        Double click to purchase
-      </Button>
+    <div key={meme.embed_url} style= {{ width: '33%'}}>
       <iframe
         src={meme.embed_url}
-        width="480"
+        width="400"
         height="298"
         frameBorder="0"
         className="giphy-embed"
         allowFullScreen
       ></iframe>
+    <Button id={meme.embed_url} onClick={handleClick} variant='square'>
+        Select
+      </Button>
     </div>
   ));
 
   return (
-    // <div style={{
-    //   bottom: "2%",
-    //   marginRight: "2%",
-    //   backgroundColor: "#371B58",
-    //   height: '300px',
-    //   width: '80%',
-    //   borderRadius: "4px",
-    //   overflowY: "scroll",
-    // }}>
+    
+    <div style={{
+      backgroundColor: '#E0D4FF',
+      overflowY: "scroll",
+      height: '500px',
+      bottom: '6%',
+      display: 'flex',
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      width: '90%',
+      marginLeft: "3%",
 
-    //   {/* Blacklist items */}
-    //   <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
-    //     <thead>
-    //       <tr>
-    //         <th>Website</th>
-    //       </tr>
-    //     </thead>
-    //     <tbody>{memesList}</tbody>
-    //   </table>
-
-    // </div>
-    <div>
-      {memesList}
+    }}>
+    {memesList}
     </div>
   );
 };

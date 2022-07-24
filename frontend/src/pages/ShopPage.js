@@ -160,7 +160,7 @@ const ShopPage = () => {
       >
         $1000
       </div>
-      <div style={{ marginTop: "10%", marginLeft: "20%", backgroundColor: 'grey' }}>{mainPage}</div>
+      <div style={{ marginTop: "7%", marginLeft: "20%" }}>{mainPage}</div>
     </>
   );
 };
