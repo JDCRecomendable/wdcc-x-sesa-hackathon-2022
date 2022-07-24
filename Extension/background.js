@@ -1,8 +1,10 @@
 // import axios from 'axios';
-// const api = "https://ripscamera0c.pythonanywhere.com/";
+const api = "https://ripscamera0c.pythonanywhere.com/ext/";
 // const progEmpty = "/ext/{user_id}/progress-empty";
 // const progFull = "/ext/{user_id}/progress-full";
-// const tabChange = "/ext/{user_id}/progress-full";
+const tabChange = "/switch-tabs";
+
+const user = "Alpha";
 
 // const axios = require('axios').default;
 
@@ -41,10 +43,27 @@ let urlStatus = null;
 
 
 // This listener will send the current url and url status to the popup window when opened
-chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+chrome.runtime.onMessage.addListener(function(message,sender,response){
     if(message.method == "getInfo"){
-        sendResponse(urlStatus);
+        response(urlStatus);
     }
+    const apiString = api + user + tabChange;
+      console.log(apiString);
+  
+      fetch(apiString).then(function(res) {
+        if(res.status !== 200){
+          response({ timeProgress: 0, newDomain: "oh no"});
+          return
+        }
+        res.json().then(function(data) {
+          debugger;
+          //send the respoinse..
+          response( {timeProgress: time, newDomain: url});
+          console.log("here", data);
+        });
+      }).catch(function(err) {
+        response({timeProgress: 0, newDomain: "no good"});
+      });
 });
 
 
@@ -76,16 +95,23 @@ function alert(link){
 
 }
   
-
+var url_g = "test"
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
     urlStatus = true;
+    // if(msg.name == ""){
+    url_g = url;
+    // }
 }
 
 let currency = 9900;
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getCurrency"){
+
+
+
+
       sendResponse(currency);
     }
   });
@@ -140,5 +166,4 @@ const newPost = {
 //       console.error(err);
 //   }
 // };
-
 
