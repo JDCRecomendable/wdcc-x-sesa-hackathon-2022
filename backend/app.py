@@ -360,7 +360,24 @@ def app_add_to_whitelist(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    whitelist_domains = request.get_json()['domains']
+    new_data = room_details[1]
+    for whitelist_domain in whitelist_domains:
+        new_data = models.room.add_to_whitelist_domains(new_data,
+                                                        whitelist_domain)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 @app.route('/app/<user_id>/add-to-blacklist/', methods=['POST'])
@@ -371,7 +388,24 @@ def app_add_to_blacklist(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    blacklist_domains = request.get_json()['domains']
+    new_data = room_details[1]
+    for blacklist_domain in blacklist_domains:
+        new_data = models.room.add_to_blacklist_domains(new_data,
+                                                        blacklist_domain)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 if __name__ == '__main__':

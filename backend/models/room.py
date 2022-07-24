@@ -226,3 +226,15 @@ def increase_member_time_points(room_item: dict, member_user_id: str, points: in
     if member_details['points'] < 0:
         member_details['points'] = 0
     return room_item
+
+
+def add_to_whitelist_domains(room_item: dict, domain: str) -> dict:
+    whitelist_domains = get_whitelist_domains(room_item)
+    whitelist_domains.append(domain)
+    return room_item
+
+
+def add_to_blacklist_domains(room_item: dict, domain: str) -> dict:
+    blacklist_domains = get_blacklist_domains(room_item)
+    blacklist_domains.append(domain)
+    return room_item
