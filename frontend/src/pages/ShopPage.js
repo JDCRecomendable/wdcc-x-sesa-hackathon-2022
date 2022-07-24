@@ -42,7 +42,25 @@ const ShopPage = () => {
           overflowX: "hidden",
           marginTop: "18px",
         }}
-      ></div>
+      >
+        <table style= {{textAlign: 'center', }}> 
+          <tr style= {{textAlign: 'center', }}>
+            <IconButton style= {{textAlign: 'center', }}>
+            Random
+            </IconButton>
+          </tr>
+          <tr >
+          <IconButton> 
+            Individual
+            </IconButton>
+          </tr>
+          <tr>
+            <IconButton>
+            Group
+            </IconButton>
+          </tr>
+        </table>
+      </div>
 
       <IconButton
         id="memes"
@@ -142,7 +160,7 @@ const ShopPage = () => {
       >
         $1000
       </div>
-      <div style={{ marginTop: "10%", marginLeft: "20%", maxHeight: '60vh', backgroundColor: 'grey' }}>{mainPage}</div>
+      <div style={{ marginTop: "10%", marginLeft: "20%", backgroundColor: 'grey' }}>{mainPage}</div>
     </>
   );
 };
