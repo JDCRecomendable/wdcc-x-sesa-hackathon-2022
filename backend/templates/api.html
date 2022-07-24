@@ -727,6 +727,21 @@
     "statusDescription" : {
       "type" : "string"
     },
+    "points" : {
+      "type" : "integer",
+      "format" : "int32"
+    }
+  }
+};
+            defs["inline_response_200_2"] = {
+  "type" : "object",
+  "properties" : {
+    "status" : {
+      "type" : "boolean"
+    },
+    "statusDescription" : {
+      "type" : "string"
+    },
     "isAttacked" : {
       "type" : "boolean"
     },
@@ -743,7 +758,7 @@
     }
   }
 };
-            defs["inline_response_200_2"] = {
+            defs["inline_response_200_3"] = {
   "type" : "object",
   "properties" : {
     "status" : {
@@ -764,21 +779,6 @@
     },
     "isBlacklist" : {
       "type" : "boolean"
-    }
-  }
-};
-            defs["inline_response_200_3"] = {
-  "type" : "object",
-  "properties" : {
-    "status" : {
-      "type" : "boolean"
-    },
-    "statusDescription" : {
-      "type" : "string"
-    },
-    "points" : {
-      "type" : "integer",
-      "format" : "int32"
     }
   }
 };
@@ -1043,7 +1043,8 @@
       "type" : "string"
     },
     "attackID" : {
-      "type" : "string"
+      "type" : "integer",
+      "format" : "int32"
     },
     "details" : {
       "type" : "string"
@@ -1110,6 +1111,9 @@
                   <li class="nav-header" data-group="Common"><a href="#api-Common">API Methods - Common</a></li>
                     <li data-group="Common" data-name="attack" class="">
                       <a href="#api-Common-attack">attack</a>
+                    </li>
+                    <li data-group="Common" data-name="buyShield" class="">
+                      <a href="#api-Common-buyShield">buyShield</a>
                     </li>
                     <li data-group="Common" data-name="getUserDetails" class="">
                       <a href="#api-Common-getUserDetails">getUserDetails</a>
@@ -1206,7 +1210,7 @@ public class ChromeExtensionApiExample {
         ChromeExtensionApi apiInstance = new ChromeExtensionApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_3 result = apiInstance.extProgressEmpty(userId);
+            inline_response_200_1 result = apiInstance.extProgressEmpty(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extProgressEmpty");
@@ -1225,7 +1229,7 @@ public class ChromeExtensionApiExample {
         ChromeExtensionApi apiInstance = new ChromeExtensionApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_3 result = apiInstance.extProgressEmpty(userId);
+            inline_response_200_1 result = apiInstance.extProgressEmpty(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extProgressEmpty");
@@ -1245,7 +1249,7 @@ ChromeExtensionApi *apiInstance = [[ChromeExtensionApi alloc] init];
 
 // Get new points after depleting progress bar
 [apiInstance extProgressEmptyWith:userId
-              completionHandler: ^(inline_response_200_3 output, NSError* error) {
+              completionHandler: ^(inline_response_200_1 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1296,7 +1300,7 @@ namespace Example
             try
             {
                 // Get new points after depleting progress bar
-                inline_response_200_3 result = apiInstance.extProgressEmpty(userId);
+                inline_response_200_1 result = apiInstance.extProgressEmpty(userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1415,7 +1419,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
+        "$ref" : "#/components/schemas/inline_response_200_1"
       }
     }
   }
@@ -1547,7 +1551,7 @@ public class ChromeExtensionApiExample {
         ChromeExtensionApi apiInstance = new ChromeExtensionApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_3 result = apiInstance.extProgressFull(userId);
+            inline_response_200_1 result = apiInstance.extProgressFull(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extProgressFull");
@@ -1566,7 +1570,7 @@ public class ChromeExtensionApiExample {
         ChromeExtensionApi apiInstance = new ChromeExtensionApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_3 result = apiInstance.extProgressFull(userId);
+            inline_response_200_1 result = apiInstance.extProgressFull(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extProgressFull");
@@ -1586,7 +1590,7 @@ ChromeExtensionApi *apiInstance = [[ChromeExtensionApi alloc] init];
 
 // Get new points after filling up progress bar
 [apiInstance extProgressFullWith:userId
-              completionHandler: ^(inline_response_200_3 output, NSError* error) {
+              completionHandler: ^(inline_response_200_1 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1637,7 +1641,7 @@ namespace Example
             try
             {
                 // Get new points after filling up progress bar
-                inline_response_200_3 result = apiInstance.extProgressFull(userId);
+                inline_response_200_1 result = apiInstance.extProgressFull(userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -1756,7 +1760,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_3"
+        "$ref" : "#/components/schemas/inline_response_200_1"
       }
     }
   }
@@ -1890,7 +1894,7 @@ public class ChromeExtensionApiExample {
         User_id_switchtabs_body body = ; // User_id_switchtabs_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200_2 result = apiInstance.extSwitchTabs(body, userId);
+            inline_response_200_3 result = apiInstance.extSwitchTabs(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extSwitchTabs");
@@ -1910,7 +1914,7 @@ public class ChromeExtensionApiExample {
         User_id_switchtabs_body body = ; // User_id_switchtabs_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200_2 result = apiInstance.extSwitchTabs(body, userId);
+            inline_response_200_3 result = apiInstance.extSwitchTabs(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling ChromeExtensionApi#extSwitchTabs");
@@ -1932,7 +1936,7 @@ ChromeExtensionApi *apiInstance = [[ChromeExtensionApi alloc] init];
 // Flush current progress to database and get whether new website is in whitelist or blacklist
 [apiInstance extSwitchTabsWith:body
     userId:userId
-              completionHandler: ^(inline_response_200_2 output, NSError* error) {
+              completionHandler: ^(inline_response_200_3 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -1985,7 +1989,7 @@ namespace Example
             try
             {
                 // Flush current progress to database and get whether new website is in whitelist or blacklist
-                inline_response_200_2 result = apiInstance.extSwitchTabs(body, userId);
+                inline_response_200_3 result = apiInstance.extSwitchTabs(body, userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2150,7 +2154,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_2"
+        "$ref" : "#/components/schemas/inline_response_200_3"
       }
     }
   }
@@ -2627,6 +2631,347 @@ except ApiException as e:
                         </article>
                       </div>
                       <hr>
+                    <div id="api-Common-buyShield">
+                      <article id="api-Common-buyShield-0" data-group="User" data-name="buyShield" data-version="0">
+                        <div class="pull-left">
+                          <h1>buyShield</h1>
+                          <p>Buy a shield</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="post"><code><span class="pln">/common/{user_id}/buy-shield</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Common-buyShield-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Common-buyShield-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Common-buyShield-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Common-buyShield-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Common-buyShield-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Common-buyShield-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Common-buyShield-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X POST\
+-H "Accept: application/json"\
+"http://ripscamera0c.pythonanywhere.com/common/{user_id}/buy-shield"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Common-buyShield-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.CommonApi;
+
+import java.io.File;
+import java.util.*;
+
+public class CommonApiExample {
+
+    public static void main(String[] args) {
+        
+        CommonApi apiInstance = new CommonApi();
+        String userId = userId_example; // String | 
+        try {
+            inline_response_200_1 result = apiInstance.buyShield(userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommonApi#buyShield");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Common-buyShield-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.CommonApi;
+
+public class CommonApiExample {
+
+    public static void main(String[] args) {
+        CommonApi apiInstance = new CommonApi();
+        String userId = userId_example; // String | 
+        try {
+            inline_response_200_1 result = apiInstance.buyShield(userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommonApi#buyShield");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Common-buyShield-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Common-buyShield-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *userId = userId_example; // 
+
+CommonApi *apiInstance = [[CommonApi alloc] init];
+
+// Buy a shield
+[apiInstance buyShieldWith:userId
+              completionHandler: ^(inline_response_200_1 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-buyShield-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var WdcCxSesaHackathon2022 = require('wdc_cx_sesa_hackathon_2022');
+
+var api = new WdcCxSesaHackathon2022.CommonApi()
+var userId = userId_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.buyShield(userId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Common-buyShield-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Common-buyShield-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class buyShieldExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new CommonApi();
+            var userId = userId_example;  // String | 
+
+            try
+            {
+                // Buy a shield
+                inline_response_200_1 result = apiInstance.buyShield(userId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling CommonApi.buyShield: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-buyShield-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiCommonApi();
+$userId = userId_example; // String | 
+
+try {
+    $result = $api_instance->buyShield($userId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommonApi->buyShield: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-buyShield-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::CommonApi;
+
+my $api_instance = WWW::SwaggerClient::CommonApi->new();
+my $userId = userId_example; # String | 
+
+eval { 
+    my $result = $api_instance->buyShield(userId => $userId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling CommonApi->buyShield: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-buyShield-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.CommonApi()
+userId = userId_example # String | 
+
+try: 
+    # Buy a shield
+    api_response = api_instance.buy_shield(userId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CommonApi->buyShield: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">user_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_buyShield_userId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Successful operation </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-buyShield-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-buyShield-200-schema">
+                                  <div id='responses-buyShield-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200_1"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-buyShield-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-buyShield-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-buyShield-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Did not succeed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-buyShield-400-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-buyShield-400-schema">
+                                  <div id='responses-buyShield-400-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Did not succeed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_400"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-buyShield-400-schema-data').val(stringify(schema));
+                                        var result = $('#responses-buyShield-400-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-buyShield-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
                     <div id="api-Common-getUserDetails">
                       <article id="api-Common-getUserDetails-0" data-group="User" data-name="getUserDetails" data-version="0">
                         <div class="pull-left">
@@ -3020,7 +3365,7 @@ public class CommonApiExample {
         CommonApi apiInstance = new CommonApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_1 result = apiInstance.isAttacked(userId);
+            inline_response_200_2 result = apiInstance.isAttacked(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommonApi#isAttacked");
@@ -3039,7 +3384,7 @@ public class CommonApiExample {
         CommonApi apiInstance = new CommonApi();
         String userId = userId_example; // String | 
         try {
-            inline_response_200_1 result = apiInstance.isAttacked(userId);
+            inline_response_200_2 result = apiInstance.isAttacked(userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommonApi#isAttacked");
@@ -3059,7 +3404,7 @@ CommonApi *apiInstance = [[CommonApi alloc] init];
 
 // Check if there is an incoming attack from another user
 [apiInstance isAttackedWith:userId
-              completionHandler: ^(inline_response_200_1 output, NSError* error) {
+              completionHandler: ^(inline_response_200_2 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -3110,7 +3455,7 @@ namespace Example
             try
             {
                 // Check if there is an incoming attack from another user
-                inline_response_200_1 result = apiInstance.isAttacked(userId);
+                inline_response_200_2 result = apiInstance.isAttacked(userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3229,7 +3574,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200_1"
+        "$ref" : "#/components/schemas/inline_response_200_2"
       }
     }
   }

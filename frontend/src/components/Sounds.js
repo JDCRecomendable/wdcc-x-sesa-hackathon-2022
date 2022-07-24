@@ -49,7 +49,6 @@ const Sounds = () => {
 
   return (
     <>
-      <h1>Sounds</h1>
       {optionsList}
       <PurchaseButton cost={400} type="sound" purchase={purchase} />
     </>
