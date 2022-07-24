@@ -8,10 +8,15 @@ const Scares = () => {
   const [selected, setSelected] = useState("");
 
   async function getMemes() {
+    const num = Math.floor(Math.random() * 50);
     try {
-      const response = await axios.get(
-        "http://api.giphy.com/v1/gifs/search?q=jump+scare&api_key=g8og2VjrkNrDviAgwZup2BUHZV3NzabW&limit=9"
-      );
+      const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
+        params: {
+          api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
+          q: "jump scare",
+          offset: num,
+        },
+      });
       setMemes(response.data.data);
     } catch (error) {
       console.error(error);

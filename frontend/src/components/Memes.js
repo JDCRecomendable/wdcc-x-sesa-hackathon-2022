@@ -9,9 +9,12 @@ const Memes = () => {
 
   async function getMemes() {
     try {
-      const response = await axios.get(
-        "http://api.giphy.com/v1/gifs/search?q=memes&api_key=g8og2VjrkNrDviAgwZup2BUHZV3NzabW&limit=9"
-      );
+      const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
+        params: {
+          api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
+          q: "meme",
+        },
+      });
       setMemes(response.data.data);
     } catch (error) {
       console.error(error);
