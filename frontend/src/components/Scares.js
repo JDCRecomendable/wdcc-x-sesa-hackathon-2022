@@ -15,6 +15,7 @@ const Scares = () => {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
           q: "jump scare",
           offset: num,
+          limit: 8,
         },
       });
       setMemes(response.data.data);

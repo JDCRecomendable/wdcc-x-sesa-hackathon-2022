@@ -15,6 +15,7 @@ const Memes = () => {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
           q: "memes",
           offset: num,
+          limit: 8,
         },
       });
       setMemes(response.data.data);
