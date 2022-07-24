@@ -137,3 +137,18 @@ button.addEventListener("click", function(){
   chrome.tabs.create({url:"localhost:3000"}); // Placeholder for web app
 })
 
+var WdcCxSesaHackathon2022 = require('wdc_cx_sesa_hackathon_2022');
+
+var api = new WdcCxSesaHackathon2022.ChromeExtensionApi()
+var userId = userId_example; //  
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.extProgressFull(userId, callback);
+
+console.log(callback);

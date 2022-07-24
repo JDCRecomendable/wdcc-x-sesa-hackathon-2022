@@ -1,15 +1,68 @@
 
 window.addEventListener("click", test, true);
 
+const imgs = ['https://giphy.com/embed/d3mlE7uhX8KFgEmY', 'https://giphy.com/gifs/culture--think-hmm-d3mlE7uhX8KFgEmY', 'https://giphy.com/embed/a5viI92PAF89q']
+
+
 function test() {
   chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
-    createIframe("https://giphy.com/embed/UtcBRO8cxulRzkrVLc")
-    playAudio("ugotthat.mp3");
+    var x = Math.floor(Math.random() * 5)
+    var y = Math.floor(Math.random() * 3)
+        if (x == 0){
+            createIframe("https://giphy.com/embed/UtcBRO8cxulRzkrVLc")
+            playAudio("ugotthat.mp3");
+        }
+        if( x == 1){
+            const colours = ["red", "green", "yellow", "blue", "purple", "pink", "orange", "Chartreuse", "DarkGoldenRod", "GreenYellow", "thistle"];
+            const fg = [];
+            const bg = []
+            let elements = document.getElementsByTagName("*");
+            console.log(elements);
+            for (elt of elements) {
+        
+              fg.push(elt.style.color);
+              bg.push(elt.style.background);
+        
+              elt.style.cursor = 'none';
+              console.log(elt.style.cursor);
+              let col1 = Math.floor(Math.random() * 12);
+              let col2 = Math.floor(Math.random() * 12);
+              elt.style.color = colours[col1];
+              elt.style.background = colours[col2];
+        
+            }
+        
+            // 10 seconds timer to remove ifram
+            let counter =0;
+            setInterval(() => {
+              counter++
+              if(counter ==15){
+                var ctr = 0
+                for(elt of elements){
+                    elt.style.cursor = 'default';
+        
+                    elt.style.color = fg[ctr];
+                    elt.style.background = bg[ctr];
+                    ctr = ctr + 1;
+                }
+        
+              }
+            }, 1000);
+        }
+        if(x==2){
+            playAudio("scream.mp3")
+        }
+        if(x==3){
+            playAudio("knock.mp3")
+        }
+        if(x==4){
+            createIframe(imgs[y]);
+        }
     });
 
-    
 }
+
 
 function createIframe(fileLink){
     var iframe = document.createElement("iframe");
@@ -19,7 +72,7 @@ function createIframe(fileLink){
     iframe.style.top = "0px"
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
-    iframe.srcdoc = '<center><iframe src="'+fileLink+'" width="1000px" height="1000px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
+    iframe.srcdoc = '<center><iframe src="'+fileLink+'" width="700px" height="700px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     
     document.body.appendChild(iframe);
     //10 seconds timer to remove ifram
@@ -37,8 +90,6 @@ function createIframe(fileLink){
     var myAudio = new Audio(chrome.runtime.getURL("sounds/"+filename));
     myAudio.play();
 }
-
-
 
 
 

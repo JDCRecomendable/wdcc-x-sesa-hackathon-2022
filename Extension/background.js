@@ -8,6 +8,7 @@ const user = "Alpha";
 
 // const axios = require('axios').default;
 
+
 let time = 0;
 let counter = 0;
 let timeIncrement = setInterval(() => {
@@ -168,7 +169,7 @@ chrome.runtime.onMessage.addListener(function(msg,sender) {
 
   chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
     if (message.method == "yo") {
-      sendResponse("heyman");
+      sendResponse("hey man");
     }
   });
 
