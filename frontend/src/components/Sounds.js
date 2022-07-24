@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import IconButton from "@mui/material/Button";
+import Button from "@mui/material/Button";
+import { IconButton } from "@mui/material";
+import PurchaseButton from "./PurchaseButton";
 
 const options = [
   "Baby screaming",
@@ -20,7 +22,12 @@ const Sounds = () => {
   };
 
   const optionsList = options.map(option => (
-    <IconButton style= {{marginRight: '20px', color: '#371B58', font: 'fantasy' }} id={option} key={option} onClick={handleClick}>
+    <IconButton
+      style={{ marginRight: "20px", color: "#371B58", font: "fantasy" }}
+      id={option}
+      key={option}
+      onClick={handleClick}
+    >
       {option}
     </IconButton>
   ));
@@ -28,6 +35,7 @@ const Sounds = () => {
     <>
       <h1>Sounds</h1>
       {optionsList}
+      <PurchaseButton cost={400} type="sound" item_id={2} details={selected} />
     </>
   );
 };
