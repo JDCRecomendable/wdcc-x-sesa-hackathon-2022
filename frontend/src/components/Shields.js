@@ -4,42 +4,58 @@ import Tooltip from "@mui/material/Tooltip";
 import ConfirmPurchase from "./ConfirmPurchase";
 
 const Shields = () => {
+  const numOfShields = 2;
+  const brokenShields = 3 - numOfShields;
+
+  let shields = (
+    <>
+      {[...Array(numOfShields)].map((e, i) => {
+        return (
+          <Box
+            component="img"
+            noWrap
+            key={i}
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              width: "20px",
+              opacity: 1,
+            }}
+            alt="shield."
+            src="shield.png"
+          />
+        );
+      })}
+    </>
+  );
+
+  let broken = (
+    <>
+      {[...Array(brokenShields)].map((e, i) => {
+        return (
+          <Box
+            component="img"
+            noWrap
+            key={i}
+            sx={{
+              display: { xs: "none", md: "flex" },
+              mr: 1,
+              width: "20px",
+              opacity: 0.5,
+            }}
+            alt="shield."
+            src="shield.png"
+          />
+        );
+      })}
+    </>
+  );
+
   return (
     <>
-      <Box
-        component="img"
-        noWrap
-        sx={{
-          display: { xs: "none", md: "flex" },
-          mr: 1,
-          width: "20px",
-        }}
-        alt="shield."
-        src="shield.png"
-      />
-      <Box
-        component="img"
-        noWrap
-        sx={{
-          display: { xs: "none", md: "flex" },
-          mr: 1,
-          width: "20px",
-        }}
-        alt="shield."
-        src="shield.png"
-      />
-      <Box
-        component="img"
-        noWrap
-        sx={{
-          display: { xs: "none", md: "flex" },
-          mr: 1,
-          width: "20px",
-          opacity: 0.5,
-        }}
-        alt="shield."
-        src="shield.png"
-      />
+      {shields}
+      {brokenShields > 0 && broken}
+
       <Tooltip title="Purchase a shield">
         <Typography
           variant="h6"

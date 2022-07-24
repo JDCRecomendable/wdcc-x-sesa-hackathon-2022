@@ -238,3 +238,13 @@ def add_to_blacklist_domains(room_item: dict, domain: str) -> dict:
     blacklist_domains = get_blacklist_domains(room_item)
     blacklist_domains.append(domain)
     return room_item
+
+
+def add_member_to_room(room_item: dict, member_user_id: str) -> dict:
+    room_item['members'].append({
+        'userID': member_user_id,
+        'points': 0,
+        'timeProgress': 0,
+        'numberOfShields': 0
+    })
+    return room_item
