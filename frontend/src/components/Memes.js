@@ -8,11 +8,13 @@ const Memes = () => {
   const [selected, setSelected] = useState("");
 
   async function getMemes() {
+    const num = Math.floor(Math.random() * 50);
     try {
       const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
         params: {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
-          q: "meme",
+          q: "memes",
+          offset: num,
         },
       });
       setMemes(response.data.data);
