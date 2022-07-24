@@ -6,14 +6,33 @@ chrome.runtime.sendMessage({method:"getTime"},function(response){
     progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;
     
     setInterval(() => {
-      progressEl.value++;
-      progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;
-      if (progressEl.value >= progressEl.max) {
-        progressEl.value = 0;       
-     }
+      if(currentStatus==true){ 
+        progressEl.value++;
+        progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;
+        if (progressEl.value >= progressEl.max) {
+          progressEl.value = 0;       
+       }
+      } else if(currentStatus==false){
+        progressEl.value--;
+        if (progressEl.value > 0) {
+          progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;  
+       }else{
+        progressEl.value = 10;  
+        progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;
+       }
+      }
+      else{
+        progressLabel.innerText = "Current time for money: "+progressEl.value+"/"+progressEl.max;
+      }
+
     }, 1000);
 });
 
+var currentStatus;
+function getcurrentStatus(status){
+  currentStatus = status;
+  console.log(status);
+}
 
 // This sender will update the users currency total
 chrome.runtime.sendMessage({method:"getCurrency"},function(response){
@@ -48,19 +67,24 @@ chrome.runtime.sendMessage({method:"getShields"}, function(response){
   }
 });
 
+
 // This function will update the html and css based on url and status
 chrome.runtime.sendMessage({method:"getInfo"},function(response){
   const progressBar = document.getElementById("progressBar");
-  const heading = document.getElementById("h1")
+  const heading = document.getElementById("h1");
+  const h5 = document.getElementById("h5");
     let status = response;
+    getcurrentStatus(status);
 
     if (status == true) {
       heading.style.color = "green";
       heading.innerText = "ayo making that bread";
+      h5.innerText = "+100";
       //progressBar.style.backgroundColor = "green";
     } else if (status == false) {
         heading.style.color = "red";
         heading.innerText = "hey watch out";
+        h5.innerText = "-100";
         //progressBar.style.backgroundColor = "red";
     } else {
         heading.style.color = "white";
