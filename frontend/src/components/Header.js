@@ -38,7 +38,8 @@ const Header = () => {
   };
 
   return (
-    <AppBar position="static" sx={{ background: "#371B58"}}>
+    <AppBar position="static" sx={{ background: "#371B58" }}>
+      <h1>ProdKiller</h1>
       <Container maxWidth="xl">
         <Toolbar disableGutters>
           <Money />
@@ -117,24 +118,29 @@ const Header = () => {
             1000
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex"} }}>
+          <Box sx={{ flexGrow: 1, display: { xs: "none", md: "flex" } }}>
             <Link component={RouterLink} to="/shop">
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block",marginRight: "200px"}}
-            >
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{
+                  my: 2,
+                  color: "white",
+                  display: "block",
+                  marginRight: "200px",
+                }}
+              >
                 Shop
-            </Button>
-              </Link>
+              </Button>
+            </Link>
 
-              <Link component={RouterLink} to="/rooms">
-            <Button
-              onClick={handleCloseNavMenu}
-              sx={{ my: 2, color: "white", display: "block" }}
-            >
+            <Link component={RouterLink} to="/rooms">
+              <Button
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: "white", display: "block" }}
+              >
                 Rooms
-            </Button>
-              </Link>
+              </Button>
+            </Link>
           </Box>
 
           <Tooltip title="View rooms">
