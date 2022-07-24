@@ -1,10 +1,10 @@
-import axios from 'axios';
-const api = "https://ripscamera0c.pythonanywhere.com/";
-const progEmpty = "/ext/{user_id}/progress-empty";
-const progFull = "/ext/{user_id}/progress-full";
-const tabChange = "/ext/{user_id}/progress-full";
+// import axios from 'axios';
+// const api = "https://ripscamera0c.pythonanywhere.com/";
+// const progEmpty = "/ext/{user_id}/progress-empty";
+// const progFull = "/ext/{user_id}/progress-full";
+// const tabChange = "/ext/{user_id}/progress-full";
 
-const axios = require('axios').default;
+// const axios = require('axios').default;
 
 let time = 0;
 let counter = 0;
@@ -68,7 +68,9 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 });
 
 function alert(link){
-  current_tab = link.url;
+  current_tab = new URL(link.url).hostname;
+  console.log(current_tab);
+
   // Send current url to back end to receive back status
   getStatus(current_tab);
 
@@ -128,15 +130,15 @@ const newPost = {
   body: 'This is the body of the new post'
 };
 
-const sendtabChangeRequest = async () => {
-  try {
-      const reqUrl = api + tabChange;
-      const resp = await axios.post(reqUrl, newPost);
-      console.log(resp.data);
-  } catch (err) {
-      // Handle Error Here
-      console.error(err);
-  }
-};
+// const sendtabChangeRequest = async () => {
+//   try {
+//       const reqUrl = api + tabChange;
+//       const resp = await axios.post(reqUrl, newPost);
+//       console.log(resp.data);
+//   } catch (err) {
+//       // Handle Error Here
+//       console.error(err);
+//   }
+// };
 
 
