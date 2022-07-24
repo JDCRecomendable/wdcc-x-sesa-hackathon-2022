@@ -697,6 +697,24 @@
     },
     "statusDescription" : {
       "type" : "string"
+    },
+    "userID" : {
+      "type" : "string"
+    },
+    "profilePhoto" : {
+      "type" : "string"
+    },
+    "points" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "timeProgress" : {
+      "type" : "integer",
+      "format" : "int32"
+    },
+    "numberOfShields" : {
+      "type" : "integer",
+      "format" : "int32"
     }
   }
 };
@@ -870,6 +888,17 @@
   },
   "example" : null
 };
+            defs["inline_response_400"] = {
+  "type" : "object",
+  "properties" : {
+    "status" : {
+      "type" : "boolean"
+    },
+    "statusDescription" : {
+      "type" : "string"
+    }
+  }
+};
             defs["items"] = {
   "required" : [ "_id", "cost", "name", "type" ],
   "type" : "object",
@@ -944,9 +973,6 @@
       "type" : "integer",
       "format" : "int32"
     },
-    "details" : {
-      "type" : "string"
-    },
     "isSuccessful" : {
       "type" : "boolean"
     },
@@ -980,7 +1006,7 @@
             defs["user_id_addroom_body"] = {
   "type" : "object",
   "properties" : {
-    "add_type" : {
+    "addType" : {
       "type" : "string"
     },
     "value" : {
@@ -1085,6 +1111,9 @@
                     <li data-group="Common" data-name="attack" class="">
                       <a href="#api-Common-attack">attack</a>
                     </li>
+                    <li data-group="Common" data-name="getUserDetails" class="">
+                      <a href="#api-Common-getUserDetails">getUserDetails</a>
+                    </li>
                     <li data-group="Common" data-name="isAttacked" class="">
                       <a href="#api-Common-isAttacked">isAttacked</a>
                     </li>
@@ -1159,7 +1188,7 @@
                           <div class="tab-pane active" id="examples-ChromeExtension-extProgressEmpty-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
-"to-be-determined.io/ext/{user_id}/progress-empty"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/ext/{user_id}/progress-empty"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ChromeExtension-extProgressEmpty-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1434,7 +1463,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -1500,7 +1529,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-ChromeExtension-extProgressFull-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
-"to-be-determined.io/ext/{user_id}/progress-full"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/ext/{user_id}/progress-full"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ChromeExtension-extProgressFull-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -1775,7 +1804,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -1842,7 +1871,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"to-be-determined.io/ext/{user_id}/switch-tabs"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/ext/{user_id}/switch-tabs"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-ChromeExtension-extSwitchTabs-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2169,7 +2198,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -2239,7 +2268,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"to-be-determined.io/common/{user_id}/attack"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/common/{user_id}/attack"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Common-attack-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2258,7 +2287,7 @@ public class CommonApiExample {
         User_id_attack_body body = ; // User_id_attack_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.attack(body, userId);
+            inline_response_400 result = apiInstance.attack(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommonApi#attack");
@@ -2278,7 +2307,7 @@ public class CommonApiExample {
         User_id_attack_body body = ; // User_id_attack_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.attack(body, userId);
+            inline_response_400 result = apiInstance.attack(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling CommonApi#attack");
@@ -2300,7 +2329,7 @@ CommonApi *apiInstance = [[CommonApi alloc] init];
 // Send an attack to another user
 [apiInstance attackWith:body
     userId:userId
-              completionHandler: ^(inline_response_200 output, NSError* error) {
+              completionHandler: ^(inline_response_400 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -2353,7 +2382,7 @@ namespace Example
             try
             {
                 // Send an attack to another user
-                inline_response_200 result = apiInstance.attack(body, userId);
+                inline_response_400 result = apiInstance.attack(body, userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -2518,7 +2547,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -2566,7 +2595,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -2592,6 +2621,347 @@ except ApiException as e:
                                     </script>
                                   </div>
                                   <input id='responses-attack-400-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                        </article>
+                      </div>
+                      <hr>
+                    <div id="api-Common-getUserDetails">
+                      <article id="api-Common-getUserDetails-0" data-group="User" data-name="getUserDetails" data-version="0">
+                        <div class="pull-left">
+                          <h1>getUserDetails</h1>
+                          <p>Get details about the user</p>
+                        </div>
+                        <div class="pull-right"></div>
+                        <div class="clearfix"></div>
+                        <p></p>
+                        <p class="marked"></p>
+                        <p></p>
+                        <br />
+                        <pre class="prettyprint language-html prettyprinted" data-type="get"><code><span class="pln">/common/{user_id}/details</span></code></pre>
+                        <p>
+                          <h3>Usage and SDK Samples</h3>
+                        </p>
+                        <ul class="nav nav-tabs nav-tabs-examples">
+                          <li class="active"><a href="#examples-Common-getUserDetails-0-curl">Curl</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-java">Java</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-android">Android</a></li>
+                          <!--<li class=""><a href="#examples-Common-getUserDetails-0-groovy">Groovy</a></li>-->
+                          <li class=""><a href="#examples-Common-getUserDetails-0-objc">Obj-C</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-javascript">JavaScript</a></li>
+                          <!--<li class=""><a href="#examples-Common-getUserDetails-0-angular">Angular</a></li>-->
+                          <li class=""><a href="#examples-Common-getUserDetails-0-csharp">C#</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-php">PHP</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-perl">Perl</a></li>
+                          <li class=""><a href="#examples-Common-getUserDetails-0-python">Python</a></li>
+                        </ul>
+
+                        <div class="tab-content">
+                          <div class="tab-pane active" id="examples-Common-getUserDetails-0-curl">
+                           <pre class="prettyprint"><code class="language-bsh">curl -X GET\
+-H "Accept: application/json"\
+"http://ripscamera0c.pythonanywhere.com/common/{user_id}/details"</code></pre>
+                          </div>
+                          <div class="tab-pane" id="examples-Common-getUserDetails-0-java">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
+import io.swagger.client.auth.*;
+import io.swagger.client.model.*;
+import io.swagger.client.api.CommonApi;
+
+import java.io.File;
+import java.util.*;
+
+public class CommonApiExample {
+
+    public static void main(String[] args) {
+        
+        CommonApi apiInstance = new CommonApi();
+        String userId = userId_example; // String | 
+        try {
+            inline_response_200 result = apiInstance.getUserDetails(userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommonApi#getUserDetails");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+
+                          <div class="tab-pane" id="examples-Common-getUserDetails-0-android">
+                            <pre class="prettyprint"><code class="language-java">import io.swagger.client.api.CommonApi;
+
+public class CommonApiExample {
+
+    public static void main(String[] args) {
+        CommonApi apiInstance = new CommonApi();
+        String userId = userId_example; // String | 
+        try {
+            inline_response_200 result = apiInstance.getUserDetails(userId);
+            System.out.println(result);
+        } catch (ApiException e) {
+            System.err.println("Exception when calling CommonApi#getUserDetails");
+            e.printStackTrace();
+        }
+    }
+}</code></pre>
+                          </div>
+  <!--
+  <div class="tab-pane" id="examples-Common-getUserDetails-0-groovy">
+  <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+  </div> -->
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-objc">
+                              <pre class="prettyprint"><code class="language-cpp">String *userId = userId_example; // 
+
+CommonApi *apiInstance = [[CommonApi alloc] init];
+
+// Get details about the user
+[apiInstance getUserDetailsWith:userId
+              completionHandler: ^(inline_response_200 output, NSError* error) {
+                            if (output) {
+                                NSLog(@"%@", output);
+                            }
+                            if (error) {
+                                NSLog(@"Error: %@", error);
+                            }
+                        }];
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-javascript">
+                              <pre class="prettyprint"><code class="language-js">var WdcCxSesaHackathon2022 = require('wdc_cx_sesa_hackathon_2022');
+
+var api = new WdcCxSesaHackathon2022.CommonApi()
+var userId = userId_example; // {{String}} 
+
+var callback = function(error, data, response) {
+  if (error) {
+    console.error(error);
+  } else {
+    console.log('API called successfully. Returned data: ' + data);
+  }
+};
+api.getUserDetails(userId, callback);
+</code></pre>
+                            </div>
+
+                            <!--<div class="tab-pane" id="examples-Common-getUserDetails-0-angular">
+              <pre class="prettyprint language-json prettyprinted" data-type="json"><code>Coming Soon!</code></pre>
+            </div>-->
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-csharp">
+                              <pre class="prettyprint"><code class="language-cs">using System;
+using System.Diagnostics;
+using IO.Swagger.Api;
+using IO.Swagger.Client;
+using IO.Swagger.Model;
+
+namespace Example
+{
+    public class getUserDetailsExample
+    {
+        public void main()
+        {
+
+            var apiInstance = new CommonApi();
+            var userId = userId_example;  // String | 
+
+            try
+            {
+                // Get details about the user
+                inline_response_200 result = apiInstance.getUserDetails(userId);
+                Debug.WriteLine(result);
+            }
+            catch (Exception e)
+            {
+                Debug.Print("Exception when calling CommonApi.getUserDetails: " + e.Message );
+            }
+        }
+    }
+}
+</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-php">
+                              <pre class="prettyprint"><code class="language-php"><&#63;php
+require_once(__DIR__ . '/vendor/autoload.php');
+
+$api_instance = new Swagger\Client\ApiCommonApi();
+$userId = userId_example; // String | 
+
+try {
+    $result = $api_instance->getUserDetails($userId);
+    print_r($result);
+} catch (Exception $e) {
+    echo 'Exception when calling CommonApi->getUserDetails: ', $e->getMessage(), PHP_EOL;
+}
+?></code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-perl">
+                              <pre class="prettyprint"><code class="language-perl">use Data::Dumper;
+use WWW::SwaggerClient::Configuration;
+use WWW::SwaggerClient::CommonApi;
+
+my $api_instance = WWW::SwaggerClient::CommonApi->new();
+my $userId = userId_example; # String | 
+
+eval { 
+    my $result = $api_instance->getUserDetails(userId => $userId);
+    print Dumper($result);
+};
+if ($@) {
+    warn "Exception when calling CommonApi->getUserDetails: $@\n";
+}</code></pre>
+                            </div>
+
+                            <div class="tab-pane" id="examples-Common-getUserDetails-0-python">
+                              <pre class="prettyprint"><code class="language-python">from __future__ import print_statement
+import time
+import swagger_client
+from swagger_client.rest import ApiException
+from pprint import pprint
+
+# create an instance of the API class
+api_instance = swagger_client.CommonApi()
+userId = userId_example # String | 
+
+try: 
+    # Get details about the user
+    api_response = api_instance.get_user_details(userId)
+    pprint(api_response)
+except ApiException as e:
+    print("Exception when calling CommonApi->getUserDetails: %s\n" % e)</code></pre>
+                            </div>
+                          </div>
+
+                          <h2>Parameters</h2>
+
+                            <div class="methodsubtabletitle">Path parameters</div>
+                            <table id="methodsubtable">
+                                <tr>
+                                  <th width="150px">Name</th>
+                                  <th>Description</th>
+                                </tr>
+                                  <tr><td style="width:150px;">user_id*</td>
+                                  <td>
+                                  
+                                  
+                                      <div id="d2e199_getUserDetails_userId">
+                                          <div class="json-schema-view">
+                                              <div class="primitive">
+                                                  <span class="type">
+                                                      String
+                                                  </span>
+                                  
+                                              </div>
+                                                  <div class="inner required">
+                                                      Required
+                                                  </div>
+                                          </div>
+                                      </div>
+                                  </td>
+                                  </tr>
+                            </table>
+
+
+
+
+
+                          <h2>Responses</h2>
+                            <h3> Status: 200 - Successful operation </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getUserDetails-200-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getUserDetails-200-schema">
+                                  <div id='responses-getUserDetails-200-schema-200' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Successful operation",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_200"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getUserDetails-200-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getUserDetails-200-schema-200');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getUserDetails-200-schema-data' type='hidden' value=''></input>
+                                </div>
+                            </div>
+
+                            <h3> Status: 400 - Did not succeed </h3>
+
+                            <ul class="nav nav-tabs nav-tabs-examples" >
+                                <li class="active">
+                                  <a data-toggle="tab" href="#responses-getUserDetails-400-schema">Schema</a>
+                                </li>
+
+                            </ul>
+
+                            <div class="tab-content" style='margin-bottom: 10px;'>
+                                <div class="tab-pane active" id="responses-getUserDetails-400-schema">
+                                  <div id='responses-getUserDetails-400-schema-400' style="padding: 30px; border-left: 1px solid #eee; border-right: 1px solid #eee; border-bottom: 1px solid #eee;">
+                                    <script>
+                                      $(document).ready(function() {
+                                        var schemaWrapper = {
+  "description" : "Did not succeed",
+  "content" : {
+    "application/json" : {
+      "schema" : {
+        "$ref" : "#/components/schemas/inline_response_400"
+      }
+    }
+  }
+};
+                                        var schema = schemaWrapper.content["application/json"].schema;
+                                        if (schema.$ref != null) {
+                                          schema = defsParser.$refs.get(schema.$ref);
+                                        } else {
+                                          schemaWrapper.components = {};
+                                          schemaWrapper.components.schemas = Object.assign({}, defs);
+                                          $RefParser.dereference(schemaWrapper).catch(function(err) {
+                                            console.log(err);
+                                          });
+                                        }
+
+                                        //console.log(JSON.stringify(schema));
+                                        var view = new JSONSchemaView(schema, 3);
+                                        $('#responses-getUserDetails-400-schema-data').val(stringify(schema));
+                                        var result = $('#responses-getUserDetails-400-schema-400');
+                                        result.empty();
+                                        result.append(view.render());
+                                      });
+                                    </script>
+                                  </div>
+                                  <input id='responses-getUserDetails-400-schema-data' type='hidden' value=''></input>
                                 </div>
                             </div>
 
@@ -2632,7 +3002,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-Common-isAttacked-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
-"to-be-determined.io/common/{user_id}/is-attacked"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/common/{user_id}/is-attacked"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-Common-isAttacked-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2907,7 +3277,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -2977,7 +3347,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"to-be-determined.io/app/{user_id}/add-to-blacklist"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/app/{user_id}/add-to-blacklist"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WebApp-appAddToBlacklist-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -2996,7 +3366,7 @@ public class WebAppApiExample {
         User_id_addtoblacklist_body body = ; // User_id_addtoblacklist_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appAddToBlacklist(body, userId);
+            inline_response_400 result = apiInstance.appAddToBlacklist(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appAddToBlacklist");
@@ -3016,7 +3386,7 @@ public class WebAppApiExample {
         User_id_addtoblacklist_body body = ; // User_id_addtoblacklist_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appAddToBlacklist(body, userId);
+            inline_response_400 result = apiInstance.appAddToBlacklist(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appAddToBlacklist");
@@ -3038,7 +3408,7 @@ WebAppApi *apiInstance = [[WebAppApi alloc] init];
 // Add domain(s) specified to blacklist
 [apiInstance appAddToBlacklistWith:body
     userId:userId
-              completionHandler: ^(inline_response_200 output, NSError* error) {
+              completionHandler: ^(inline_response_400 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -3091,7 +3461,7 @@ namespace Example
             try
             {
                 // Add domain(s) specified to blacklist
-                inline_response_200 result = apiInstance.appAddToBlacklist(body, userId);
+                inline_response_400 result = apiInstance.appAddToBlacklist(body, userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3256,7 +3626,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -3304,7 +3674,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -3371,7 +3741,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"to-be-determined.io/app/{user_id}/add-to-whitelist"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/app/{user_id}/add-to-whitelist"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WebApp-appAddToWhitelist-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -3390,7 +3760,7 @@ public class WebAppApiExample {
         User_id_addtowhitelist_body body = ; // User_id_addtowhitelist_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appAddToWhitelist(body, userId);
+            inline_response_400 result = apiInstance.appAddToWhitelist(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appAddToWhitelist");
@@ -3410,7 +3780,7 @@ public class WebAppApiExample {
         User_id_addtowhitelist_body body = ; // User_id_addtowhitelist_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appAddToWhitelist(body, userId);
+            inline_response_400 result = apiInstance.appAddToWhitelist(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appAddToWhitelist");
@@ -3432,7 +3802,7 @@ WebAppApi *apiInstance = [[WebAppApi alloc] init];
 // Add domain(s) specified to whitelist
 [apiInstance appAddToWhitelistWith:body
     userId:userId
-              completionHandler: ^(inline_response_200 output, NSError* error) {
+              completionHandler: ^(inline_response_400 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -3485,7 +3855,7 @@ namespace Example
             try
             {
                 // Add domain(s) specified to whitelist
-                inline_response_200 result = apiInstance.appAddToWhitelist(body, userId);
+                inline_response_400 result = apiInstance.appAddToWhitelist(body, userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -3650,7 +4020,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -3698,7 +4068,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -3764,7 +4134,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-WebApp-appRoom-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: application/json"\
-"to-be-determined.io/app/{user_id}/room"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/app/{user_id}/room"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WebApp-appRoom-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4039,7 +4409,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -4106,7 +4476,7 @@ except ApiException as e:
                            <pre class="prettyprint"><code class="language-bsh">curl -X POST\
 -H "Accept: application/json"\
 -H "Content-Type: application/json"\
-"to-be-determined.io/app/{user_id}/add-room"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/app/{user_id}/add-room"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WebApp-appRoomCreateOrJoin-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4125,7 +4495,7 @@ public class WebAppApiExample {
         User_id_addroom_body body = ; // User_id_addroom_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appRoomCreateOrJoin(body, userId);
+            inline_response_400 result = apiInstance.appRoomCreateOrJoin(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appRoomCreateOrJoin");
@@ -4145,7 +4515,7 @@ public class WebAppApiExample {
         User_id_addroom_body body = ; // User_id_addroom_body | 
         String userId = userId_example; // String | 
         try {
-            inline_response_200 result = apiInstance.appRoomCreateOrJoin(body, userId);
+            inline_response_400 result = apiInstance.appRoomCreateOrJoin(body, userId);
             System.out.println(result);
         } catch (ApiException e) {
             System.err.println("Exception when calling WebAppApi#appRoomCreateOrJoin");
@@ -4167,7 +4537,7 @@ WebAppApi *apiInstance = [[WebAppApi alloc] init];
 // Create a new room or join an existing room
 [apiInstance appRoomCreateOrJoinWith:body
     userId:userId
-              completionHandler: ^(inline_response_200 output, NSError* error) {
+              completionHandler: ^(inline_response_400 output, NSError* error) {
                             if (output) {
                                 NSLog(@"%@", output);
                             }
@@ -4220,7 +4590,7 @@ namespace Example
             try
             {
                 // Create a new room or join an existing room
-                inline_response_200 result = apiInstance.appRoomCreateOrJoin(body, userId);
+                inline_response_400 result = apiInstance.appRoomCreateOrJoin(body, userId);
                 Debug.WriteLine(result);
             }
             catch (Exception e)
@@ -4385,7 +4755,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -4433,7 +4803,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }
@@ -4499,7 +4869,7 @@ except ApiException as e:
                           <div class="tab-pane active" id="examples-WebApp-appShop-0-curl">
                            <pre class="prettyprint"><code class="language-bsh">curl -X GET\
 -H "Accept: application/json"\
-"to-be-determined.io/app/{user_id}/shop"</code></pre>
+"http://ripscamera0c.pythonanywhere.com/app/{user_id}/shop"</code></pre>
                           </div>
                           <div class="tab-pane" id="examples-WebApp-appShop-0-java">
                             <pre class="prettyprint"><code class="language-java">import io.swagger.client.*;
@@ -4774,7 +5144,7 @@ except ApiException as e:
   "content" : {
     "application/json" : {
       "schema" : {
-        "$ref" : "#/components/schemas/inline_response_200"
+        "$ref" : "#/components/schemas/inline_response_400"
       }
     }
   }

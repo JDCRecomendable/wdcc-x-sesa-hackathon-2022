@@ -147,6 +147,7 @@ const ShopPage = () => {
       >
         {mainPage}
       </div>
+      <div style={{ marginTop: "7%", marginLeft: "20%" }}>{mainPage}</div>
     </>
   );
 };
