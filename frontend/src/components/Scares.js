@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
+import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
@@ -23,6 +24,21 @@ const Scares = () => {
       console.error(error);
     }
   }
+
+  const purchase = () => {
+    axios
+      .post("http://ripscamera0c.pythonanywhere.com/common/Alpha/attack", {
+        tgtUserID: "Beta",
+        attackID: 4,
+        details: { selected },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
 
   useEffect(() => {
     getMemes();
@@ -53,6 +69,7 @@ const Scares = () => {
     <div>
       <h1>Scares</h1>
       {memesList}
+      <PurchaseButton cost={800} purchase={purchase} />
     </div>
   );
 };

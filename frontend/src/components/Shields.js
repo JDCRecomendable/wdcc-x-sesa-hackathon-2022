@@ -2,10 +2,27 @@ import Box from "@mui/material/Box";
 import Typography from "@mui/material/Typography";
 import Tooltip from "@mui/material/Tooltip";
 import ConfirmPurchase from "./ConfirmPurchase";
+const axios = require("axios");
 
 const Shields = () => {
-  const numOfShields = 2;
-  const brokenShields = 3 - numOfShields;
+  let numOfShields = 2;
+  let brokenShields = 3 - numOfShields;
+
+  const getResponse = async () => {
+    try {
+      const response = await axios.get(
+        "http://ripscamera0c.pythonanywhere.com/app/Alpha/room"
+      );
+      numOfShields = response.data.numberOfShields;
+      console.log(numOfShields);
+    } catch (err) {
+      console.log("err");
+    }
+  };
+
+  getResponse();
+
+  const purchase = () => {};
 
   let shields = (
     <>
@@ -77,6 +94,7 @@ const Shields = () => {
             price="100"
             description="Shields will protect you from attacks from other users."
             buttonText="+"
+            purchase={purchase}
           />
         </Typography>
       </Tooltip>

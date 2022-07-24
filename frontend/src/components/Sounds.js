@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import Button from "@mui/material/Button";
+import { IconButton } from "@mui/material";
+import PurchaseButton from "./PurchaseButton";
+const axios = require("axios");
 
 const options = [
   "Baby screaming",
@@ -20,14 +22,36 @@ const Sounds = () => {
   };
 
   const optionsList = options.map(option => (
-    <Button id={option} variant="outlined" key={option} onClick={handleClick}>
+    <IconButton
+      style={{ marginRight: "20px", color: "#371B58", font: "fantasy" }}
+      id={option}
+      key={option}
+      onClick={handleClick}
+    >
       {option}
-    </Button>
+    </IconButton>
   ));
+
+  const purchase = () => {
+    axios
+      .post("http://ripscamera0c.pythonanywhere.com/common/Alpha/attack", {
+        tgtUserID: "Beta",
+        attackID: 1,
+        details: { selected },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  };
+
   return (
     <>
       <h1>Sounds</h1>
       {optionsList}
+      <PurchaseButton cost={400} type="sound" purchase={purchase} />
     </>
   );
 };
