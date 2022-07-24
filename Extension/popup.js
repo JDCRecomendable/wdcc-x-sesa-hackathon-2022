@@ -134,7 +134,7 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 // This listener will send the user to the web app in a new tab when the attack button is pressed
 var button = document.getElementById("attackBtn");
 button.addEventListener("click", function(){
-  chrome.tabs.create({url:"localhost:3000"}); // Placeholder for web app
+  chrome.tabs.create({url:"localhost:3000/shop"}); // Placeholder for web app
 })
 
 var WdcCxSesaHackathon2022 = require('wdc_cx_sesa_hackathon_2022');
