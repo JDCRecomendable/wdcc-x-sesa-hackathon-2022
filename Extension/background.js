@@ -1,11 +1,21 @@
-let time = 50;
+let time = 3;
 let counter = 0;
 let timeIncrement = setInterval(() => {
-    time++;
-    console.log(time)
-    if (time >= 100) {
-      time = 0;
-      counter++; 
+    if(urlStatus==true){
+        time++;
+        if (time >= 10) {
+            time = 0;
+            counter++; 
+        }
+    }else if(urlStatus==false){
+        time--;
+        if (time == 0) {
+            time = 10;
+            counter--; 
+    }else{
+        time =time;
+    }
+    
    }
   }, 1000);
 
