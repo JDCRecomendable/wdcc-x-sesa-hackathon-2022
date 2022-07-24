@@ -9,7 +9,7 @@ class MongoDBCommunicator:
     def __init__(self, username: str, password: str, url: str):
         self.username = urllib.parse.quote_plus(username)
         self.password = urllib.parse.quote_plus(password)
-        self.client = MongoClient(f'mongodb+srv://{self.username}:{self.password}@{url}')
+        self.client = MongoClient(f'mongodb+srv://{self.username}:{self.password}@{url}', connectTimeoutMS=30000, socketTimeoutMS=None, connect=False, maxPoolsize=1)
         self.db = self.client.get_database('user_db')
 
     def get_all_collections(self) -> list:

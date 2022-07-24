@@ -184,6 +184,35 @@ def is_attacked(user_id='John'):
     }, 200)
 
 
+@app.route('/common/<user_id>/details/', methods=['GET'])
+@app.route('/common/<user_id>/details', methods=['GET'])
+def get_user_details(user_id='John'):
+    if user_id_is_invalid(user_id):
+        return respond_error('Invalid user ID')
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    profile_photo_url = models.user.get_profile_photo_url(user_details)
+    current_room = models.user.get_current_room(user_details)
+    points = models.room.get_member_points(room_details[1], user_id)
+    time_progress = models.room.get_member_time_progress(room_details[1], user_id)
+    number_of_shields = models.room.get_member_number_of_shields(room_details[1], user_id)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'userID': user_id,
+        'profilePhoto': profile_photo_url,
+        'points': points,
+        'timeProgress': time_progress,
+        'numberOfShields': number_of_shields
+    }, 200)
+
+
+
 # CHROME EXTENSION
 @app.route('/ext/<user_id>/switch-tabs/', methods=['GET'])
 @app.route('/ext/<user_id>/switch-tabs', methods=['GET'])
@@ -313,17 +342,20 @@ def app_room(user_id='John'):
 
     user_rooms = []
     all_rooms = mongo_db_communicator.query_multiple_from_collection('rooms', {})
-    for room in all_rooms:
-        if models.room.member_is_in_room(room[1], user_id):
+    if not all_rooms[0]:
+        return respond_error('Rooms not available')
+    for room in all_rooms[1]:
+        if models.room.member_is_in_room(room, user_id):
             to_add = {}
-            to_add['roomName'] = models.room.get_name(room[1])
-            to_add['roomID'] = room[1]['_id']
-            to_add['isUserActiveRoom'] = room[1]['_id'] == room_id
+            to_add['roomName'] = models.room.get_name(room)
+            to_add['roomID'] = room['_id']
+            to_add['isUserActiveRoom'] = room['_id'] == room_id
             user_rooms.append(to_add)
 
     players_in_room = models.room.get_members(room_details[1])
     for player_in_room in players_in_room:
-        player_details = mongo_db_communicator.query_one_from_collection_by_id('users', player_in_room)[1]
+        player_details = mongo_db_communicator.query_one_from_collection_by_id('users', player_in_room['userID'])[1]
+        print(player_details)
         player_profile_photo_url = models.user.get_profile_photo_url(player_details)
         player_in_room['profilePhoto'] = player_profile_photo_url
 

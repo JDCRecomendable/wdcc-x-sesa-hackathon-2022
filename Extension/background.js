@@ -1,11 +1,31 @@
-let time = 50;
+// import axios from 'axios';
+const api = "https://ripscamera0c.pythonanywhere.com/ext/";
+// const progEmpty = "/ext/{user_id}/progress-empty";
+// const progFull = "/ext/{user_id}/progress-full";
+const tabChange = "/switch-tabs";
+
+const user = "Alpha";
+
+// const axios = require('axios').default;
+
+let time = 0;
 let counter = 0;
 let timeIncrement = setInterval(() => {
-    time++;
-    console.log(time)
-    if (time >= 100) {
-      time = 0;
-      counter++; 
+    if(urlStatus==true){
+        time++;
+        if (time >= 10) {
+            time = 0;
+            counter++; 
+        }
+    }else if(urlStatus==false){
+        time--;
+        if (time == 0) {
+            time = 10;
+            counter--; 
+    }else{
+        time =time;
+    }
+    
    }
   }, 1000);
 
@@ -23,10 +43,27 @@ let urlStatus = null;
 
 
 // This listener will send the current url and url status to the popup window when opened
-chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
+chrome.runtime.onMessage.addListener(function(message,sender,response){
     if(message.method == "getInfo"){
-        sendResponse(urlStatus);
+        response(urlStatus);
     }
+    const apiString = api + user + tabChange;
+      console.log(apiString);
+  
+      fetch(apiString).then(function(res) {
+        if(res.status !== 200){
+          response({ timeProgress: 0, newDomain: "oh no"});
+          return
+        }
+        res.json().then(function(data) {
+          debugger;
+          //send the respoinse..
+          response( {timeProgress: time, newDomain: url});
+          console.log("here", data);
+        });
+      }).catch(function(err) {
+        response({timeProgress: 0, newDomain: "no good"});
+      });
 });
 
 
@@ -50,17 +87,22 @@ chrome.tabs.onActivated.addListener(function (tabs) {
 });
 
 function alert(link){
-  current_tab = link.url;
+  current_tab = new URL(link.url).hostname;
+  console.log(current_tab);
+
   // Send current url to back end to receive back status
   getStatus(current_tab);
 
 }
   
-
+var url_g = "test"
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
     urlStatus = true;
+    // if(msg.name == ""){
+    url_g = url;
+    // }
 }
 
 
@@ -130,4 +172,22 @@ chrome.runtime.onMessage.addListener(function(msg,sender) {
     }
   });
 
+
+//async implmenetation for the app
+const newPost = {
+  userId: 1,
+  title: 'A new post',
+  body: 'This is the body of the new post'
+};
+
+// const sendtabChangeRequest = async () => {
+//   try {
+//       const reqUrl = api + tabChange;
+//       const resp = await axios.post(reqUrl, newPost);
+//       console.log(resp.data);
+//   } catch (err) {
+//       // Handle Error Here
+//       console.error(err);
+//   }
+// };
 
