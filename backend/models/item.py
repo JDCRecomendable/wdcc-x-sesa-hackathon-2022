@@ -17,9 +17,9 @@ def get_name(item_data: dict) -> str:
     return item_data['name']
 
 
-def get_cost(item_data: dict) -> str:
+def get_cost(item_data: dict) -> int:
     return item_data['cost']
 
 
-def get_type(item_data: dict) -> str:
+def get_type(item_data: dict) -> int:
     return item_data['type']

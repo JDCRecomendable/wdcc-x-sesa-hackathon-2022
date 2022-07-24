@@ -4,9 +4,14 @@ from typing import List
 from flask import Flask, render_template, request
 from flask_cors import CORS
 
+import models.common
+import models.item
+import models.room
+import models.user
 from db import MongoDBCommunicator
 from utils.config_reader import get_value
 
+POINTS_DIFF = 200
 app = Flask(__name__)
 CORS(app)
 username = get_value('username')
@@ -49,7 +54,41 @@ def hello_world():  # put application's code here
 
 @app.route('/test')
 def test_area():
-    return str(user_id_is_invalid('1'))
+    sample_room_details = {
+        "_id": 1,
+        "name": "Work Room",
+        "ownerUserID": "John",
+        "whitelistDomains": [
+            "teams.microsoft.com",
+            "slack.com",
+            "jira.com"
+        ],
+        "blacklistDomains": [
+            "reddit.com",
+            "twitter.com"
+        ],
+        "members": [
+            {
+                "userID": "John",
+                "points": 750,
+                "timeProgress": 80,
+                "numberOfShields": 3
+            }
+        ],
+        "attackQueue": [
+            {
+                "srcUserID": "John",
+                "tgtUserID": "John",
+                "attackID": 1,
+                "isSuccessful": False,
+                "completed": False
+            }
+        ]
+    }
+    text_to_display = str('OLD\n{}\n\n'.format(str(sample_room_details)))
+    models.room.set_member_time_progress(sample_room_details, 'John', 120)
+    text_to_display += str('NEW\n{}\n\n'.format(str(sample_room_details)))
+    return str(text_to_display)
 
 
 @app.route('/common/<user_id>/attack/', methods=['POST'])
@@ -60,7 +99,38 @@ def attack(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+    src_user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)
+    src_user_active_room = models.user.get_current_room(src_user_details[1])
+    tgt_user_id = request.get_json()['tgtUserID']
+    tgt_user_details = mongo_db_communicator.query_one_from_collection_by_id('users', tgt_user_id)
+    tgt_user_active_room = models.user.get_current_room(tgt_user_details[1])
+
+    if src_user_active_room != tgt_user_active_room:
+        return respond_error('Target user not in the same room')
+
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', src_user_active_room)
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    attack_id = request.get_json()['attackID']
+    attack_desc = request.get_json()['details']
+    attack_details = mongo_db_communicator.query_one_from_collection_by_id('attacks', attack_id)
+    if not attack_details[0]:
+        return respond_error('Attack item ID not available')
+    attack_cost = models.item.get_cost(attack_details[1])
+    src_user_points = models.room.get_member_points(room_details[1], user_id)
+    if attack_cost > src_user_points:
+        return respond_error('Not enough points')
+
+    new_data = models.room.add_to_attack_queue(room_details[1], user_id, tgt_user_id, attack_id, attack_desc)
+    new_data = models.room.increase_member_points(new_data, user_id, -attack_cost)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', src_user_active_room, new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 @app.route('/common/<user_id>/is-attacked/', methods=['POST'])
@@ -68,7 +138,49 @@ def attack(user_id='John'):
 def is_attacked(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    pending_attacks = models.room.get_pending_attacks_for_tgt_user(room_details[1], user_id)
+    number_of_shields = models.room.get_member_number_of_shields(room_details[1], user_id)
+    if len(pending_attacks) == 0:
+        return craft_response({
+            'status': True,
+            'statusDescription': 'No pending attacks',
+            'isAttacked': False,
+            'attackID': -1,
+            'details': '',
+            'numberOfShields': number_of_shields
+        }, 200)
+
+    attack_details = pending_attacks[0]
+
+    if number_of_shields > 0:
+        number_of_shields -= 1
+        models.room.update_pending_attack_status(attack_details, False)
+        new_data = models.room.increase_member_number_of_shields(room_details[1], user_id, -number_of_shields)
+        mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+        return craft_response({
+            'status': True,
+            'statusDescription': 'Decreased shield by 1',
+            'isAttacked': False,
+            'attackID': -1,
+            'details': '',
+            'numberOfShields': number_of_shields
+        }, 200)
+
+    models.room.update_pending_attack_status(attack_details, True)
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Attack sent',
+        'isAttacked': True,
+        'attackID': attack_details['attackID'],
+        'details': attack_details['details'],
+        'numberOfShields': number_of_shields
+    }, 200)
 
 
 # CHROME EXTENSION
@@ -80,7 +192,31 @@ def ext_switch_tabs(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    new_data = models.room.increase_member_time_progress(room_details[1], user_id, request.get_json()['timeProgress'])
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+    domain = request.get_json()['newDomain']
+    is_whitelist = False
+    is_blacklist = False
+    if models.room.is_whitelist_domain(room_details[1], domain):
+        is_whitelist = True
+    if models.room.is_blacklist_domain(room_details[1], domain):
+        is_blacklist = True
+    member_points = models.room.get_member_points(room_details[1], user_id)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': member_points,
+        'newDomain': domain,
+        'isWhitelist': is_whitelist,
+        'isBlacklist': is_blacklist
+    }, 200)
 
 
 @app.route('/ext/<user_id>/progress-full/', methods=['POST'])
@@ -88,7 +224,21 @@ def ext_switch_tabs(user_id='John'):
 def ext_progress_full(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    new_data = models.room.increase_member_points(room_details[1], user_id, POINTS_DIFF)
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    member_points = models.room.get_member_points(room_details[1], user_id)
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': member_points
+    }, 200)
 
 
 @app.route('/ext/<user_id>/progress-empty/', methods=['POST'])
@@ -96,7 +246,21 @@ def ext_progress_full(user_id='John'):
 def ext_progress_empty(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    new_data = models.room.increase_member_points(room_details[1], user_id, -POINTS_DIFF)
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    member_points = models.room.get_member_points(room_details[1], user_id)
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': member_points
+    }, 200)
 
 
 # WEB APP - SHOP PAGE
@@ -105,7 +269,25 @@ def ext_progress_empty(user_id='John'):
 def app_shop(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    points = models.room.get_member_points(room_details[1], user_id)
+    number_of_shields = models.room.get_member_number_of_shields(room_details[1], user_id)
+    profile_photo_url = models.user.get_profile_photo_url(user_details)
+    room_name = models.room.get_name(room_details[1])
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': points,
+        'numberOfShields': number_of_shields,
+        'profilePhoto': profile_photo_url,
+        'roomName': room_name
+    }, 200)
 
 
 # WEB APP - ROOM PAGE
@@ -114,7 +296,49 @@ def app_shop(user_id='John'):
 def app_room(user_id='John'):
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    points = models.room.get_member_points(room_details[1], user_id)
+    number_of_shields = models.room.get_member_number_of_shields(room_details[1], user_id)
+    profile_photo_url = models.user.get_profile_photo_url(user_details)
+    room_name = models.room.get_name(room_details[1])
+    room_id = room_details[1]['_id']
+    whitelist_domains = models.room.get_whitelist_domains(room_details[1])
+    blacklist_domains = models.room.get_blacklist_domains(room_details[1])
+
+    user_rooms = []
+    all_rooms = mongo_db_communicator.query_multiple_from_collection('rooms', {})
+    for room in all_rooms:
+        if models.room.member_is_in_room(room[1], user_id):
+            to_add = {}
+            to_add['roomName'] = models.room.get_name(room[1])
+            to_add['roomID'] = room[1]['_id']
+            to_add['isUserActiveRoom'] = room[1]['_id'] == room_id
+            user_rooms.append(to_add)
+
+    players_in_room = models.room.get_members(room_details[1])
+    for player_in_room in players_in_room:
+        player_details = mongo_db_communicator.query_one_from_collection_by_id('users', player_in_room)[1]
+        player_profile_photo_url = models.user.get_profile_photo_url(player_details)
+        player_in_room['profilePhoto'] = player_profile_photo_url
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': points,
+        'numberOfShields': number_of_shields,
+        'profilePhoto': profile_photo_url,
+        'roomName': room_name,
+        'roomID': room_id,
+        'userRooms': user_rooms,
+        'playersInRoom': players_in_room,
+        'whitelistDomains': whitelist_domains,
+        'blacklistDomains': blacklist_domains
+    }, 200)
 
 
 @app.route('/app/<user_id>/add-room/', methods=['POST'])
@@ -136,7 +360,24 @@ def app_add_to_whitelist(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    whitelist_domains = request.get_json()['domains']
+    new_data = room_details[1]
+    for whitelist_domain in whitelist_domains:
+        new_data = models.room.add_to_whitelist_domains(new_data,
+                                                        whitelist_domain)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 @app.route('/app/<user_id>/add-to-blacklist/', methods=['POST'])
@@ -147,7 +388,24 @@ def app_add_to_blacklist(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    blacklist_domains = request.get_json()['domains']
+    new_data = room_details[1]
+    for blacklist_domain in blacklist_domains:
+        new_data = models.room.add_to_blacklist_domains(new_data,
+                                                        blacklist_domain)
+
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful'
+    }, 200)
 
 
 if __name__ == '__main__':
