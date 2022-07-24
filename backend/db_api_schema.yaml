@@ -1,0 +1,678 @@
+openapi: 3.0.0
+info:
+    version: "2.1"
+    title: "WDCCxSESA Hackathon 2022"
+    license:
+        name: MIT
+servers:
+    - url: "http://ripscamera0c.pythonanywhere.com"
+paths:
+    /common/{user_id}/details:
+        get:
+            tags:
+                - Common
+            summary: "Get details about the user"
+            operationId: get_user_details
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    userID:
+                                        type: string
+                                    profilePhoto:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                                    timeProgress:
+                                        type: integer
+                                        format: int32
+                                    numberOfShields:
+                                        type: integer
+                                        format: int32
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /common/{user_id}/attack:
+        post:
+            tags:
+                - Common
+            summary: "Send an attack to another user"
+            operationId: attack
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                tgtUserID:
+                                    type: string
+                                attackID:
+                                    type: integer
+                                    format: int32
+                                details:
+                                    type: string
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /common/{user_id}/buy-shield:
+        post:
+            tags:
+                - Common
+            summary: "Buy a shield"
+            operationId: buy_shield
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /common/{user_id}/is-attacked:
+        post:
+            tags:
+                - Common
+            summary: "Check if there is an incoming attack from another user"
+            operationId: is_attacked
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    isAttacked:
+                                        type: boolean
+                                    attackID:
+                                        type: integer
+                                        format: int32
+                                    details:
+                                        type: string
+                                    numberOfShields:
+                                        type: integer
+                                        format: int32
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /ext/{user_id}/switch-tabs:
+        post:
+            tags:
+                - Chrome Extension
+            summary: "Flush current progress to database and get whether new website is in whitelist or blacklist"
+            operationId: ext_switch_tabs
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                timeProgress:
+                                    type: integer
+                                    format: int32
+                                newDomain:
+                                    type: string
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                                    newDomain:
+                                        type: string
+                                    isWhitelist:
+                                        type: boolean
+                                    isBlacklist:
+                                        type: boolean
+
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /ext/{user_id}/progress-full:
+        post:
+            tags:
+                - Chrome Extension
+            summary: "Get new points after filling up progress bar"
+            operationId: ext_progress_full
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /ext/{user_id}/progress-empty:
+        post:
+            tags:
+                - Chrome Extension
+            summary: "Get new points after depleting progress bar"
+            operationId: ext_progress_empty
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /app/{user_id}/shop:
+        get:
+            tags:
+                - Web App
+            summary: "Get required data when going into the shop screen"
+            operationId: app_shop
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                                    numberOfShields:
+                                        type: integer
+                                        format: int32
+                                    profilePhoto:
+                                        type: string
+                                    roomName:
+                                        type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /app/{user_id}/room:
+        get:
+            tags:
+                - Web App
+            summary: "Get required data when going into the room screen"
+            operationId: app_room
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                                    points:
+                                        type: integer
+                                        format: int32
+                                    numberOfShields:
+                                        type: integer
+                                        format: int32
+                                    profilePhoto:
+                                        type: string
+                                    roomName:
+                                        type: string
+                                    roomID:
+                                        type: integer
+                                        format: int32
+                                    userRooms:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                roomName:
+                                                    type: string
+                                                roomID:
+                                                    type: integer
+                                                    format: int32
+                                                isUserActiveRoom:
+                                                    type: boolean
+                                    playersInRoom:
+                                        type: array
+                                        items:
+                                            type: object
+                                            properties:
+                                                userID:
+                                                    type: string
+                                                profilePhoto:
+                                                    type: string
+                                    whitelistDomains:
+                                        type: array
+                                        items:
+                                            type: string
+                                    blacklistDomains:
+                                        type: array
+                                        items:
+                                            type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /app/{user_id}/add-room:
+        post:
+            tags:
+                - Web App
+            summary: "Create a new room or join an existing room"
+            operationId: app_room_create_or_join
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                addType:
+                                    type: string
+                                value:
+                                    type: string
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /app/{user_id}/add-to-whitelist:
+        post:
+            tags:
+                - Web App
+            summary: "Add domain(s) specified to whitelist"
+            operationId: app_add_to_whitelist
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                domains:
+                                    type: array
+                                    items:
+                                        type: string
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+    /app/{user_id}/add-to-blacklist:
+        post:
+            tags:
+                - Web App
+            summary: "Add domain(s) specified to blacklist"
+            operationId: app_add_to_blacklist
+            parameters:
+                - in: path
+                  name: user_id
+                  schema:
+                      type: string
+                  required: true
+            requestBody:
+                required: true
+                content:
+                    application/json:
+                        schema:
+                            type: object
+                            properties:
+                                domains:
+                                    type: array
+                                    items:
+                                        type: string
+            responses:
+                "200":
+                    description: "Successful operation"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+                "400":
+                    description: "Did not succeed"
+                    content:
+                        application/json:
+                            schema:
+                                type: object
+                                properties:
+                                    status:
+                                        type: boolean
+                                    statusDescription:
+                                        type: string
+components:
+    schemas:
+        users:
+            type: object
+            required:
+                - _id
+                - pw
+                - currentRoomID
+                - profilePhoto
+            properties:
+                _id:
+                    type: string
+                pw:
+                    type: string
+                currentRoomID:
+                    type: integer
+                    format: int32
+                profilePhoto:
+                    type: string
+        items:
+            type: object
+            required:
+                - _id
+                - name
+                - cost
+                - type
+            properties:
+                _id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                cost:
+                    type: integer
+                    format: int32
+                type:
+                    type: integer
+                    format: int32
+        rooms:
+            type: object
+            required:
+                - _id
+                - name
+                - ownerUserID
+                - whitelistDomains
+                - blacklistDomains
+                - members
+                - attackQueue
+            properties:
+                _id:
+                    type: integer
+                    format: int32
+                name:
+                    type: string
+                ownerUserID:
+                    type: string
+                whitelistDomains:
+                    type: array
+                    items:
+                        type: string
+                blacklistDomains:
+                    type: array
+                    items:
+                        type: string
+                members:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            userID:
+                                type: string
+                            points:
+                                type: integer
+                                format: int32
+                            timeProgress:
+                                type: integer
+                                format: int32
+                            numberOfShields:
+                                type: integer
+                                format: int32
+                attackQueue:
+                    type: array
+                    items:
+                        type: object
+                        properties:
+                            srcUserID:
+                                type: string
+                            tgtUserID:
+                                type: string
+                            attackID:
+                                type: integer
+                                format: int32
+                            isSuccessful:
+                                type: boolean
+                            completed:
+                                type: boolean
