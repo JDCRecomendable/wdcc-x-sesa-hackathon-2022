@@ -137,7 +137,7 @@ const ShopPage = () => {
         Scare
       </IconButton>
 
-      <div
+      {/* <div
         style={{
           marginTop: "10%",
           marginLeft: "20%",
@@ -146,7 +146,7 @@ const ShopPage = () => {
         }}
       >
         {mainPage}
-      </div>
+      </div> */}
       <div style={{ marginTop: "7%", marginLeft: "20%" }}>{mainPage}</div>
     </>
   );
