@@ -12,7 +12,8 @@ import models.user
 from db import MongoDBCommunicator
 from utils.config_reader import get_value
 
-POINTS_DIFF = 200
+POINTS_DIFF = 500
+SHIELD_COST = 250
 app = Flask(__name__)
 CORS(app)
 username = get_value('username')
@@ -115,7 +116,7 @@ def attack(user_id='John'):
 
     attack_id = request.get_json()['attackID']
     attack_desc = request.get_json()['details']
-    attack_details = mongo_db_communicator.query_one_from_collection_by_id('attacks', attack_id)
+    attack_details = mongo_db_communicator.query_one_from_collection_by_id('items', attack_id)
     if not attack_details[0]:
         return respond_error('Attack item ID not available')
     attack_cost = models.item.get_cost(attack_details[1])
@@ -131,6 +132,34 @@ def attack(user_id='John'):
     return craft_response({
         'status': True,
         'statusDescription': 'Successful'
+    }, 200)
+
+
+@app.route('/common/<user_id>/buy-shield/', methods=['POST'])
+@app.route('/common/<user_id>/buy-shield', methods=['POST'])
+def buy_shield(user_id='John'):
+    if user_id_is_invalid(user_id):
+        return respond_error('Invalid user ID')
+
+    user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+    room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+    if not room_details[0]:
+        return respond_error('Room not available')
+
+    user_points = models.room.get_member_points(room_details[1], user_id)
+    if SHIELD_COST > user_points:
+        return respond_error('Not enough points')
+
+    new_data = models.room.increase_member_number_of_shields(room_details[1], user_id, 1)
+    new_data = models.room.increase_member_points(new_data, user_id, -SHIELD_COST)
+    mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
+    new_data = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])[1]
+    new_points = models.room.get_member_points(new_data, user_id)
+
+    return craft_response({
+        'status': True,
+        'statusDescription': 'Successful',
+        'points': new_points
     }, 200)
 
 
