@@ -4,9 +4,12 @@ import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
+
+
 const Memes = () => {
   const [memes, setMemes] = useState([]);
   const [selected, setSelected] = useState("");
+  // const [memes, setMemes] = useState([]);
 
   async function getMemes() {
     const num = Math.floor(Math.random() * 50);
@@ -16,7 +19,7 @@ const Memes = () => {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
           q: "memes",
           offset: num,
-          limit: 8,
+          limit: 6,
         },
       });
       setMemes(response.data.data);
@@ -50,8 +53,28 @@ const Memes = () => {
   ));
 
   return (
+    // <div style={{
+    //   bottom: "2%",
+    //   marginRight: "2%",
+    //   backgroundColor: "#371B58",
+    //   height: '300px',
+    //   width: '80%',
+    //   borderRadius: "4px",
+    //   overflowY: "scroll",
+    // }}>
+
+    //   {/* Blacklist items */}
+    //   <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
+    //     <thead>
+    //       <tr>
+    //         <th>Website</th>
+    //       </tr>
+    //     </thead>
+    //     <tbody>{memesList}</tbody>
+    //   </table>
+
+    // </div>
     <div>
-      <h1>Memes</h1>
       {memesList}
       <PurchaseButton cost={200} type="scare" item_id={1} details={selected} />
     </div>
