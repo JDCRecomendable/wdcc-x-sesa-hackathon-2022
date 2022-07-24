@@ -3,6 +3,7 @@ import Header from "./components/Header";
 import RoomsPage from "./pages/RoomsPage";
 import ShopPage from "./pages/ShopPage";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Giphy from "./components/Giphy";
 
 function App() {
   return (

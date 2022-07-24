@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 // chrome.runtime.sendMessage({from:"content"}); //first, tell the background page that this is the tab that wants to receive the messages.
@@ -18,19 +19,28 @@
 // for(elt of p){
 //   elt.style['background-color'] = "red";
 // }
+=======
+>>>>>>> ba1c37de440368c4a5c8d4b1e2192a88f9d5aaf8
 
 window.addEventListener("click", test, true);
 
 function test() {
   chrome.runtime.sendMessage({ method: "yo" }, function (response) {
     console.log(response);
-    /*var iframe = document.createElement("iframe");
+    createIframe("https://giphy.com/embed/UtcBRO8cxulRzkrVLc")
+    playAudio("ugotthat.mp3");
+    });
+}
+
+function createIframe(fileLink){
+    var iframe = document.createElement("iframe");
     iframe.style.height = "100%";
     iframe.style.width = "100%";
     iframe.style.position = "fixed";
     iframe.style.top = "0px";
     iframe.style.opacity = "1";
     iframe.style.zIndex = "9000000000000000000";
+<<<<<<< HEAD
     iframe.srcdoc = '<center><iframe src="https://giphy.com/embed/UtcBRO8cxulRzkrVLc" width="800" height="800" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
     */
 
@@ -40,6 +50,11 @@ function test() {
     var myAudio = new Audio(chrome.runtime.getURL("sounds/ugotthat.mp3"));
     myAudio.play();
 
+=======
+    iframe.srcdoc = '<center><iframe src="'+fileLink+'" width="1000px" height="1000px" frameBorder="0" class="giphy-embed" allowFullScreen></iframe></center>';
+    
+    document.body.appendChild(iframe);
+>>>>>>> ba1c37de440368c4a5c8d4b1e2192a88f9d5aaf8
     //10 seconds timer to remove ifram
     // let counter =0;
     // setInterval(() => {
@@ -86,8 +101,18 @@ function test() {
         
       }
     }, 1000);
-  });
 }
+
+ function playAudio(filename){
+    //play audio
+    var myAudio = new Audio(chrome.runtime.getURL("sounds/"+filename));
+    myAudio.play();
+}
+
+
+
+
+
 /*chrome.runtime.sendMessage({ from: "content" }); //first, tell the background page that this is the tab that wants to receive the messages.
 
 chrome.runtime.onMessage.addListener(function (msg) {

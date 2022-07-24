@@ -11,7 +11,12 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction="up" ref={ref} {...props} />;
 });
 
-export default function ConfirmPurchase() {
+export default function ConfirmPurchase({
+  name,
+  price,
+  description,
+  buttonText,
+}) {
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -25,7 +30,7 @@ export default function ConfirmPurchase() {
   return (
     <div>
       <Button variant="outlined" onClick={handleClickOpen}>
-        +
+        {buttonText}
       </Button>
       <Dialog
         open={open}
@@ -35,11 +40,11 @@ export default function ConfirmPurchase() {
         aria-describedby="alert-dialog-slide-description"
       >
         <DialogTitle>
-          {"Confirm purchase of one shield for 100 coins?"}
+          Confirm purchase of one {name} for {price} coins?
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-slide-description">
-            Shields will protect you from attacks from other users.
+            {description}
           </DialogContentText>
         </DialogContent>
         <DialogActions>
