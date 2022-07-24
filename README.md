@@ -1,5 +1,5 @@
 # ProdMe
-A WDCCxSESA Hackathon 2022 project.
+A WDCCxSESA Hackathon 2022 project, at Third Place.
 
 ## Idea
 Programming is fun, isn't it?  You can go up to 170 wpm, knowing what to write.  You know your method calls, parameter types and class members so well...until you don't.
