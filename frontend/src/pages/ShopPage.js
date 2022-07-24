@@ -4,6 +4,7 @@ import Memes from "../components/Memes";
 import Scares from "../components/Scares";
 import Cursors from "../components/Cursors";
 import Sounds from "../components/Sounds";
+import { IconButton } from "@mui/material";
 
 const ShopPage = () => {
   const [page, setPage] = useState("blank");
@@ -43,103 +44,94 @@ const ShopPage = () => {
         }}
       ></div>
 
-      <button
+      <IconButton
         id="memes"
         onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
           height: "8%",
-          zIndex: "1",
           backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginTop: "1%",
+          marginTop: "6%",
           marginLeft: "24%",
           borderRadius: "15px",
           color: "#fff",
-          fontSize: "40px",
+          fontSize: "35px",
           font: "Georgia",
           textAlign: "center",
         }}
       >
         Memes
-      </button>
+      </IconButton>
 
-      <button
+      <IconButton
         id="sounds"
         onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
           height: "8%",
-          zIndex: "1",
           backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginTop: "1%",
+          marginTop: "6%",
           marginLeft: "42%",
           borderRadius: "15px",
           color: "#fff",
-          fontSize: "40px",
+          fontSize: "35px",
           font: "Georgia",
           textAlign: "center",
         }}
       >
         Sounds
-      </button>
+      </IconButton>
 
-      <button
+      <IconButton
         id="cursors"
         onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
           height: "8%",
-          zIndex: "1",
           backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginTop: "1%",
+          marginTop: "6%",
           marginLeft: "60%",
           borderRadius: "15px",
           color: "#fff",
-          fontSize: "40px",
+          fontSize: "35px",
           font: "Georgia",
           textAlign: "center",
         }}
       >
-        Cursor
-      </button>
+        Party
+      </IconButton>
 
-      <button
+      <IconButton
         id="scares"
+        on
         onClick={handleClick}
         style={{
           position: "fixed",
           width: "15%",
           height: "8%",
-          zIndex: "1",
           backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginTop: "1%",
+          marginTop: "6%",
           marginLeft: "78%",
           borderRadius: "15px",
           color: "#fff",
-          fontSize: "40px",
+          fontSize: "35px",
           font: "Georgia",
           textAlign: "center",
         }}
       >
         Scare
-      </button>
+      </IconButton>
 
       <div
         style={{
           position: "fixed",
-          width: "10%",
+          width: "12%",
           height: "8%",
-          zIndex: "1",
           backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginLeft: "88%",
+          marginLeft: "86%",
           borderRadius: "50px",
           bottom: "5%",
           color: "#fff",
@@ -150,7 +142,7 @@ const ShopPage = () => {
       >
         $1000
       </div>
-      <div style={{ marginTop: "10%", marginLeft: "20%" }}>{mainPage}</div>
+      <div style={{ marginTop: "10%", marginLeft: "20%", maxHeight: '60vh', backgroundColor: 'grey' }}>{mainPage}</div>
     </>
   );
 };
