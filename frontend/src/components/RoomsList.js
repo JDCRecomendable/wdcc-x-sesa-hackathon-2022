@@ -9,49 +9,60 @@ import Avatar from "@mui/material/Avatar";
 import FolderIcon from "@mui/icons-material/Folder";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-
-const roomDummyData = [
-  { _id: 252523, name: "Cool room" },
-  { _id: 993541, name: "Another room" },
-  { _id: 342345, name: "Room X" },
-];
-
-function generate(element) {
-  return roomDummyData.map(room =>
-    React.cloneElement(element, {
-      key: room._id,
-    })
-  );
-}
-
-const Demo = styled("div")(({ theme }) => ({
-  backgroundColor: theme.palette.background.paper,
-}));
+const axios = require("axios");
 
 export default function RoomsList() {
-  return (
-    <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
-      <Demo>
-        <List>
-          {generate(
-            <ListItem
-              sx={{ background: "#E0D4FF" }}
-              secondaryAction={
-                <IconButton edge="end" aria-label="delete">
-                  <DeleteIcon />
-                </IconButton>
-              }
-            >
-              <ListItemAvatar>
-                <Avatar>
-                  <FolderIcon />
-                </Avatar>
-              </ListItemAvatar>
-              <ListItemText primary="Room name" />
-            </ListItem>
-          )}
-        </List>
-      </Demo>
-    </Box>
-  );
+  const roomDummyData = [
+    { _id: 252523, name: "Cool room" },
+    { _id: 993541, name: "Another room" },
+    { _id: 342345, name: "Room X" },
+  ];
+
+  const getResponse = async () => {
+    try {
+      const response = await axios.get(
+        "http://ripscamera0c.pythonanywhere.com/app/Alpha/room"
+      );
+      console.log(response);
+    } catch (err) {
+      console.log("err");
+    }
+
+    function generate(element) {
+      return roomDummyData.map(room =>
+        React.cloneElement(element, {
+          key: room._id,
+        })
+      );
+    }
+
+    const Demo = styled("div")(({ theme }) => ({
+      backgroundColor: theme.palette.background.paper,
+    }));
+    return (
+      <Box sx={{ flexGrow: 1, maxWidth: 752 }}>
+        <Demo>
+          <List>
+            {generate(
+              <ListItem
+                sx={{ background: "#E0D4FF" }}
+                secondaryAction={
+                  <IconButton edge="end" aria-label="delete">
+                    <DeleteIcon />
+                  </IconButton>
+                }
+              >
+                <ListItemAvatar>
+                  <Avatar>
+                    <FolderIcon />
+                  </Avatar>
+                </ListItemAvatar>
+                <ListItemText primary="Room name" />
+              </ListItem>
+            )}
+          </List>
+        </Demo>
+      </Box>
+    );
+  };
 }
