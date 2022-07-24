@@ -4,8 +4,6 @@ import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
-
-
 const Memes = () => {
   const [memes, setMemes] = useState([]);
   const [selected, setSelected] = useState("");
@@ -34,6 +32,21 @@ const Memes = () => {
 
   const handleClick = e => {
     setSelected(e.target.id);
+  };
+
+  const purchase = () => {
+    axios
+      .post("http://ripscamera0c.pythonanywhere.com/common/Alpha/attack", {
+        tgtUserID: "Beta",
+        attackID: 1,
+        details: { selected },
+      })
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   };
 
   const memesList = memes.map(meme => (
@@ -76,7 +89,7 @@ const Memes = () => {
     // </div>
     <div>
       {memesList}
-      <PurchaseButton cost={200} type="scare" item_id={1} details={selected} />
+      <PurchaseButton cost={200} purchase={purchase} />
     </div>
   );
 };
