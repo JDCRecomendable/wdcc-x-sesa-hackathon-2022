@@ -127,22 +127,14 @@ const ShopPage = () => {
 
       <div
         style={{
-          position: "fixed",
-          width: "12%",
-          height: "8%",
-          backgroundColor: "#371B58",
-          marginLeft: "86%",
-          borderRadius: "50px",
-          bottom: "5%",
-          color: "#fff",
-          fontSize: "40px",
-          font: "Georgia",
-          textAlign: "center",
+          marginTop: "10%",
+          marginLeft: "20%",
+          maxHeight: "60vh",
+          backgroundColor: "grey",
         }}
       >
-        $1000
+        {mainPage}
       </div>
-      <div style={{ marginTop: "10%", marginLeft: "20%", maxHeight: '60vh', backgroundColor: 'grey' }}>{mainPage}</div>
     </>
   );
 };

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "@mui/material/Button";
+import PurchaseButton from "./PurchaseButton";
 
 const options = [
   "Baby screaming",
@@ -28,6 +29,7 @@ const Sounds = () => {
     <>
       <h1>Sounds</h1>
       {optionsList}
+      <PurchaseButton cost={400} type="sound" item_id={2} details={selected} />
     </>
   );
 };

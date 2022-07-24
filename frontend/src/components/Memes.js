@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
+import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
@@ -30,7 +31,6 @@ const Memes = () => {
 
   const handleClick = e => {
     setSelected(e.target.id);
-    console.log(selected);
   };
 
   const memesList = memes.map(meme => (
@@ -53,6 +53,7 @@ const Memes = () => {
     <div>
       <h1>Memes</h1>
       {memesList}
+      <PurchaseButton cost={200} type="scare" item_id={1} details={selected} />
     </div>
   );
 };

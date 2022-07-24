@@ -16,6 +16,7 @@ export default function ConfirmPurchase({
   price,
   description,
   buttonText,
+  purchase,
 }) {
   const [open, setOpen] = React.useState(false);
 
@@ -25,6 +26,10 @@ export default function ConfirmPurchase({
 
   const handleClose = () => {
     setOpen(false);
+  };
+  const handleClosePurchase = () => {
+    setOpen(false);
+    purchase();
   };
 
   return (
@@ -49,7 +54,7 @@ export default function ConfirmPurchase({
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Confirm</Button>
+          <Button onClick={handleClosePurchase}>Confirm</Button>
         </DialogActions>
       </Dialog>
     </div>

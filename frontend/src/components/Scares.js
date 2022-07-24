@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "@mui/material/Button";
+import PurchaseButton from "./PurchaseButton";
 
 const axios = require("axios");
 
@@ -53,6 +54,7 @@ const Scares = () => {
     <div>
       <h1>Scares</h1>
       {memesList}
+      <PurchaseButton cost={800} type="scare" item_id={4} details={selected} />
     </div>
   );
 };
