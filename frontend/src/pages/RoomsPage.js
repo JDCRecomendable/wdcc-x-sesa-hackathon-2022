@@ -7,7 +7,6 @@ import PeopleList from "../components/PeopleList";
 import RoomsList from "../components/RoomsList";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { fontSize } from "@mui/system";
 
 const RoomsPage = () => {
   const blacklistDummyData = ["youtube.com", "facebook.com", "twitter.com"];
@@ -15,13 +14,19 @@ const RoomsPage = () => {
 
   const whitelisted = whitelistDummyData.map(website => (
     <tr key={website}>
-      <td>{website}</td>
+      <td>{website} 
+      <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton></td>
     </tr>
   ));
 
   const blacklisted = blacklistDummyData.map(website => (
     <tr key={website}>
-      <td>{website}</td>
+      <td>{website}
+      <IconButton edge="end" aria-label="delete">
+                  <DeleteIcon />
+                </IconButton></td>
     </tr>
   ));
 
@@ -29,7 +34,7 @@ const RoomsPage = () => {
   const [blackURL, setBlackURL] = useState("");
 
   return (
-    <> 
+    <>
       <div
         style={{
           position: "fixed",
@@ -99,42 +104,50 @@ const RoomsPage = () => {
           Room Members</h2>
         <PeopleList />
       </div>
+
+      {/* Implementation of Whitelist tab */}
       <div
         style={{
           position: "fixed",
           width: "35%",
-          height: "30%",
+          height: "21%",
           zIndex: "1",
           top: "3.4em",
           backgroundColor: "#371B58",
           overflowX: "hidden",
           marginTop: "10%",
           marginLeft: "61.5%",
-          borderRadius: "10px",
+          borderRadius: "5px",
         }}
       >
 
-
-
+        {/* Heading */}
         <h2 style={{ textAlign: 'center', color: '#fff' }}>Whitelisted Websites</h2>
 
+        {/* Whitelist items */}
         <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
           <thead>
             <tr>
               <th>Website</th>
             </tr>
           </thead>
-          <tbody>{whitelisted}</tbody>
+          <tbody>{whitelisted}
+          </tbody>
         </table>
+      </div>
 
-
-
-
-        <div style={{
-          backgroundColor: '#E0D4FF',
-          bottom: '0px',
-          textAlign: 'fixed',
-        }}>
+      {/* Adding new items to whitelist */}
+      <div style={{
+        backgroundColor: '#E0D4FF',
+        textAlign: 'fixed',
+        position: "fixed",
+        width: "35%",
+        height: "9%",
+        bottom: "42%",
+        marginLeft: "61.5%",
+        borderRadius: "4px",
+      }}>
+        <div style= {{marginRight: '23%'}}>
           <TextField
             autoFocus
 
@@ -145,33 +158,32 @@ const RoomsPage = () => {
             variant="standard"
             onChange={e => setWhiteURL(e.target.value)}
             value={whiteURL}
-
           />
-          <Button variant="outlined" onClick={() => setWhiteURL("")}>
-            Add to whitelist
-          </Button>
         </div>
+
+        {/* Button implementation for whitelist */}
+        <Button style={{ marginLeft: '78%', marginRight: '9%', bottom: '85%' }} variant="outlined" onClick={() => setWhiteURL("")}>
+          Add to whitelist
+        </Button>
       </div>
 
+      {/* Implementation of Blacklist tab */}
+      <div style={{
+        position: "fixed",
+        width: "35%",
+        height: "21%",
+        zIndex: "1",
+        bottom: "15%",
+        backgroundColor: "#371B58",
+        overflowX: "hidden",
+        marginLeft: "61.5%",
+        borderRadius: "4px",
+      }}>
 
-
-      <div
-        style={{
-          position: "fixed",
-          width: "35%",
-          height: "30%",
-          zIndex: "1",
-          top: "3.4em",
-          backgroundColor: "#371B58",
-          overflowX: "hidden",
-          marginTop: "27%",
-          marginLeft: "61.5%",
-          borderRadius: "10px",
-        }}
-      >
-
-
+        {/* Heading */}
         <h2 style={{ color: '#fff', textAlign: 'center' }}>Blacklisted Websites</h2>
+
+        {/* Blacklist items */}
         <table style={{ textAlign: 'center', marginLeft: 'auto', marginRight: 'auto', color: '#fff', marginBottom: '15px' }}>
           <thead>
             <tr>
@@ -180,13 +192,23 @@ const RoomsPage = () => {
           </thead>
           <tbody>{blacklisted}</tbody>
         </table>
-        <div style={{
-          backgroundColor: '#E0D4FF',
-          bottom: '0px',
-          textAlign: 'fixed',
-        }}>
 
+      </div>
 
+      {/* Adding new items to blacklist */}
+      <div style={{
+        backgroundColor: '#E0D4FF',
+        bottom: '6%',
+        textAlign: 'fixed',
+        position: 'fixed',
+        width: '35%',
+        height: '9%',
+        marginLeft: "61.5%",
+        borderRadius: "4px",
+      }}>
+
+        {/* Enter URL implementation */}
+        <div style={{ marginRight: '23%' }}>
           <TextField
             autoFocus
             margin="dense"
@@ -197,10 +219,12 @@ const RoomsPage = () => {
             onChange={e => setBlackURL(e.target.value)}
             value={blackURL}
           />
-          <Button variant="outlined" onClick={() => setWhiteURL("")}>
-            Add to blacklist
-          </Button>
         </div>
+
+        {/* Button to save implementation */}
+        <Button style={{ marginLeft: '78%', bottom: '85%', marginRight: '9%' }} variant="outlined" onClick={() => setBlackURL("")}>
+          Add to blacklist
+        </Button>
       </div>
 
     </>
