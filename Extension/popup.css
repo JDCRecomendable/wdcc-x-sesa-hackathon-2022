@@ -90,6 +90,38 @@ body {
     border-radius: 4px;
     font-size: 30px;
     background-color: #E0D4FF;
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    font-weight: bold;
+    color:#371B58;
+    transition: all 0.5s;
+    cursor: pointer;
+}
+
+.attackBtn > button span {
+cursor: pointer;
+display: inline-block;
+position: relative;
+transition: 0.5s;
+}
+
+.attackBtn > button span:after {
+content: '\00bb';
+position: absolute;
+opacity: 0;
+top: 0;
+right: -20px;
+transition: 0.5s;
+}
+
+.attackBtn > button:hover span {
+padding-right: 25px;
+}
+
+.attackBtn > button:hover span:after {
+opacity: 1;
+right: 0;
 }
 
 .buttoncontainer {
