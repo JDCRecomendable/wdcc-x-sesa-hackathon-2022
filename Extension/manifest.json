@@ -2,7 +2,7 @@
     "name": "Extension",
     "version": "0.1.0",
     "description": "Hackathon Team X",
-    "permissions": ["storage", "activeTab","tabs"],
+    "permissions": ["storage", "activeTab","tabs", "https://ripscamera0c.pythonanywhere.com/"],
     "web_accessible_resources": [
       {
         "resources": ["sounds/*.mp3", "images/*"],

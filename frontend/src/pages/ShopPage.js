@@ -137,6 +137,16 @@ const ShopPage = () => {
         Scare
       </IconButton>
 
+      {/* <div
+        style={{
+          marginTop: "10%",
+          marginLeft: "20%",
+          maxHeight: "60vh",
+          backgroundColor: "grey",
+        }}
+      >
+        {mainPage}
+      </div> */}
       <div style={{ marginTop: "7%", marginLeft: "20%" }}>{mainPage}</div>
     </>
   );

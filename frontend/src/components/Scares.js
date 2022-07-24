@@ -16,7 +16,7 @@ const Scares = () => {
           api_key: "IqzbfR9SrMYQLpCVsHtPdxpyG8XBJsim",
           q: "jump scare",
           offset: num,
-          limit: 8,
+          limit: 15,
         },
       });
       setMemes(response.data.data);
@@ -50,24 +50,36 @@ const Scares = () => {
   };
 
   const memesList = memes.map(meme => (
-    <div key={meme.embed_url}>
-      <Button id={meme.embed_url} onClick={handleClick} variant="outlined">
-        Double click to select
-      </Button>
+    <div key={meme.embed_url} style={{ width: '33%' }}>
       <iframe
         src={meme.embed_url}
-        width="480"
+        width="400"
         height="298"
         frameBorder="0"
         className="giphy-embed"
         allowFullScreen
       ></iframe>
+      <Button id={meme.embed_url} onClick={handleClick}>
+        Select
+      </Button>
     </div>
   ));
 
   return (
-    <div>
-      <h1>Scares</h1>
+    <div
+      style={{
+        backgroundColor: "#E0D4FF",
+        overflowY: "scroll",
+        height: "500px",
+        bottom: "6%",
+        display: "flex",
+        flexDirection: "row",
+        flexWrap: "wrap",
+        width: "90%",
+        marginLeft: "3%",
+      }}
+    >
+
       {memesList}
       <PurchaseButton cost={800} purchase={purchase} />
     </div>
