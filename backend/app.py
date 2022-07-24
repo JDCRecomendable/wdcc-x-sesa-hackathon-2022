@@ -1,4 +1,5 @@
 import json
+import random
 from typing import List
 
 from flask import Flask, render_template, request
@@ -349,7 +350,42 @@ def app_room_create_or_join(user_id='John'):
         return respond_error('Missing or invalid parameters')
     if user_id_is_invalid(user_id):
         return respond_error('Invalid user ID')
-    # TODO
+
+    add_type = request.get_json()['addType']
+    value = request.get_json()['value']
+
+    if add_type == 'create':
+        random_number = random.randint(100000, 999999)
+        while mongo_db_communicator.query_one_from_collection_by_id('rooms', random_number):
+            random_number = random.randint(100000, 999999)
+        room_details = {
+            '_id': random_number,
+            'name': value,
+            'ownerUserID': user_id,
+            'whitelistDomains': [],
+            'blacklistDomains': [],
+            'members': [
+                {
+                    'userID': user_id,
+                    'points': 0,
+                    'timeProgress': 0,
+                    'numberOfShields': 0
+                }
+            ],
+            'attackQueue': []
+        }
+        mongo_db_communicator.insert_to_collection('rooms', random_number, room_details)
+        return craft_response({
+            'status': True,
+            'statusDescription': 'Successful'
+        }, 200)
+    else:
+        user_details = mongo_db_communicator.query_one_from_collection_by_id('users', user_id)[1]
+        room_details = mongo_db_communicator.query_one_from_collection_by_id('rooms', user_details['currentRoomID'])
+        if not room_details[0]:
+            return respond_error('Room not available')
+        new_data = models.room.add_member_to_room(room_details[1], user_id)
+        mongo_db_communicator.update_one_in_collection_by_id('rooms', room_details[1]['_id'], new_data)
 
 
 @app.route('/app/<user_id>/add-to-whitelist/', methods=['POST'])
