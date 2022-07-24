@@ -37,34 +37,71 @@ function getcurrentStatus(status){
 // This sender will update the users currency total
 chrome.runtime.sendMessage({method:"getCurrency"},function(response){
   let currency = response;
-  const currencyText = document.getElementById("currency");
-  currencyText.innerText = currency;
+
+  const api_url = "http://ripscamera0c.pythonanywhere.com/common/Alpha/details";
+      
+  // Defining async function
+  async function getapi(url) {
+    
+    // Storing response
+    const response = await fetch(url);
+    
+    // Storing data in form of JSON
+    var data = await response.json();
+    
+    let currency = data.points;
+
+    const currencyText = document.getElementById("currency");
+    currencyText.innerText = currency;
+  };
+  getapi(api_url);
 });
 
 // This sender will update the users shield total
 chrome.runtime.sendMessage({method:"getShields"}, function(response){
   let shields = response;
-  if (shields == 3) {
+  
+  
+  const api_url = "http://ripscamera0c.pythonanywhere.com/common/Alpha/details";
+      
+  // Defining async function
+  async function getapi(url) {
+    
+        // Storing response
+        const response = await fetch(url);
+    
+        // Storing data in form of JSON
+        var data = await response.json();
+        console.log(data.numberOfShields);
+        let shields = data.numberOfShields;
 
-    document.getElementById("shield1").style.opacity = "1";
-    document.getElementById("shield2").style.opacity = "1";
-    document.getElementById("shield3").style.opacity = "1";
-  } else if (shields == 2) {
+        if (shields == 3) {
 
-    document.getElementById("shield1").style.opacity = "1";
-    document.getElementById("shield2").style.opacity = "1";
-    document.getElementById("shield3").style.opacity = "0.3";
-  } else if (shields == 1) {
-
-    document.getElementById("shield1").style.opacity = "1";
-    document.getElementById("shield2").style.opacity = "0.3";
-    document.getElementById("shield3").style.opacity = "0.3";
-  } else {
-
-    document.getElementById("shield1").style.opacity = "0.3";
-    document.getElementById("shield2").style.opacity = "0.3";
-    document.getElementById("shield3").style.opacity = "0.3";
+          document.getElementById("shield1").style.opacity = "1";
+          document.getElementById("shield2").style.opacity = "1";
+          document.getElementById("shield3").style.opacity = "1";
+        } else if (shields == 2) {
+      
+          document.getElementById("shield1").style.opacity = "1";
+          document.getElementById("shield2").style.opacity = "1";
+          document.getElementById("shield3").style.opacity = "0.3";
+        } else if (shields == 1) {
+      
+          document.getElementById("shield1").style.opacity = "1";
+          document.getElementById("shield2").style.opacity = "0.3";
+          document.getElementById("shield3").style.opacity = "0.3";
+        } else {
+      
+          document.getElementById("shield1").style.opacity = "0.3";
+          document.getElementById("shield2").style.opacity = "0.3";
+          document.getElementById("shield3").style.opacity = "0.3";
+        }
   }
+
+  // Calling that async function
+  getapi(api_url);
+
+  
 });
 
 
@@ -97,6 +134,6 @@ chrome.runtime.sendMessage({method:"getInfo"},function(response){
 // This listener will send the user to the web app in a new tab when the attack button is pressed
 var button = document.getElementById("attackBtn");
 button.addEventListener("click", function(){
-  chrome.tabs.create({url:"http://google.com/"}); // Placeholder for web app
+  chrome.tabs.create({url:"localhost:3000"}); // Placeholder for web app
 })
 

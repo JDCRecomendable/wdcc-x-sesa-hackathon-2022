@@ -105,14 +105,10 @@ function getStatus(url) {
     // }
 }
 
-let currency = 9900;
+
 chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
     if(message.method == "getCurrency"){
-
-
-
-
-      sendResponse(currency);
+      sendResponse(true);
     }
   });
 
@@ -138,7 +134,35 @@ chrome.runtime.onMessage.addListener(function(msg,sender) {
   // This listener checks how many shields the user has and sends it to the popup
   chrome.runtime.onMessage.addListener(function(message,sender,sendResponse) {
     if (message.method == "getShields") {
-      sendResponse(shields);
+
+      // const api_url = "http://ripscamera0c.pythonanywhere.com/common/Alpha/details";
+      
+      // // Defining async function
+      // async function getapi(url) {
+    
+      //   // Storing response
+      //   const response = await fetch(url);
+    
+      //   // Storing data in form of JSON
+      //   var data = await response.json();
+      //   console.log(data.numberOfShields);
+      //   sendResponse(data.numberOfShields);
+        
+      // }
+      // // Calling that async function
+      // getapi(api_url);
+
+    //   const getapi = async() => {
+    //     // Storing response
+    //     const response = await fetch("http://ripscamera0c.pythonanywhere.com/common/Alpha/details");
+    
+    //     // Storing data in form of JSON
+    //     var data = await response.json();
+    //   }
+
+    //   const data = getapi();
+    //   console.log(data);
+      sendResponse(true);
     }
   });
 
