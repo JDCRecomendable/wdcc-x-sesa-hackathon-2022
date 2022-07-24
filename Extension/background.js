@@ -40,7 +40,7 @@ chrome.runtime.onMessage.addListener(function(message,sender,sendResponse){
 
 // Global variables storing current URL and status of URL
 let currentURL = '';
-let urlStatus = null;
+let urlStatus = true;
 
 
 // This listener will send the current url and url status to the popup window when opened
@@ -48,23 +48,23 @@ chrome.runtime.onMessage.addListener(function(message,sender,response){
     if(message.method == "getInfo"){
         response(urlStatus);
     }
-    const apiString = api + user + tabChange;
-      console.log(apiString);
+    // const apiString = api + user + tabChange;
+    //   console.log(apiString);
   
-      fetch(apiString).then(function(res) {
-        if(res.status !== 200){
-          response({ timeProgress: 0, newDomain: "oh no"});
-          return
-        }
-        res.json().then(function(data) {
-          debugger;
-          //send the respoinse..
-          response( {timeProgress: time, newDomain: url});
-          console.log("here", data);
-        });
-      }).catch(function(err) {
-        response({timeProgress: 0, newDomain: "no good"});
-      });
+    //   fetch(apiString).then(function(res) {
+    //     if(res.status !== 200){
+    //       response({ timeProgress: 0, newDomain: "oh no"});
+    //       return
+    //     }
+    //     res.json().then(function(data) {
+    //       debugger;
+    //       //send the respoinse..
+    //       response( {timeProgress: time, newDomain: url});
+    //       console.log("here", data);
+    //     });
+    //   }).catch(function(err) {
+    //     response({timeProgress: 0, newDomain: "no good"});
+    //   });
 });
 
 
@@ -96,13 +96,11 @@ function alert(link){
 
 }
   
-var url_g = "test"
 // This function sends the url to the server to check whether the link is on the blacklist/whitelist. Returns the status of the url
 function getStatus(url) {
     // send url to server to get back status
-    urlStatus = true;
+    urlStatus = urlStatus !== true;
     // if(msg.name == ""){
-    url_g = url;
     // }
 }
 
