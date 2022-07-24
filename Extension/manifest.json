@@ -5,7 +5,7 @@
     "permissions": ["storage", "activeTab","tabs"],
     "web_accessible_resources": [
       {
-        "resources": ["sounds/*.mp3"],
+        "resources": ["sounds/*.mp3", "images/*"],
         "matches": ["<all_urls>"]
       }
     ],
