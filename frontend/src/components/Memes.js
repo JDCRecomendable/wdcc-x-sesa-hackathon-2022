@@ -8,9 +8,11 @@ const axios = require("axios");
 const Memes = () => {
   const [memes, setMemes] = useState([]);
   const [selected, setSelected] = useState("");
+  const [isError, setIsError] = useState(false);
   // const [memes, setMemes] = useState([]);
 
   async function getMemes() {
+    setIsError(false);
     const num = Math.floor(Math.random() * 50);
     try {
       const response = await axios.get("https://api.giphy.com/v1/gifs/search", {
@@ -24,6 +26,7 @@ const Memes = () => {
       setMemes(response.data.data);
     } catch (error) {
       console.error(error);
+      setIsError(true);
     }
   }
 
@@ -81,6 +84,7 @@ const Memes = () => {
         marginLeft: "3%",
       }}
     >
+      {isError && <h3>Error</h3>}
       {memesList}
       <PurchaseButton cost={200} purchase={purchase} />
     </div>

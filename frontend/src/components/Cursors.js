@@ -23,7 +23,6 @@ const Cursors = () => {
     <>
       <h1>Surprise Party!</h1>
       <h3>Send a colourful surprise to your friends</h3>
-      <Button variant="outlined">Throw a surprise party</Button>
       <PurchaseButton cost={600} type="surprise" purchase={purchase} />
     </>
   );
