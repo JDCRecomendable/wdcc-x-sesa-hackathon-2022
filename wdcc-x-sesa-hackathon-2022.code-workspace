@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": "."
+		},
+		{
+			"name": "frontend",
+			"path": "frontend"
+		},
+		{
+			"name": "backend",
+			"path": "backend"
+		},
+		{
+			"name": "chrome-extension",
+			"path": "Extension"
+		}
+	]
+}
