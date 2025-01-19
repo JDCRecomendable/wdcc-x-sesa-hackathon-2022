@@ -1,0 +1,7 @@
+{
+    "has_authentication": true,
+    "username": "user",
+    "password": "",
+    "url": "",
+    "protocol": "mongodb+srv"
+}
