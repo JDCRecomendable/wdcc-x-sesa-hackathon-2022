@@ -6,10 +6,11 @@ from pymongo import MongoClient
 
 
 class MongoDBCommunicator:
-    def __init__(self, username: str, password: str, url: str):
+    def __init__(self, has_authentication: bool, username: str, password: str, url: str, protocol:str):
         self.username = urllib.parse.quote_plus(username)
         self.password = urllib.parse.quote_plus(password)
-        self.client = MongoClient(f'mongodb+srv://{self.username}:{self.password}@{url}', connectTimeoutMS=30000, socketTimeoutMS=None, connect=False, maxPoolsize=1)
+        auth_prefix = f'{username}:{password}@' if has_authentication else ''
+        self.client = MongoClient(f'{protocol}://{auth_prefix}{url}', connectTimeoutMS=30000, socketTimeoutMS=None, connect=False, maxPoolsize=1)
         self.db = self.client.get_database('user_db')
 
     def get_all_collections(self) -> list:

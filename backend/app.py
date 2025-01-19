@@ -16,10 +16,12 @@ POINTS_DIFF = 500
 SHIELD_COST = 250
 app = Flask(__name__)
 CORS(app)
+has_authentication = get_value('has_authentication')
 username = get_value('username')
 password = get_value('password')
 url = get_value('url')
-mongo_db_communicator = MongoDBCommunicator(username, password, url)
+protocol = get_value('protocol')
+mongo_db_communicator = MongoDBCommunicator(has_authentication, username, password, url, protocol)
 
 
 def craft_response(json_body, status_code):
